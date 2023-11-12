@@ -1,0 +1,35 @@
+services:
+  smtp:
+    build: https://github.com/mailhog/MailHog.git#master
+    ports:
+      - 1025:1025
+      - 8025:8025
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=codex
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  codex:
+    profiles:
+      - production
+    build:
+      dockerfile: ./Dockerfile
+    depends_on:
+      - smtp
+      - db
+    env_file:
+      - .env
+      - .env.local
+    environment:
+      - DATABASE_URL=postgres://postgres@db/codex
+      - MAILER_DSN=smtp://smtp:1025
+    ports:
+      - 3000:3000
+
+volumes:
+  db_data:

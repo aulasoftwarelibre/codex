@@ -1,10 +1,12 @@
 import { Button } from '@nextui-org/react'
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
 import AuthModalFooter from '@/components/AuthModal/AuthModalFooter'
 import AuthModalHeader from '@/components/AuthModal/AuthModalHeader'
+import { auth } from '@/lib/auth/auth'
 
 export const metadata: Metadata = {
   description: 'Biblioteca del Aula de Software Libre',
@@ -12,6 +14,12 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
+  const session = await auth()
+
+  if (session) {
+    return redirect('/')
+  }
+
   return (
     <>
       <AuthModalHeader title="Iniciar sesión en">

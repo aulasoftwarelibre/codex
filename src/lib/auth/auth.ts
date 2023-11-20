@@ -1,11 +1,12 @@
-import NextAuth from 'next-auth'
+import NextAuthFirewall from '@aulasoftwarelibre/next-auth-firewall'
 
 import authConfig from '@/lib/auth/auth.config'
 
 export const {
   auth,
+  firewallHandler,
   handlers: { GET, POST },
   signIn,
   signOut,
   update,
-} = NextAuth(authConfig)
+} = NextAuthFirewall(authConfig)

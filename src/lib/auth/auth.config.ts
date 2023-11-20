@@ -1,30 +1,21 @@
+import { NextAuthFirewallConfig } from '@aulasoftwarelibre/next-auth-firewall'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import type { NextAuthConfig } from 'next-auth'
 
 import EmailProvider from '@/lib/auth/providers/email'
 import prisma from '@/lib/prisma/prisma'
 
 const authConfig = {
-  adapter: PrismaAdapter(prisma),
-  callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user
-
-      const isOnSecuredPage = nextUrl.pathname.startsWith('/c/')
-      if (isOnSecuredPage) {
-        return isLoggedIn
-      }
-
-      if (
-        (isLoggedIn && nextUrl.pathname.startsWith('/signin')) ||
-        (!isLoggedIn && nextUrl.pathname.startsWith('/signout'))
-      ) {
-        return Response.redirect(new URL('/', nextUrl))
-      }
-
-      return true
+  accessControl: [
+    {
+      path: '^/settings',
+      roles: 'IS_AUTHENTICATED',
     },
-  },
+    {
+      path: '^/',
+      roles: 'PUBLIC_ACCESS',
+    },
+  ],
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: '/signin',
     signOut: '/signout',
@@ -38,6 +29,6 @@ const authConfig = {
   session: {
     strategy: 'jwt',
   },
-} satisfies NextAuthConfig
+} as NextAuthFirewallConfig
 
-export default authConfig as unknown as NextAuthConfig
+export default authConfig

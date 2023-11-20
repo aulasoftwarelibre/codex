@@ -42,7 +42,10 @@ export default function HeaderAuthenticatedMenu(
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile actions" variant="flat">
-          <DropdownItem key="profile">
+          <DropdownItem
+            key="profile"
+            onClick={() => router.push('/settings/profile')}
+          >
             <User
               name={name || 'Bienvenido'}
               description={email}

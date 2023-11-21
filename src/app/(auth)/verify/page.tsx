@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   title: 'Codex | Verifica tu correo',
 }
 
+const WEBMAIL_URL = process.env.WEBMAIL_URL as string
+
 export default async function Page() {
   const session = await auth()
 
@@ -28,7 +30,7 @@ export default async function Page() {
           size="lg"
           radius="none"
           as={Link}
-          href="https://webmail.uco.es"
+          href={WEBMAIL_URL}
           target="_blank"
         >
           Abrir UCOWebMail

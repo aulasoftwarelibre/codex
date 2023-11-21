@@ -18,6 +18,7 @@ export default function ThemeSwitcher() {
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       startContent={<SunIcon />}
       endContent={<MoonIcon />}
+      data-testid="theme-switcher"
     />
   )
 }

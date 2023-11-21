@@ -37,3 +37,11 @@ next-env.d.ts
 
 # prisma migrations
 !prisma/migrations/**/*.sql
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.auth/
+/playwright/.cache/
+

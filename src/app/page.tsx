@@ -1,7 +1,11 @@
-export default function Home() {
+import BookGrid from '@/components/BookGrid/BookGrid'
+import { findBooks } from '@/core/book/infrastructure/actions'
+
+export default async function Home() {
+  const books = await findBooks()
   return (
     <main>
-      <p>Lo sentimos, aún no hay libros :-(</p>
+      <BookGrid books={books} />
     </main>
   )
 }

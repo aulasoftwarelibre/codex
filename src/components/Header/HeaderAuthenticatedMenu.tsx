@@ -1,4 +1,3 @@
-import { Session } from '@auth/core/types'
 import {
   ArrowLeftOnRectangleIcon,
   BookOpenIcon,
@@ -14,10 +13,11 @@ import {
 } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 
+import { FindUserResponse } from '@/core/user/application/types'
 import gravatar from '@/lib/utils/gravatar'
 
 interface HeaderAuthenticatedMenuProps {
-  session: Session
+  user: FindUserResponse
 }
 
 export default function HeaderAuthenticatedMenu(
@@ -25,7 +25,7 @@ export default function HeaderAuthenticatedMenu(
 ) {
   const router = useRouter()
   const {
-    session: { user: { email, image, name } = {} },
+    user: { email, image, name },
   } = props
 
   return (

@@ -1,6 +1,5 @@
 'use client'
 
-import { Session } from '@auth/core/types'
 import {
   Navbar,
   NavbarBrand,
@@ -12,20 +11,17 @@ import Link from 'next/link'
 import HeaderAuthenticatedMenu from '@/components/Header/HeaderAuthenticatedMenu'
 import HeaderUnauthenticatedMenu from '@/components/Header/HeaderUnauthenticatedMenu'
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
+import { FindUserResponse } from '@/core/user/application/types'
 
 interface HeaderProps {
-  session: Session | null
-}
-
-function useController(props: HeaderProps) {
-  return { ...props }
+  user: FindUserResponse | null
 }
 
 export default function Header(props: HeaderProps) {
-  const { session } = useController(props)
+  const { user } = props
 
-  const AuthNavbarItem = session?.user ? (
-    <HeaderAuthenticatedMenu session={session} />
+  const AuthNavbarItem = user ? (
+    <HeaderAuthenticatedMenu user={user} />
   ) : (
     <HeaderUnauthenticatedMenu />
   )

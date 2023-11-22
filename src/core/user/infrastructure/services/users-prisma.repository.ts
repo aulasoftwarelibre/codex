@@ -1,6 +1,7 @@
 import { PrismaClient, User as PrismaUser } from '@prisma/client'
 
 import Email from '@/core/user/domain/model/email.value-object'
+import Image from '@/core/user/domain/model/image.value-object'
 import Name from '@/core/user/domain/model/name.value-object'
 import Role from '@/core/user/domain/model/role.value-object'
 import User from '@/core/user/domain/model/user.entity'
@@ -13,6 +14,7 @@ export default class UsersPrisma implements Users {
     const user = await this.prisma.user.findUnique({
       select: {
         email: true,
+        image: true,
         name: true,
         roles: true,
       },
@@ -30,27 +32,31 @@ export default class UsersPrisma implements Users {
 
   private mapFromPrismaUser({
     email,
+    image,
     name,
     roles,
-  }: Pick<PrismaUser, 'email' | 'name' | 'roles'>) {
+  }: Pick<PrismaUser, 'email' | 'name' | 'roles' | 'image'>) {
     return new User(
       new Name(name || ''),
       roles.map((role) => new Role(role)),
       new Email(email || ''),
+      new Image(image || ''),
     )
   }
 
   async save(user: User): Promise<void> {
-    const { email, name, roles } = user
+    const { email, image, name, roles } = user
 
     await this.prisma.user.upsert({
       create: {
         email,
+        image,
         name,
         roles,
       },
       update: {
         email,
+        image,
         name,
         roles,
       },

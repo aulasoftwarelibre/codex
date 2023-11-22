@@ -10,36 +10,54 @@ import {
 } from '@/core/user/application/types'
 import { auth } from '@/lib/auth/auth'
 import container from '@/lib/container'
+import gravatar from '@/lib/utils/gravatar'
 
 const UpdateFormSchema = z.object({
   name: z.string().min(3),
 })
 
-async function update(formData: FormData) {
+export interface UpdateUserResponse {
+  message: string
+  success: boolean
+}
+
+export async function updateUser(
+  prevState: unknown,
+  formData: FormData,
+): Promise<UpdateUserResponse> {
   const session = await auth()
   const email = session?.user?.email as string
 
   if (!email) {
-    throw new Error('Session not found')
+    return {
+      message: 'Error: Sesión no encontrada',
+      success: false,
+    }
   }
 
   const { name } = UpdateFormSchema.parse({
     name: formData.get('name'),
   })
 
-  await container.updateUser.with(new UpdateUserCommand(name, email))
-
+  await container.updateUser.with(
+    new UpdateUserCommand(name, email, gravatar(email)),
+  )
   revalidateTag(`role-for-${email}`)
+
+  return {
+    message: 'Perfil actualizado',
+    success: true,
+  }
 }
 
-async function find(email: string): Promise<FindUserResponse> {
+export async function findUser(
+  email: string,
+): Promise<FindUserResponse | null> {
   const result = await container.findUser.with(new FindUserCommand(email))
 
   if (result.isErr()) {
-    throw new Error('User not found')
+    return null
   }
 
   return result.value
 }
-
-export { find, update }

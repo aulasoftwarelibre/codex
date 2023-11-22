@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000
 const baseURL = `http://localhost:${PORT}`
 
 export default defineConfig({
+  fullyParallel: false,
   projects: [
     {
       name: 'Desktop Chrome',

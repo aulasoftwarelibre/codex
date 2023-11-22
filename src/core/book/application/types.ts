@@ -1,8 +1,11 @@
+export interface CreateBookResponse {
+  message: string
+  success: boolean
+}
+
 export interface FindBookResponse {
-  authors: string[]
-  id: string
-  image: string
-  title: string
+  message: string
+  success: boolean
 }
 
 export class CreateBookCommand {

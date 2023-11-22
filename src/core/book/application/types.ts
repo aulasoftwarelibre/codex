@@ -4,3 +4,6 @@ export interface FindBookResponse {
   image: string
   title: string
 }
+export class FindBooksCommand {
+  constructor() {}
+}

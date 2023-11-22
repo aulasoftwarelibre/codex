@@ -1,9 +1,9 @@
-export default class Image {
+export default class BookImage {
   constructor(public readonly value: string) {}
 
-  static create(name: string): Image {
+  static create(name: string): BookImage {
     if (!name.trim()) {
-      return new Image('')
+      return new BookImage('')
     }
 
     try {
@@ -12,6 +12,6 @@ export default class Image {
       throw new Error('Invalid URL')
     }
 
-    return new Image(name)
+    return new BookImage(name)
   }
 }

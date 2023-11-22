@@ -1,4 +1,4 @@
-import Books from '@/core/book/domain/services/book.repository'
+import Books from '@/core/book/domain/services/books.repository'
 
 import { FindBookResponse } from './types'
 
@@ -12,7 +12,7 @@ export default class FindBooksUseCase {
       authors: book.authors,
       id: book.id,
       image: book.image,
-      title: book.tittle,
+      title: book.title,
     }))
   }
 }

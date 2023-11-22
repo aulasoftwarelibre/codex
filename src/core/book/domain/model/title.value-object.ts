@@ -1,7 +1,7 @@
 export class BookTitle {
   constructor(public readonly value: string) {}
 
-  public static with(title: string): BookTitle {
+  public static create(title: string): BookTitle {
     if (title === undefined) {
       throw Error('Title can not be undefined')
     }

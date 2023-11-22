@@ -1,40 +1,41 @@
-import Image from '@/core/book/domain/model/image.value-object'
-import Tittle from '@/core/book/domain/model/tittle.value-object'
+import BookImage from '@/core/book/domain/model/image.value-object'
+
+import { BookAuthor } from './author.value-object'
+import BookId from './id.value-object'
+import { BookTitle } from './title.value-object'
 
 export default class Book {
   constructor(
-    private _id: string,
-    private _tittle: Tittle,
-    private _authors: string[],
-    private _image: Image,
+    private _id: BookId,
+    private _title: BookTitle,
+    private _authors: BookAuthor[],
+    private _image: BookImage,
   ) {}
 
   static create(
     id: string,
     authors: string[],
-    tittle: string,
+    title: string,
     image: string,
   ): Book {
-    const tittleObj = Tittle.create(tittle)
-    const imageObj = Image.create(image)
+    const idObj = BookId.create(id)
+    const titleObj = BookTitle.create(title)
+    const imageObj = BookImage.create(image)
+    const authorObj = authors.map((item) => BookAuthor.create(item))
 
-    return new Book(id, tittleObj, authors, imageObj)
+    return new Book(idObj, titleObj, authorObj, imageObj)
   }
 
   get id(): string {
-    return this._id
+    return this._id.value
   }
 
-  get tittle(): string {
-    return this._tittle.value
-  }
-
-  set tittle(tittle: string) {
-    this._tittle = Tittle.create(tittle)
+  get title(): string {
+    return this._title.value
   }
 
   get authors(): string[] {
-    return this._authors.map((author) => author)
+    return this._authors.map((author) => author.value)
   }
 
   get image(): string {

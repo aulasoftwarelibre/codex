@@ -1,8 +1,11 @@
 import Book from '../../domain/model/book.entity'
-import Books from '../../domain/services/book.repository'
+import BookId from '../../domain/model/id.value-object'
+import Books from '../../domain/services/books.repository'
 
 export default class BooksInMemory implements Books {
-  async findAll(): Promise<Book[]> {
+  private books: Map<string, Book> = new Map();
+
+  constructor(){
     const booksRaw = [
       {
         authors: ['Donald Knuth'],
@@ -76,11 +79,24 @@ export default class BooksInMemory implements Books {
       },
     ]
 
-    return await booksRaw.map((book) =>
-      Book.create(book.id, book.authors, book.title, book.image),
-    )
+    booksRaw.map((book) =>
+    this.books.set(book.id, Book.create(book.id, book.authors, book.title, book.image))
+    )}
+
+  async findById(id: BookId): Promise<Book | null> {
+    const book = this.books.get(id.value);
+    return (book ) ? book : null; 
   }
-  save(book: Book): Promise<void> {
-    throw new Error('Method not implemented.' + book.tittle)
+
+  async findAll(): Promise<Book[]> {
+    return Array.from(this.books.values())
+  }
+
+  async save(book: Book): Promise<void> {
+    this.books.set(book.id, book)
+  }
+
+  purge(): void {
+    this.books = new Map()
   }
 }

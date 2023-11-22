@@ -1,3 +1,4 @@
+import CreateBookUseCase from '@/core/book/application/create-book.use-case'
 import FindBooksUseCase from '@/core/book/application/find-books.use-case'
 import BooksInMemory from '@/core/book/infrastructure/services/books-in-memory.retository'
 import FindUserUseCase from '@/core/user/application/find-user.use-case'
@@ -11,6 +12,7 @@ const Container = {
     const books = new BooksInMemory()
     return {
       findBooks: new FindBooksUseCase(books),
+      createBook: new CreateBookUseCase(books),
       findUser: new FindUserUseCase(users),
       updateUser: new UpdateUserUseCase(users),
     }

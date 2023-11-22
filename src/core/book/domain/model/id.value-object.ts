@@ -7,7 +7,7 @@ export default class BookId {
     return new BookId(uuid())
   }
 
-  public static with(id: string): BookId {
+  public static create(id: string): BookId {
     return new BookId(id)
   }
 }

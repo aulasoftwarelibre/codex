@@ -11,4 +11,8 @@ export default class UsersInMemory implements Users {
   async save(user: User): Promise<void> {
     this.users.set(user.email, user)
   }
+
+  purge(): void {
+    this.users = new Map()
+  }
 }

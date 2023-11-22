@@ -53,3 +53,10 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Book {
+  id        String      @id @default(cuid())
+  authors   String[]
+  image     String
+  title     String
+}

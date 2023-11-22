@@ -1,5 +1,5 @@
 export default class Name {
-  private constructor(public readonly value: string) {}
+  constructor(public readonly value: string) {}
 
   static create(name: string): Name {
     const trimmedName = name.trim()

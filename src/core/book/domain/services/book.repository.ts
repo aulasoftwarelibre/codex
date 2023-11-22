@@ -1,9 +1,9 @@
-import User from '@/core/user/domain/model/user.entity'
+import Book from '@/core/book/domain/model/book.entity'
 
-export default interface Users {
+export default interface Books {
   // Finds a user by email
-  findByEmail(email: string): Promise<User | null>
+  findAll(): Promise<Book[] | null>
 
   // Saves a user
-  save(user: User): Promise<void>
+  save(user: Book): Promise<void>
 }

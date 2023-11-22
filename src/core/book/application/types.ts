@@ -4,6 +4,12 @@ export interface FindBookResponse {
   image: string
   title: string
 }
-export class FindBooksCommand {
-  constructor() {}
+
+export class CreateBookCommand {
+  constructor(
+    public readonly id: string,
+    public readonly title: string,
+    public readonly authors: string[],
+    public readonly image: string,
+  ) {}
 }

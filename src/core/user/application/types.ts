@@ -2,11 +2,11 @@ export class FindUserCommand {
   constructor(public readonly email: string) {}
 }
 
-export class FindUserResponse {
-  constructor(
-    public readonly name: string | null,
-    public readonly email: string | null,
-  ) {}
+export interface FindUserResponse {
+  email: string | null
+  image: string | null
+  name: string | null
+  roles: string[]
 }
 
 export class FindUserError extends Error {
@@ -19,5 +19,6 @@ export class UpdateUserCommand {
   constructor(
     public readonly name: string,
     public readonly email: string,
+    public readonly image: string,
   ) {}
 }

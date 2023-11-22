@@ -19,6 +19,11 @@ export default class FindUserUseCase {
       return err(FindUserError.causeNotFound(command.email))
     }
 
-    return ok(new FindUserResponse(user.name, user.email))
+    return ok({
+      email: user.email,
+      image: user.image,
+      name: user.name,
+      roles: user.roles,
+    })
   }
 }

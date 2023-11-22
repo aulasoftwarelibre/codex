@@ -1,11 +1,13 @@
 export default class Name {
-  constructor(public readonly value: string) {}
+  private constructor(public readonly value: string) {}
 
   static create(name: string): Name {
-    if (!name.trim()) {
-      return new Name('')
+    const trimmedName = name.trim()
+
+    if (!trimmedName) {
+      throw new Error('Name cannot be empty')
     }
 
-    return new Name(name)
+    return new Name(trimmedName)
   }
 }

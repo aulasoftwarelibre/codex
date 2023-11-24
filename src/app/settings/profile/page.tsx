@@ -12,9 +12,7 @@ export default async function Page() {
     return redirect('/')
   }
 
-  const user = (await findUser(
-    session.user?.email as string,
-  )) as FindUserResponse
+  const user = (await findUser(email)) as FindUserResponse
 
   return (
     <>

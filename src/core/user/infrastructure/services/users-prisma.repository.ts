@@ -55,7 +55,6 @@ export default class UsersPrisma implements Users {
         roles,
       },
       update: {
-        email,
         image,
         name,
         roles,

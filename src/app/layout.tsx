@@ -25,7 +25,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 min-h-screen`}
+      >
         <Providers>
           <Header user={user} />
           <div className="container mx-auto pt-5">{children}</div>

@@ -3,9 +3,9 @@ import BookId from '../../domain/model/id.value-object'
 import Books from '../../domain/services/books.repository'
 
 export default class BooksInMemory implements Books {
-  private books: Map<string, Book> = new Map();
+  private books: Map<string, Book> = new Map()
 
-  constructor(){
+  constructor() {
     const booksRaw = [
       {
         authors: ['Donald Knuth'],
@@ -80,12 +80,16 @@ export default class BooksInMemory implements Books {
     ]
 
     booksRaw.map((book) =>
-    this.books.set(book.id, Book.create(book.id, book.authors, book.title, book.image))
-    )}
+      this.books.set(
+        book.id,
+        Book.create(book.id, book.authors, book.title, book.image),
+      ),
+    )
+  }
 
   async findById(id: BookId): Promise<Book | null> {
-    const book = this.books.get(id.value);
-    return (book ) ? book : null; 
+    const book = this.books.get(id.value)
+    return book ? book : null
   }
 
   async findAll(): Promise<Book[]> {

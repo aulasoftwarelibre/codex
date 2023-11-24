@@ -10,4 +10,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {}
+export const Basic: Story = {
+  args: {
+    create: async () => ({ message: 'success', success: true }),
+  },
+}

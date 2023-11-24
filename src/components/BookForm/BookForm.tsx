@@ -13,7 +13,7 @@ import {
 } from '@/core/book/application/types'
 
 interface BookFormProps {
-  book: FindBookResponse
+  book?: FindBookResponse
   create: (
     prevState: unknown,
     formData: FormData,

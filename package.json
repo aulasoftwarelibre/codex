@@ -24,9 +24,10 @@
   "dependencies": {
     "@aulasoftwarelibre/next-auth-firewall": "^1.0.1",
     "@auth/core": "^0.0.0-manual.e9863699",
-    "@auth/prisma-adapter": "^1.0.7",
+    "@auth/prisma-adapter": "^1.0.8",
     "@heroicons/react": "^2.0.18",
     "@nextui-org/react": "2.2.9",
+    "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "^5.6.0",
     "framer-motion": "^10.16.5",
     "neverthrow": "^6.1.0",
@@ -43,8 +44,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.2",
-    "@commitlint/config-conventional": "^18.4.2",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@playwright/test": "^1.40.0",
     "@storybook/addon-essentials": "^7.5.3",
     "@storybook/addon-interactions": "^7.5.3",
@@ -57,7 +58,7 @@
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.2",
-    "@types/jest": "^29.5.8",
+    "@types/jest": "^29.5.10",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.14",
     "@types/react": "^18",

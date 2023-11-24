@@ -1,3 +1,5 @@
+'use server'
+
 import { z } from 'zod'
 
 import container from '@/lib/container'
@@ -24,21 +26,16 @@ export async function createBook(
   formData: FormData,
 ): Promise<CreateBookResponse> {
   const id = BookId.generate()
-  const { title } = CreateFormSchema.parse({
-    title: formData.get('title'),
-  })
-  const { authors } = CreateFormSchema.parse({
+  const { authors, image, title } = CreateFormSchema.parse({
     authors: formData.get('authors'),
-  })
-  const authorsArray: string[] = authors.split(',')
-
-  const { image } = CreateFormSchema.parse({
     image: formData.get('image'),
+    title: formData.get('title'),
   })
 
   await container.createBook.with(
-    new CreateBookCommand(id.value, title, authorsArray, image),
+    new CreateBookCommand(id.value, title, authors.split(', '), image),
   )
+
   return {
     message: 'good',
     success: true,

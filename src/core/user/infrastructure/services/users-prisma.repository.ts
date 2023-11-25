@@ -10,7 +10,7 @@ import Users from '@/core/user/domain/services/users.repository'
 export default class UsersPrisma implements Users {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string): Promise<User | undefined> {
     const user = await this.prisma.user.findUnique({
       select: {
         email: true,
@@ -24,7 +24,7 @@ export default class UsersPrisma implements Users {
     })
 
     if (!user) {
-      return null
+      return undefined
     }
 
     return this.mapFromPrismaUser(user)

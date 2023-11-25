@@ -30,8 +30,8 @@ export class SmtpClient {
         text: text({ host, url }),
         to: identifier,
       })
-      const failed = result.rejected.concat(result.pending).filter(Boolean)
-      if (failed.length) {
+      const failed = [...result.rejected, ...result.pending].filter(Boolean)
+      if (failed.length > 0) {
         throw new Error(`El correo (${failed.join(', ')}) no pudo ser enviado.`)
       }
     } catch (error) {

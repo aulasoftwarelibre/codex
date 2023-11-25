@@ -21,11 +21,11 @@ export async function POST(request: Request) {
     )
   }
 
-  const params: SendVerificationRequestParams = await request.json()
+  const parameters: SendVerificationRequestParams = await request.json()
 
   await new SmtpClient(
     process.env.MAILER_DSN as string,
-  ).sendVerificationRequest(params)
+  ).sendVerificationRequest(parameters)
 
   return Response.json({ success: true })
 }

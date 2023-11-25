@@ -87,13 +87,12 @@ export default class BooksInMemory implements Books {
     )
   }
 
-  async findById(id: BookId): Promise<Book | null> {
-    const book = this.books.get(id.value)
-    return book ? book : null
+  async findById(id: BookId): Promise<Book | undefined> {
+    return this.books.get(id.value)
   }
 
   async findAll(): Promise<Book[]> {
-    return Array.from(this.books.values())
+    return [...this.books.values()]
   }
 
   async save(book: Book): Promise<void> {

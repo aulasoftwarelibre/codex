@@ -8,10 +8,10 @@ import { Theme } from '@auth/core/types'
  *
  * @note We don't add the email address to avoid needing to escape it, if you do, remember to sanitize it!
  */
-export function html(params: { host: string; theme: Theme; url: string }) {
-  const { host, theme, url } = params
+export function html(parameters: { host: string; theme: Theme; url: string }) {
+  const { host, theme, url } = parameters
 
-  const escapedHost = host.replace(/\./g, '&#8203;.')
+  const escapedHost = host.replaceAll('.', '&#8203;.')
 
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const brandColor = theme.brandColor || '#346df1'

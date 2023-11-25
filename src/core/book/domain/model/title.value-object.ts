@@ -3,10 +3,10 @@ export class BookTitle {
 
   public static create(title: string): BookTitle {
     if (title === undefined) {
-      throw Error('Title can not be undefined')
+      throw new Error('Title can not be undefined')
     }
     if (title.length < 3) {
-      throw Error('Title is too short')
+      throw new Error('Title is too short')
     }
 
     return new BookTitle(title)

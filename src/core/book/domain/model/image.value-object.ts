@@ -8,7 +8,7 @@ export default class BookImage {
 
     try {
       new URL(name)
-    } catch (error) {
+    } catch {
       throw new Error('Invalid URL')
     }
 

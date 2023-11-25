@@ -11,28 +11,21 @@ import {
 import { auth } from '@/lib/auth/auth'
 import container from '@/lib/container'
 import gravatar from '@/lib/utils/gravatar'
+import FormResponse from '@/lib/zod/form-response'
 
 const UpdateFormSchema = z.object({
   name: z.string().min(3),
 })
 
-export interface UpdateUserResponse {
-  message: string
-  success: boolean
-}
-
 export async function updateUser(
-  prevState: unknown,
+  previousState: unknown,
   formData: FormData,
-): Promise<UpdateUserResponse> {
+): Promise<FormResponse> {
   const session = await auth()
   const email = session?.user?.email as string
 
   if (!email) {
-    return {
-      message: 'Error: Sesión no encontrada',
-      success: false,
-    }
+    return FormResponse.custom(['email'], 'Error en la sesión del usuario')
   }
 
   const { name } = UpdateFormSchema.parse({
@@ -45,18 +38,17 @@ export async function updateUser(
   revalidateTag(`role-for-${email}`)
 
   return {
-    message: 'Perfil actualizado',
     success: true,
   }
 }
 
 export async function findUser(
   email: string,
-): Promise<FindUserResponse | null> {
+): Promise<FindUserResponse | undefined> {
   const result = await container.findUser.with(new FindUserCommand(email))
 
   if (result.isErr()) {
-    return null
+    return undefined
   }
 
   return result.value

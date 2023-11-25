@@ -3,14 +3,15 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-import AuthModalFooter from '@/components/AuthModal/AuthModalFooter'
-import AuthModalHeader from '@/components/AuthModal/AuthModalHeader'
-import SignInEmailForm from '@/components/SignInEmailForm/SignInEmailForm'
+import AuthModalFooter from '@/components/auth-modal/auth-modal-footer'
+import AuthModalHeader from '@/components/auth-modal/auth-modal-header'
 import { auth } from '@/lib/auth/auth'
+
+import SignInEmailForm from '../../../components/sign-in-email-form'
 
 export const metadata: Metadata = {
   description: 'Biblioteca del Aula de Software Libre',
-  title: 'Codex | Login',
+  title: 'Iniciar sesión | Codex',
 }
 
 export default async function Page() {

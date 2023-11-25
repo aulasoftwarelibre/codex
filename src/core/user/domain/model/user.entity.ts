@@ -18,12 +18,12 @@ export default class User {
     email: string,
     image: string,
   ): User {
-    const nameObj = Name.create(name)
-    const roleObjs = roles.map(Role.create)
-    const emailObj = Email.create(email)
-    const imageObj = Image.create(image || gravatar(email))
+    const nameObject = Name.create(name)
+    const roleObjs = roles.map((role) => Role.create(role))
+    const emailObject = Email.create(email)
+    const imageObject = Image.create(image || gravatar(email))
 
-    return new User(nameObj, roleObjs, emailObj, imageObj)
+    return new User(nameObject, roleObjs, emailObject, imageObject)
   }
 
   get name(): string {

@@ -4,13 +4,13 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-import AuthModalFooter from '@/components/AuthModal/AuthModalFooter'
-import AuthModalHeader from '@/components/AuthModal/AuthModalHeader'
+import AuthModalFooter from '@/components/auth-modal/auth-modal-footer'
+import AuthModalHeader from '@/components/auth-modal/auth-modal-header'
 import { auth } from '@/lib/auth/auth'
 
 export const metadata: Metadata = {
   description: 'Biblioteca del Aula de Software Libre',
-  title: 'Codex | Verifica tu correo',
+  title: 'Verifica tu correo | Codex',
 }
 
 const WEBMAIL_URL = process.env.WEBMAIL_URL as string

@@ -4,8 +4,8 @@ import Users from '@/core/user/domain/services/users.repository'
 export default class UsersInMemory implements Users {
   private users: Map<string, User> = new Map()
 
-  async findByEmail(email: string): Promise<User | null> {
-    return this.users.get(email) || null
+  async findByEmail(email: string): Promise<User | undefined> {
+    return this.users.get(email)
   }
 
   async save(user: User): Promise<void> {

@@ -1,11 +1,11 @@
 import Books from '@/core/book/domain/services/books.repository'
 
-import { FindBookResponse } from './types'
+import { BookDTO } from './types'
 
 export default class FindBooksUseCase {
   constructor(private readonly booksRepository: Books) {}
 
-  async with(): Promise<FindBookResponse[]> {
+  async with(): Promise<BookDTO[]> {
     const books = await this.booksRepository.findAll()
 
     return books.map((book) => ({

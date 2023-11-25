@@ -13,10 +13,10 @@ export default class BooksPrisma implements Books {
   async findAll(): Promise<Book[]> {
     const books = await this.prisma.book.findMany()
 
-    return books.map(this.mapFromPrismaBook)
+    return books.map((book) => this.mapFromPrismaBook(book))
   }
 
-  async findById(id: BookId): Promise<Book | null> {
+  async findById(id: BookId): Promise<Book | undefined> {
     const book = await this.prisma.book.findUnique({
       where: {
         id: id.value,
@@ -24,7 +24,7 @@ export default class BooksPrisma implements Books {
     })
 
     if (!book) {
-      return null
+      return undefined
     }
 
     return this.mapFromPrismaBook(book)

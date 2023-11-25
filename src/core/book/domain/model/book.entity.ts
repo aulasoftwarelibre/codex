@@ -18,12 +18,12 @@ export default class Book {
     title: string,
     image: string,
   ): Book {
-    const idObj = BookId.create(id)
-    const titleObj = BookTitle.create(title)
-    const imageObj = BookImage.create(image)
-    const authorObj = authors.map((item) => BookAuthor.create(item))
+    const idObject = BookId.create(id)
+    const titleObject = BookTitle.create(title)
+    const imageObject = BookImage.create(image)
+    const authorObject = authors.map((item) => BookAuthor.create(item))
 
-    return new Book(idObj, titleObj, authorObj, imageObj)
+    return new Book(idObject, titleObject, authorObject, imageObject)
   }
 
   get id(): string {

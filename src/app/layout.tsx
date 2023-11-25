@@ -3,8 +3,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 
-import Header from '@/components/Header/Header'
-import { Providers } from '@/components/Providers/Providers'
+import Header from '@/components/header'
+import { Providers } from '@/components/providers'
 import { findUser } from '@/core/user/infrastructure/actions'
 import { auth } from '@/lib/auth/auth'
 
@@ -30,7 +30,7 @@ export default async function RootLayout({
       >
         <Providers>
           <Header user={user} />
-          <div className="container mx-auto pt-5">{children}</div>
+          <div className="container mx-auto pt-4 px-4">{children}</div>
         </Providers>
       </body>
     </html>

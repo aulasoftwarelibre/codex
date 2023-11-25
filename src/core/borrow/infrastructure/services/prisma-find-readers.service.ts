@@ -7,7 +7,9 @@ import {
 
 export class PrismaFindReader implements FindBorrowsService {
   constructor(private readonly prisma: PrismaClient) {}
-  async withReader(bookId: string): Promise<BorrowWithReaderResponse | null> {
+  async withReader(
+    bookId: string,
+  ): Promise<BorrowWithReaderResponse | undefined> {
     const borrow = await this.prisma.borrow.findUnique({
       select: {
         id: true,
@@ -19,7 +21,7 @@ export class PrismaFindReader implements FindBorrowsService {
     })
 
     if (!borrow) {
-      return null
+      return undefined
     }
 
     const {

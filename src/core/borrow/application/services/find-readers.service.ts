@@ -1,5 +1,5 @@
 export interface FindBorrowsService {
-  withReader(bookId: string): Promise<BorrowWithReaderResponse | null>
+  withReader(bookId: string): Promise<BorrowWithReaderResponse | undefined>
 }
 
 export interface BorrowWithReaderResponse {

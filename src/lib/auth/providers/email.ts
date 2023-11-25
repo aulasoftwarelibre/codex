@@ -13,9 +13,9 @@ export default function Email(
     maxAge: 24 * 60 * 60,
     name: 'Email',
     options,
-    async sendVerificationRequest(params: SendVerificationRequestParams) {
+    async sendVerificationRequest(parameters: SendVerificationRequestParams) {
       const response = await fetch(process.env.MAILER_URL as string, {
-        body: JSON.stringify(params),
+        body: JSON.stringify(parameters),
         headers: {
           Authorization: `Bearer ${process.env.MAILER_SECRET}`,
           'Content-Type': 'application/json',

@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
 
-import EditProfileForm from '@/components/EditProfileForm/EditProfileForm'
+import EditProfileForm from '@/components/edit-profile-form'
 import { FindUserResponse } from '@/core/user/application/types'
-import { findUser, updateUser } from '@/core/user/infrastructure/actions'
+import { findUser } from '@/core/user/infrastructure/actions'
 import { auth } from '@/lib/auth/auth'
 
 export default async function Page() {
@@ -16,7 +16,7 @@ export default async function Page() {
 
   return (
     <>
-      <EditProfileForm user={user} update={updateUser} />
+      <EditProfileForm user={user} />
     </>
   )
 }

@@ -1,38 +1,15 @@
-import {
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Image,
-} from '@nextui-org/react'
+import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 
 import { BookDTO } from '@/core/book/application/types'
-import { findBorrow } from '@/core/borrow/infrastructure/actions'
-import gravatar from '@/lib/utils/gravatar'
 
 export interface BookProperties {
   book: BookDTO
-  onBorrow: (id: string) => void
 }
 
 export default async function Book(properties: BookProperties) {
   const {
-    book: { authors, id, image, title },
-    onBorrow,
+    book: { authors, image, title },
   } = properties
-  const { reader } = await findBorrow(id)
-
-  const footer = reader ? (
-    <div className="flex flex-row-reverse w-full gap-4 items-center">
-      <Avatar size="sm" src={gravatar(reader.email || '')} />
-      <div className="text-sm">Prestado a</div>
-    </div>
-  ) : (
-    <div className="flex flex-row-reverse w-full">
-      <Button onClick={() => onBorrow(id)}>Reservar</Button>
-    </div>
-  )
 
   return (
     <>
@@ -47,7 +24,6 @@ export default async function Book(properties: BookProperties) {
           <div className="line-clamp-1 overflow-hidden text-ellipsis text-sm">
             {authors.join(', ')}
           </div>
-          {footer}
         </CardFooter>
       </Card>
     </>

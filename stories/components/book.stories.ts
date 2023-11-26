@@ -20,14 +20,3 @@ export const Basic: Story = {
     },
   },
 }
-
-export const Borrowed: Story = {
-  args: {
-    book: {
-      authors: ['Martin Kleppmann'],
-      id: '23423432',
-      image: 'https://m.media-amazon.com/images/I/91YfNb49PLL._SL1500_.jpg',
-      title: 'Designing Data-Intensive Applications',
-    },
-  },
-}

@@ -7,6 +7,12 @@ import BookId from '@/core/book/domain/model/id.value-object'
 import container from '@/lib/container'
 import FormResponse from '@/lib/zod/form-response'
 
+export interface BookForm {
+  authors: string
+  image: string
+  title: string
+}
+
 const CreateFormSchema = z.object({
   authors: z.string().min(3, 'Introduzca un nombre de autor válido.'),
   image: z.string().url('Se debe indicar una URL válida.'),

@@ -3,25 +3,20 @@
 import { Divider } from '@nextui-org/react'
 import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
-import toast from 'react-hot-toast'
 
 import InputForm from '@/components/input-form'
 import SubmitButton from '@/components/submit-button'
-import Toast from '@/components/toast'
+import { showToast } from '@/components/toast'
 import { createBook } from '@/core/book/infrastructure/actions/create-book'
 import FormResponse from '@/lib/zod/form-response'
 
 export default function BookForm() {
+  // @ts-expect-error: TODO
   const [state, action] = useFormState(createBook, FormResponse.initialState())
 
   useEffect(() => {
     if (state?.success) {
-      toast((t) => (
-        <Toast
-          message="Libro catalogado con éxito"
-          onCloseHandler={() => toast.dismiss(t.id)}
-        />
-      ))
+      showToast('Libro catalogado con éxito')
     }
   }, [state])
 

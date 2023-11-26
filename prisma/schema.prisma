@@ -44,7 +44,6 @@ model User {
   roles         String[]  @default(["ROLE_USER"])
   accounts      Account[]
   sessions      Session[]
-  Borrow        Borrow[]
 }
 
 model VerificationToken {
@@ -60,17 +59,4 @@ model Book {
   authors String[]
   image   String
   title   String
-  Borrow  Borrow?
-}
-
-model Borrow {
-  id         String   @id @default(cuid())
-  userId     String
-  bookId     String
-  borrowedAt DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
-
-  @@unique([bookId])
 }

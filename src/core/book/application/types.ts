@@ -1,33 +1,33 @@
-import BookId from '@/core/book/domain/model/id.value-object'
+import { DeepReadonly } from 'ts-essentials'
 
-export class CreateBookCommand {
-  constructor(
-    public readonly id: string,
-    public readonly title: string,
-    public readonly authors: string[],
-    public readonly image: string,
-  ) {}
-}
+import Book from '@/core/book/domain/model/book.entity'
 
-export interface BookDTO {
+type CreateBookCommand = DeepReadonly<{
   authors: string[]
   id: string
   image: string
   title: string
+}>
+
+const CreateBookCommand = {
+  with: (properties: CreateBookCommand) => properties,
 }
 
-export class BookError extends Error {
-  constructor(
-    message: string,
-    public readonly type: string,
-  ) {
-    super(message)
-  }
+type BookDTO = DeepReadonly<{
+  authors: string[]
+  id: string
+  image: string
+  title: string
+}>
 
-  static becauseAlreadyExists(id: BookId) {
-    return new BookError(
-      `Book with id ${id.value} already exists`,
-      'DUPLICATE_NAME',
-    )
-  }
+const BookDTO = {
+  fromModel: (book: Book): BookDTO => ({
+    authors: book.authors.map((author) => author.value),
+    id: book.id.value,
+    image: book.image.value,
+    title: book.title.value,
+  }),
+  with: (properties: BookDTO) => properties,
 }
+
+export { BookDTO, CreateBookCommand }

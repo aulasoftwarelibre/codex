@@ -1,18 +1,32 @@
-export class FindUserCommand {
-  constructor(public readonly email: string) {}
+import { DeepReadonly } from 'ts-essentials'
+
+type FindUserCommand = DeepReadonly<{
+  email: string
+}>
+
+const FindUserCommand = {
+  with: (properties: FindUserCommand) => properties,
 }
 
-export class UpdateUserCommand {
-  constructor(
-    public readonly name: string,
-    public readonly email: string,
-    public readonly image: string,
-  ) {}
+type UpdateUserCommand = DeepReadonly<{
+  email: string
+  image: string
+  name: string
+}>
+
+const UpdateUserCommand = {
+  with: (properties: UpdateUserCommand) => properties,
 }
 
-export interface UserDTO {
+type UserDTO = DeepReadonly<{
   email: string
   image: string
   name: string
   roles: string[]
+}>
+
+const UserDTO = {
+  with: (properties: UserDTO) => properties,
 }
+
+export { FindUserCommand, UpdateUserCommand, UserDTO }

@@ -1,11 +1,15 @@
-import { err, ok, Result } from 'neverthrow'
+import { ok, Result, safeTry } from 'neverthrow'
 
 import DomainError from '@/core/common/domain/errors/domain-error'
 import Email from '@/core/common/domain/value-objects/email'
+import EmailError from '@/core/common/domain/value-objects/email/email.error'
 import FullName from '@/core/common/domain/value-objects/fullname'
+import FullNameError from '@/core/common/domain/value-objects/fullname/fullname.error'
 import Image from '@/core/common/domain/value-objects/image'
+import ImageError from '@/core/common/domain/value-objects/image/image.error'
+import RoleError from '@/core/common/domain/value-objects/role/role.error'
 import Roles from '@/core/common/domain/value-objects/roles'
-import gravatar from '@/lib/utils/gravatar'
+import { UserDTO } from '@/core/user/application/types'
 
 export default class User {
   constructor(
@@ -16,24 +20,24 @@ export default class User {
   ) {}
 
   static create(
-    email: string,
-    roles: string[],
-    name: string,
-    image?: string,
-  ): Result<User, DomainError> {
-    return Result.combine([
-      FullName.create(name),
-      Email.create(email),
-      Image.create(image || gravatar(email)),
-      Roles.create(roles),
-    ]).match<Result<User, DomainError>>(
-      ([_fullName, _email, _image, _roles]) => {
-        return ok(new User(_email, _roles, _fullName, _image))
-      },
-      (error) => {
-        return err(error)
-      },
-    )
+    userDTO: UserDTO,
+  ): Result<User, EmailError | RoleError | FullNameError | ImageError> {
+    return safeTry<User, DomainError>(function* () {
+      const email = yield* Email.create(userDTO.email)
+        .mapErr((error) => error)
+        .safeUnwrap()
+      const roles = yield* Roles.create(userDTO.roles)
+        .mapErr((error) => error)
+        .safeUnwrap()
+      const name = yield* FullName.create(userDTO.name)
+        .mapErr((error) => error)
+        .safeUnwrap()
+      const image = yield* Image.create(userDTO.image)
+        .mapErr((error) => error)
+        .safeUnwrap()
+
+      return ok(new User(email, roles, name, image))
+    })
   }
 
   get name(): FullName {

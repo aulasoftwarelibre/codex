@@ -13,7 +13,7 @@ interface EditProfileForm {
   name?: string
 }
 
-const UpdateFormSchema = z.object({
+const EditProfileSchema = z.object({
   name: z.string().min(3),
 })
 
@@ -32,7 +32,7 @@ export async function updateUser(
     )
   }
 
-  const result = UpdateFormSchema.safeParse({
+  const result = EditProfileSchema.safeParse({
     name: formData.get('name'),
   })
 
@@ -43,7 +43,7 @@ export async function updateUser(
   const { name } = result.data
 
   await container.updateUser.with(
-    new UpdateUserCommand(name, email, gravatar(email)),
+    UpdateUserCommand.with({ email, image: gravatar(email), name }),
   )
   revalidateTag(`role-for-${email}`)
 

@@ -1,5 +1,5 @@
+import Image from '@/core/common/domain/value-objects/image'
 import ImageError from '@/core/common/domain/value-objects/image/image.error'
-import Image from '@/core/common/domain/value-objects/image/index'
 import unexpected from '@/lib/utils/unexpected'
 
 describe('Image', () => {

@@ -1,44 +1,58 @@
-import BookImage from '@/core/book/domain/model/image.value-object'
+import { ok, Result, safeTry } from 'neverthrow'
 
-import { BookAuthor } from './author.value-object'
-import BookId from './id.value-object'
-import { BookTitle } from './title.value-object'
+import { BookDTO } from '@/core/book/application/types'
+import DomainError from '@/core/common/domain/errors/domain-error'
+import BookId from '@/core/common/domain/value-objects/book-id'
+import FullNameError from '@/core/common/domain/value-objects/fullname/fullname.error'
+import FullNames from '@/core/common/domain/value-objects/fullnames'
+import IdError from '@/core/common/domain/value-objects/id/id.error'
+import Image from '@/core/common/domain/value-objects/image'
+import ImageError from '@/core/common/domain/value-objects/image/image.error'
+import Title from '@/core/common/domain/value-objects/title'
+import TitleError from '@/core/common/domain/value-objects/title/title.error'
 
 export default class Book {
   constructor(
     private _id: BookId,
-    private _title: BookTitle,
-    private _authors: BookAuthor[],
-    private _image: BookImage,
+    private _title: Title,
+    private _authors: FullNames,
+    private _image: Image,
   ) {}
 
   static create(
-    id: string,
-    authors: string[],
-    title: string,
-    image: string,
-  ): Book {
-    const idObject = BookId.create(id)
-    const titleObject = BookTitle.create(title)
-    const imageObject = BookImage.create(image)
-    const authorObject = authors.map((item) => BookAuthor.create(item))
+    bookDTO: BookDTO,
+  ): Result<Book, IdError | TitleError | FullNameError | ImageError> {
+    return safeTry<Book, DomainError>(function* () {
+      const bookId = yield* BookId.create(bookDTO.id)
+        .mapErr((error) => error)
+        .safeUnwrap()
+      const title = yield* Title.create(bookDTO.title)
+        .mapErr((error) => error)
+        .safeUnwrap()
+      const authors = yield* FullNames.create(bookDTO.authors)
+        .mapErr((error) => error)
+        .safeUnwrap()
+      const image = yield* Image.create(bookDTO.image)
+        .mapErr((error) => error)
+        .safeUnwrap()
 
-    return new Book(idObject, titleObject, authorObject, imageObject)
+      return ok(new Book(bookId, title, authors, image))
+    })
   }
 
-  get id(): string {
-    return this._id.value
+  get id(): BookId {
+    return this._id
   }
 
-  get title(): string {
-    return this._title.value
+  get title(): Title {
+    return this._title
   }
 
-  get authors(): string[] {
-    return this._authors.map((author) => author.value)
+  get authors(): FullNames {
+    return this._authors
   }
 
-  get image(): string {
-    return this._image.value
+  get image(): Image {
+    return this._image
   }
 }

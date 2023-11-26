@@ -1,6 +1,6 @@
 import Role from '@/core/common/domain/value-objects/role'
 import RoleError from '@/core/common/domain/value-objects/role/role.error'
-import Roles from '@/core/common/domain/value-objects/roles/index'
+import Roles from '@/core/common/domain/value-objects/roles'
 import unexpected from '@/lib/utils/unexpected'
 
 describe('Roles', () => {

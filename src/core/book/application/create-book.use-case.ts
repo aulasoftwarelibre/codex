@@ -1,29 +1,22 @@
-import { err, ok, Result } from 'neverthrow'
+import { errAsync } from 'neverthrow'
 
-import Book from '../domain/model/book.entity'
-import BookId from '../domain/model/id.value-object'
-import Books from '../domain/services/books.repository'
-import { BookError, CreateBookCommand } from './types'
+import BookIdAlreadyExistsError from '@/core/book/domain/errors/book-id-already-exists.error'
+import Book from '@/core/book/domain/model/book.entity'
+import Books from '@/core/book/domain/services/books.repository'
+import BookId from '@/core/common/domain/value-objects/book-id'
+
+import { CreateBookCommand } from './types'
 
 export default class CreateBookUseCase {
-  constructor(private readonly bookRepository: Books) {}
+  constructor(private readonly books: Books) {}
 
-  async with(command: CreateBookCommand): Promise<Result<true, BookError>> {
-    const bookId = BookId.create(command.id)
-
-    if (await this.bookRepository.findById(bookId)) {
-      return err(BookError.becauseAlreadyExists(bookId))
-    }
-
-    const book = Book.create(
-      command.id,
-      command.authors,
-      command.title,
-      command.image,
-    )
-
-    await this.bookRepository.save(book)
-
-    return ok(true)
+  async with(command: CreateBookCommand) {
+    return await BookId.create(command.id)
+      .asyncAndThen((bookId) => this.books.findById(bookId))
+      .match(
+        (book) => errAsync(BookIdAlreadyExistsError.withId(book.id)),
+        () =>
+          Book.create(command).asyncAndThen((_book) => this.books.save(_book)),
+      )
   }
 }

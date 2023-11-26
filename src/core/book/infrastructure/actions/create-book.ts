@@ -1,13 +1,13 @@
 'use server'
 
+import { ulid } from 'ulid'
 import { z } from 'zod'
 
 import { CreateBookCommand } from '@/core/book/application/types'
-import BookId from '@/core/book/domain/model/id.value-object'
 import container from '@/lib/container'
 import FormResponse from '@/lib/zod/form-response'
 
-export interface BookForm {
+export interface CreateBookForm {
   authors: string
   image: string
   title: string
@@ -20,10 +20,10 @@ const CreateFormSchema = z.object({
 })
 
 export async function createBook(
-  previousState: unknown,
+  previousState: FormResponse<CreateBookForm>,
   formData: FormData,
-): Promise<FormResponse> {
-  const id = BookId.generate()
+): Promise<FormResponse<CreateBookForm>> {
+  const id = ulid()
   const result = CreateFormSchema.safeParse({
     authors: formData.get('authors'),
     image: formData.get('image'),
@@ -31,17 +31,14 @@ export async function createBook(
   })
 
   if (!result.success) {
-    return {
-      errors: result.error.issues,
-      success: false,
-    }
+    return FormResponse.withError(result.error, previousState.data)
   }
 
   const { authors, image, title } = result.data
 
   await container.createBook.with(
-    new CreateBookCommand(id.value, title, authors.split(', '), image),
+    CreateBookCommand.with({ authors: authors.split(', '), id, image, title }),
   )
 
-  return FormResponse.success()
+  return FormResponse.success(result.data)
 }

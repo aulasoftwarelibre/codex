@@ -1,4 +1,5 @@
 import Role from '@/core/common/domain/value-objects/role'
+import { UserDTO } from '@/core/user/application/types'
 import User from '@/core/user/domain/model/user.entity'
 import gravatar from '@/lib/utils/gravatar'
 import unexpected from '@/lib/utils/unexpected'
@@ -8,7 +9,15 @@ describe('User', () => {
     it('should create a valid user', () => {
       // Arrange
       // Act
-      const user = User.create('admin@example.com', ['ROLE_USER'], 'Sergio')
+      const user = User.create(
+        UserDTO.with({
+          email: 'admin@example.com',
+          image: gravatar('admin@example.com'),
+          name: 'Sergio',
+          roles: ['ROLE_USER'],
+        }),
+      )
+
       // Assert
       user.match(
         (_user) => {
@@ -27,7 +36,15 @@ describe('User', () => {
       // Arrange
       const invalidEmail = 'invalid-email'
       // Act
-      const user = User.create(invalidEmail, ['ROLE_USER'], 'Sergio')
+      const user = User.create(
+        UserDTO.with({
+          email: invalidEmail,
+          image: gravatar(invalidEmail),
+          name: 'Sergio',
+          roles: ['ROLE_USER'],
+        }),
+      )
+
       // Assert
       user.match(
         (_user) => {
@@ -43,7 +60,14 @@ describe('User', () => {
       // Arrange
       const emptyName = ''
       // Act
-      const user = User.create('admin@example.com', ['ROLE_USER'], emptyName)
+      const user = User.create(
+        UserDTO.with({
+          email: 'admin@example.com',
+          image: gravatar('admin@example.com'),
+          name: emptyName,
+          roles: ['ROLE_USER'],
+        }),
+      )
       // Assert
       user.match(
         (_user) => {
@@ -59,7 +83,14 @@ describe('User', () => {
       // Arrange
       const invalidRole = 'INVALID_ROLE'
       // Act
-      const user = User.create('admin@example.com', [invalidRole], 'Sergio')
+      const user = User.create(
+        UserDTO.with({
+          email: 'admin@example.com',
+          image: gravatar('admin@example.com'),
+          name: 'Sergio',
+          roles: [invalidRole],
+        }),
+      )
       // Assert
       user.match(
         (_user) => {

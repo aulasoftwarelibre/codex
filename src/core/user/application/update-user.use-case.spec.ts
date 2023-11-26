@@ -1,4 +1,4 @@
-import { UpdateUserCommand } from '@/core/user/application/types'
+import { UpdateUserCommand, UserDTO } from '@/core/user/application/types'
 import UpdateUserUseCase from '@/core/user/application/update-user.use-case'
 import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
 import User from '@/core/user/domain/model/user.entity'
@@ -11,20 +11,22 @@ describe('UpdateUserUseCase', () => {
     // Arrange
     const userRepository = new UsersInMemory()
     const user = User.create(
-      'test@example.com',
-      ['ROLE_USER'],
-      'Test User',
-      gravatar('test@example.com'),
+      UserDTO.with({
+        email: 'test@example.com',
+        image: gravatar('test@example.com'),
+        name: 'Test User',
+        roles: ['ROLE_USER'],
+      }),
     )._unsafeUnwrap()
     userRepository.users.set('test@example.com', user)
 
     const updatedName = 'Updated User'
 
-    const updateUserCommand = new UpdateUserCommand(
-      updatedName,
-      'test@example.com',
-      gravatar('test@example.com'),
-    )
+    const updateUserCommand = UpdateUserCommand.with({
+      email: 'test@example.com',
+      image: gravatar('test@example.com'),
+      name: updatedName,
+    })
     const updateUserUseCase = new UpdateUserUseCase(userRepository)
 
     // Act
@@ -51,8 +53,11 @@ describe('UpdateUserUseCase', () => {
     const email = 'nonexistent@example.com'
     const image = gravatar(email)
     const updatedName = 'Updated User'
-
-    const updateUserCommand = new UpdateUserCommand(updatedName, email, image)
+    const updateUserCommand = UpdateUserCommand.with({
+      email,
+      image,
+      name: updatedName,
+    })
 
     // Act
     const result = await updateUserUseCase.with(updateUserCommand)

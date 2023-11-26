@@ -31,20 +31,6 @@ export default class UsersPrisma implements Users {
     ).andThen((user) => okAsync(this.mapFromPrismaUser(user)))
   }
 
-  private mapFromPrismaUser({
-    email,
-    image,
-    name,
-    roles,
-  }: Pick<PrismaUser, 'email' | 'name' | 'roles' | 'image'>) {
-    return new User(
-      new Email(email || ''),
-      new Roles(roles.map((role) => new Role(role))),
-      new FullName(name || ''),
-      new Image(image || ''),
-    )
-  }
-
   save(user: User): ResultAsync<User, ApplicationError> {
     const { email, image, name, roles } = user
 
@@ -67,5 +53,19 @@ export default class UsersPrisma implements Users {
       }),
       (error: unknown) => new ApplicationError((error as Error).toString()),
     ).andThen(() => okAsync(user))
+  }
+
+  private mapFromPrismaUser({
+    email,
+    image,
+    name,
+    roles,
+  }: Pick<PrismaUser, 'email' | 'name' | 'roles' | 'image'>) {
+    return new User(
+      new Email(email || ''),
+      new Roles(roles.map((role) => new Role(role))),
+      new FullName(name || ''),
+      new Image(image || ''),
+    )
   }
 }

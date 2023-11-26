@@ -27,7 +27,6 @@
     "@auth/prisma-adapter": "^1.0.8",
     "@heroicons/react": "^2.0.18",
     "@nextui-org/react": "2.2.9",
-    "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "^5.6.0",
     "framer-motion": "^10.16.5",
     "neverthrow": "^6.1.0",
@@ -40,6 +39,8 @@
     "react-hot-toast": "^2.4.1",
     "server-only": "^0.0.1",
     "sharp": "^0.32.6",
+    "ts-essentials": "^9.4.1",
+    "ulid": "^2.3.0",
     "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },
@@ -71,7 +72,6 @@
     "eslint-config-next": "14.0.3",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-neverthrow": "^1.1.4",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-sort": "^2.11.0",
@@ -128,7 +128,6 @@
       "simple-import-sort",
       "sort",
       "unused-imports",
-      "neverthrow",
       "prettier"
     ],
     "root": true,
@@ -148,13 +147,13 @@
       "import/first": "error",
       "import/newline-after-import": "error",
       "import/no-duplicates": "error",
-      "neverthrow/must-use-result": "warn",
       "no-shadow": "off",
       "simple-import-sort/exports": "error",
       "simple-import-sort/imports": "error",
       "sort/destructuring-properties": "error",
       "sort/object-properties": "error",
       "sort/type-properties": "error",
+      "unicorn/no-useless-undefined": "off",
       "unicorn/prefer-node-protocol": "off",
       "unused-imports/no-unused-imports": "error"
     }

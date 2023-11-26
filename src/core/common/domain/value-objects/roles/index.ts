@@ -1,10 +1,9 @@
 import { err, ok, Result } from 'neverthrow'
-import { undefined } from 'zod'
 
 import Role from '@/core/common/domain/value-objects/role'
 import RoleError from '@/core/common/domain/value-objects/role/role.error'
 
-export default class Roles implements Iterable<Role> {
+export default class Roles {
   private readonly _roles: Role[]
 
   constructor(roles: Role[]) {
@@ -22,18 +21,6 @@ export default class Roles implements Iterable<Role> {
 
   has(other: Role): boolean {
     return this._roles.some((role) => role.equals(other))
-  }
-
-  [Symbol.iterator](): Iterator<Role> {
-    let index = 0
-
-    return {
-      next: (): IteratorResult<Role> => {
-        return index < this._roles.length
-          ? { done: false, value: this._roles[index++] }
-          : { done: true, value: undefined }
-      },
-    }
   }
 
   map<T>(callback: (value: Role, index: number, array: Role[]) => T): T[] {

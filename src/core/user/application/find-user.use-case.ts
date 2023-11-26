@@ -7,13 +7,13 @@ import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
 import Users from '@/core/user/domain/services/users.repository'
 
 export default class FindUserUseCase {
-  constructor(private readonly userRepository: Users) {}
+  constructor(private readonly users: Users) {}
 
   async with(
     command: FindUserCommand,
   ): Promise<Result<UserDTO, UserNotFoundError | EmailError>> {
     return Email.create(command.email)
-      .asyncAndThen((email) => this.userRepository.findByEmail(email))
+      .asyncAndThen((email) => this.users.findByEmail(email))
       .andThen((user) =>
         ok({
           email: user.email.value,

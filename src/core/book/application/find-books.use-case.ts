@@ -1,18 +1,15 @@
-import Books from '@/core/book/domain/services/books.repository'
+import { okAsync, ResultAsync } from 'neverthrow'
 
-import { BookDTO } from './types'
+import { BookDTO } from '@/core/book/application/types'
+import Books from '@/core/book/domain/services/books.repository'
+import ApplicationError from '@/core/common/domain/errors/application-error'
 
 export default class FindBooksUseCase {
-  constructor(private readonly booksRepository: Books) {}
+  constructor(private readonly books: Books) {}
 
-  async with(): Promise<BookDTO[]> {
-    const books = await this.booksRepository.findAll()
-
-    return books.map((book) => ({
-      authors: book.authors,
-      id: book.id,
-      image: book.image,
-      title: book.title,
-    }))
+  with(): ResultAsync<BookDTO[], ApplicationError> {
+    return this.books.findAll().andThen((books) => {
+      return okAsync(books.map((book) => BookDTO.fromModel(book)))
+    })
   }
 }

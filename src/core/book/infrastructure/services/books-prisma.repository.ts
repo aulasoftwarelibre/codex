@@ -1,62 +1,67 @@
 import { Book as PrismaBook, PrismaClient } from '@prisma/client'
+import { okAsync, ResultAsync } from 'neverthrow'
 
-import { BookAuthor } from '@/core/book/domain/model/author.value-object'
+import { BookDTO } from '@/core/book/application/types'
+import BookNotFoundError from '@/core/book/domain/errors/book-not-found.error'
 import Book from '@/core/book/domain/model/book.entity'
-import BookId from '@/core/book/domain/model/id.value-object'
-import BookImage from '@/core/book/domain/model/image.value-object'
-import { BookTitle } from '@/core/book/domain/model/title.value-object'
 import Books from '@/core/book/domain/services/books.repository'
+import ApplicationError from '@/core/common/domain/errors/application-error'
+import BookId from '@/core/common/domain/value-objects/book-id'
+import FullName from '@/core/common/domain/value-objects/fullname'
+import FullNames from '@/core/common/domain/value-objects/fullnames'
+import Image from '@/core/common/domain/value-objects/image'
+import Title from '@/core/common/domain/value-objects/title'
 
 export default class BooksPrisma implements Books {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async findAll(): Promise<Book[]> {
-    const books = await this.prisma.book.findMany()
-
-    return books.map((book) => this.mapFromPrismaBook(book))
+  findAll(): ResultAsync<Book[], ApplicationError> {
+    return ResultAsync.fromSafePromise(this.prisma.book.findMany()).andThen(
+      (books) => okAsync(books.map((book) => this.mapFromPrismaBook(book))),
+    )
   }
 
-  async findById(id: BookId): Promise<Book | undefined> {
-    const book = await this.prisma.book.findUnique({
-      where: {
-        id: id.value,
-      },
-    })
+  findById(id: BookId): ResultAsync<Book, BookNotFoundError> {
+    return ResultAsync.fromPromise(
+      this.prisma.book.findUniqueOrThrow({
+        where: {
+          id: id.value,
+        },
+      }),
+      () => BookNotFoundError.withId(id),
+    ).andThen((book) => okAsync(this.mapFromPrismaBook(book)))
+  }
 
-    if (!book) {
-      return undefined
-    }
+  save(book: Book): ResultAsync<Book, ApplicationError> {
+    const { authors, id, image, title } = BookDTO.fromModel(book) as PrismaBook
 
-    return this.mapFromPrismaBook(book)
+    return ResultAsync.fromPromise(
+      this.prisma.book.upsert({
+        create: {
+          authors,
+          id,
+          image,
+          title,
+        },
+        update: {
+          authors,
+          image,
+          title,
+        },
+        where: {
+          id,
+        },
+      }),
+      (error: unknown) => new ApplicationError((error as Error).toString()),
+    ).andThen(() => okAsync(book))
   }
 
   private mapFromPrismaBook(book: PrismaBook): Book {
     return new Book(
       new BookId(book.id),
-      new BookTitle(book.title),
-      book.authors.map((author) => new BookAuthor(author)),
-      new BookImage(book.image),
+      new Title(book.title),
+      new FullNames(book.authors.map((author) => new FullName(author))),
+      new Image(book.image),
     )
-  }
-
-  async save(book: Book): Promise<void> {
-    const { authors, id, image, title } = book
-
-    await this.prisma.book.upsert({
-      create: {
-        authors,
-        id,
-        image,
-        title,
-      },
-      update: {
-        authors,
-        image,
-        title,
-      },
-      where: {
-        id,
-      },
-    })
   }
 }

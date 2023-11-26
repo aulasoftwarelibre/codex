@@ -1,10 +1,9 @@
-import { err, ok, Result } from 'neverthrow'
+import { ok, Result } from 'neverthrow'
 
-import {
-  FindUserCommand,
-  FindUserError,
-  FindUserResponse,
-} from '@/core/user/application/types'
+import Email from '@/core/common/domain/value-objects/email'
+import EmailError from '@/core/common/domain/value-objects/email/email.error'
+import { FindUserCommand, UserDTO } from '@/core/user/application/types'
+import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
 import Users from '@/core/user/domain/services/users.repository'
 
 export default class FindUserUseCase {
@@ -12,18 +11,16 @@ export default class FindUserUseCase {
 
   async with(
     command: FindUserCommand,
-  ): Promise<Result<FindUserResponse, FindUserError>> {
-    const user = await this.userRepository.findByEmail(command.email)
-
-    if (!user) {
-      return err(FindUserError.causeNotFound(command.email))
-    }
-
-    return ok({
-      email: user.email,
-      image: user.image,
-      name: user.name,
-      roles: user.roles,
-    })
+  ): Promise<Result<UserDTO, UserNotFoundError | EmailError>> {
+    return Email.create(command.email)
+      .asyncAndThen((email) => this.userRepository.findByEmail(email))
+      .andThen((user) =>
+        ok({
+          email: user.email.value,
+          image: user.image.value,
+          name: user.name.value,
+          roles: user.roles.map((role) => role.value),
+        } as UserDTO),
+      )
   }
 }

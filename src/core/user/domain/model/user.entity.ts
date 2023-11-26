@@ -1,48 +1,58 @@
-import Email from '@/core/user/domain/model/email.value-object'
-import Image from '@/core/user/domain/model/image.value-object'
-import Name from '@/core/user/domain/model/name.value-object'
-import Role from '@/core/user/domain/model/role.value-object'
+import { err, ok, Result } from 'neverthrow'
+
+import DomainError from '@/core/common/domain/errors/domain-error'
+import Email from '@/core/common/domain/value-objects/email'
+import FullName from '@/core/common/domain/value-objects/fullname'
+import Image from '@/core/common/domain/value-objects/image'
+import Roles from '@/core/common/domain/value-objects/roles'
 import gravatar from '@/lib/utils/gravatar'
 
 export default class User {
   constructor(
-    private _name: Name,
-    private _roles: Role[],
     private _email: Email,
+    private _roles: Roles,
+    private _name: FullName,
     private _image: Image,
   ) {}
 
   static create(
-    name: string,
-    roles: string[],
     email: string,
-    image: string,
-  ): User {
-    const nameObject = Name.create(name)
-    const roleObjs = roles.map((role) => Role.create(role))
-    const emailObject = Email.create(email)
-    const imageObject = Image.create(image || gravatar(email))
-
-    return new User(nameObject, roleObjs, emailObject, imageObject)
+    roles: string[],
+    name: string,
+    image?: string,
+  ): Result<User, DomainError> {
+    return Result.combine([
+      FullName.create(name),
+      Email.create(email),
+      Image.create(image || gravatar(email)),
+      Roles.create(roles),
+    ]).match<Result<User, DomainError>>(
+      ([_fullName, _email, _image, _roles]) => {
+        return ok(new User(_email, _roles, _fullName, _image))
+      },
+      (error) => {
+        return err(error)
+      },
+    )
   }
 
-  get name(): string {
-    return this._name.value
+  get name(): FullName {
+    return this._name
   }
 
-  set name(name: string) {
-    this._name = Name.create(name)
+  set name(fullName: FullName) {
+    this._name = fullName
   }
 
-  get roles(): string[] {
-    return this._roles.map((role) => role.value)
+  get email(): Email {
+    return this._email
   }
 
-  get email(): string {
-    return this._email.value
+  get roles(): Roles {
+    return this._roles
   }
 
-  get image(): string {
-    return this._image.value
+  get image(): Image {
+    return this._image
   }
 }

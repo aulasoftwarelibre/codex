@@ -1,33 +1,46 @@
-import { FindUserError, UpdateUserCommand } from '@/core/user/application/types'
+import { UpdateUserCommand } from '@/core/user/application/types'
 import UpdateUserUseCase from '@/core/user/application/update-user.use-case'
+import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
 import User from '@/core/user/domain/model/user.entity'
 import UsersInMemory from '@/core/user/infrastructure/services/users-in-memory.repository'
 import gravatar from '@/lib/utils/gravatar'
+import unexpected from '@/lib/utils/unexpected'
 
 describe('UpdateUserUseCase', () => {
   test('should update user name by email', async () => {
     // Arrange
     const userRepository = new UsersInMemory()
-    const updateUserUseCase = new UpdateUserUseCase(userRepository)
+    const user = User.create(
+      'test@example.com',
+      ['ROLE_USER'],
+      'Test User',
+      gravatar('test@example.com'),
+    )._unsafeUnwrap()
+    userRepository.users.set('test@example.com', user)
 
-    const email = 'test@example.com'
-    const name = 'Test User'
-    const image = gravatar(email)
     const updatedName = 'Updated User'
 
-    const user = User.create(name, [], email, image)
-
-    await userRepository.save(user)
-
-    const updateUserCommand = new UpdateUserCommand(updatedName, email, image)
+    const updateUserCommand = new UpdateUserCommand(
+      updatedName,
+      'test@example.com',
+      gravatar('test@example.com'),
+    )
+    const updateUserUseCase = new UpdateUserUseCase(userRepository)
 
     // Act
     const result = await updateUserUseCase.with(updateUserCommand)
-    const updatedUser = await userRepository.findByEmail(email)
 
     // Assert
-    expect(result._unsafeUnwrap()).toEqual(true)
-    expect(updatedUser?.name).toEqual(updatedName)
+    result.match(
+      (expectedUser) => {
+        expect(expectedUser.name.value).toEqual(updatedName)
+        const updatedUser = userRepository.users.get('test@example.com')
+        expect(updatedUser?.name.value).toEqual(updatedName)
+      },
+      (error) => {
+        unexpected.error(error)
+      },
+    )
   })
 
   test('should handle updating a non-existent user', async () => {
@@ -45,8 +58,13 @@ describe('UpdateUserUseCase', () => {
     const result = await updateUserUseCase.with(updateUserCommand)
 
     // Assert
-    expect(result._unsafeUnwrapErr()).toEqual(
-      FindUserError.causeNotFound(email),
+    result.match(
+      (_user) => {
+        unexpected.success(_user)
+      },
+      (error) => {
+        expect(error).toBeInstanceOf(UserNotFoundError)
+      },
     )
   })
 })

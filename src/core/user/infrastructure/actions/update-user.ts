@@ -3,53 +3,49 @@
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
-import {
-  FindUserCommand,
-  FindUserResponse,
-  UpdateUserCommand,
-} from '@/core/user/application/types'
+import { UpdateUserCommand } from '@/core/user/application/types'
 import { auth } from '@/lib/auth/auth'
 import container from '@/lib/container'
 import gravatar from '@/lib/utils/gravatar'
 import FormResponse from '@/lib/zod/form-response'
+
+interface EditProfileForm {
+  name?: string
+}
 
 const UpdateFormSchema = z.object({
   name: z.string().min(3),
 })
 
 export async function updateUser(
-  previousState: unknown,
+  previousState: FormResponse<EditProfileForm>,
   formData: FormData,
-): Promise<FormResponse> {
+): Promise<FormResponse<EditProfileForm>> {
   const session = await auth()
   const email = session?.user?.email as string
 
   if (!email) {
-    return FormResponse.custom(['email'], 'Error en la sesión del usuario')
+    return FormResponse.custom(
+      ['email'],
+      'Error en la sesión del usuario',
+      previousState.data,
+    )
   }
 
-  const { name } = UpdateFormSchema.parse({
+  const result = UpdateFormSchema.safeParse({
     name: formData.get('name'),
   })
+
+  if (!result.success) {
+    return FormResponse.withError(result.error, previousState.data)
+  }
+
+  const { name } = result.data
 
   await container.updateUser.with(
     new UpdateUserCommand(name, email, gravatar(email)),
   )
   revalidateTag(`role-for-${email}`)
 
-  return {
-    success: true,
-  }
-}
-
-export async function findUser(
-  email: string,
-): Promise<FindUserResponse | undefined> {
-  const result = await container.findUser.with(new FindUserCommand(email))
-
-  if (result.isErr()) {
-    return undefined
-  }
-
-  return result.value
+  return FormResponse.success(result.data)
 }

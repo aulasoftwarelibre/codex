@@ -1,18 +1,23 @@
+import { errAsync, okAsync, ResultAsync } from 'neverthrow'
+
+import ApplicationError from '@/core/common/domain/errors/application-error'
+import Email from '@/core/common/domain/value-objects/email'
+import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
 import User from '@/core/user/domain/model/user.entity'
 import Users from '@/core/user/domain/services/users.repository'
 
 export default class UsersInMemory implements Users {
-  private users: Map<string, User> = new Map()
+  public users: Map<string, User> = new Map()
 
-  async findByEmail(email: string): Promise<User | undefined> {
-    return this.users.get(email)
+  findByEmail(email: Email): ResultAsync<User, UserNotFoundError> {
+    const user = this.users.get(email.value)
+
+    return user ? okAsync(user) : errAsync(UserNotFoundError.withEmail(email))
   }
 
-  async save(user: User): Promise<void> {
-    this.users.set(user.email, user)
-  }
+  save(user: User): ResultAsync<User, ApplicationError> {
+    this.users.set(user.email.value, user)
 
-  purge(): void {
-    this.users = new Map()
+    return okAsync(user)
   }
 }

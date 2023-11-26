@@ -1,31 +1,27 @@
 'use client'
 
 import { EnvelopeIcon } from '@heroicons/react/24/outline'
-import { Button, Input } from '@nextui-org/react'
+import { Button } from '@nextui-org/react'
 import React from 'react'
 import { useFormState } from 'react-dom'
-import { ZodIssue } from 'zod'
 
-import { form } from '@/components/sign-in-email-form/actions'
+import InputForm from '@/components/input-form'
+import { signInAction } from '@/components/sign-in-email-form/actions'
+import FormResponse from '@/lib/zod/form-response'
 
 export default function SignInEmailForm() {
-  const [code, action] = useFormState(form, [])
-
-  // eslint-disable-next-line unicorn/no-array-reduce
-  const errors = code.reduce(
-    (map, error) => {
-      map[error.path.toString()] = error
-      return map
-    },
-    {} as Record<string, ZodIssue>,
+  const [state, action] = useFormState(
+    signInAction,
+    FormResponse.initialState({
+      email: '',
+    }),
   )
 
   return (
     <>
       <form className="flex flex-col gap-2" action={action}>
-        <Input
-          name="email"
-          type="email"
+        <InputForm
+          label="Email"
           autoFocus
           endContent={
             <EnvelopeIcon
@@ -34,11 +30,12 @@ export default function SignInEmailForm() {
               className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
             />
           }
-          label="Email"
+          name="email"
+          type="email"
           placeholder="Introduce tu email"
           variant="bordered"
-          errorMessage={errors?.email?.message}
-          color={errors?.email ? 'danger' : 'default'}
+          errors={state.errors}
+          defaultValue={state.data.email}
         />
         <Button
           size="lg"

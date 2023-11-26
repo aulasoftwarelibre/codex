@@ -1,8 +1,13 @@
 'use server'
 
-import { z, ZodError, ZodIssue } from 'zod'
+import { z } from 'zod'
 
 import { signIn } from '@/lib/auth/auth'
+import FormResponse from '@/lib/zod/form-response'
+
+export interface SignInForm {
+  email?: string
+}
 
 const FormSchema = z.object({
   email: z
@@ -11,23 +16,17 @@ const FormSchema = z.object({
     .regex(/@uco.es$/, 'Introduce un correo válido de la UCO'),
 })
 
-export async function form(
-  previousState: ZodIssue[] | undefined,
+export async function signInAction(
+  previousState: FormResponse<SignInForm>,
   formData: FormData,
-) {
-  try {
-    const { email } = FormSchema.parse(Object.fromEntries(formData))
+): Promise<FormResponse<SignInForm>> {
+  const result = FormSchema.safeParse(Object.fromEntries(formData))
 
-    return signIn('email', {
-      email,
-    })
-  } catch (error) {
-    console.error(`ERROR IN SIGN IN: ${(error as Error).toString()}`)
-
-    if ((error as ZodError).issues) {
-      return (error as ZodError).issues
-    }
-
-    throw error
+  if (!result.success) {
+    return FormResponse.withError(result.error, previousState.data)
   }
+
+  await signIn('email', result.data)
+
+  return FormResponse.success(result.data)
 }

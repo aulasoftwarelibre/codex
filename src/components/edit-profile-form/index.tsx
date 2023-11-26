@@ -3,31 +3,28 @@
 import { Divider } from '@nextui-org/react'
 import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
-import toast from 'react-hot-toast'
 
 import InputForm from '@/components/input-form'
 import SubmitButton from '@/components/submit-button'
-import Toast from '@/components/toast'
-import { FindUserResponse } from '@/core/user/application/types'
-import { updateUser } from '@/core/user/infrastructure/actions'
+import { showToast } from '@/components/toast'
+import { UserDTO } from '@/core/user/application/types'
+import { updateUser } from '@/core/user/infrastructure/actions/update-user'
 import FormResponse from '@/lib/zod/form-response'
 
 interface EditProfileFormProperties {
-  user: FindUserResponse
+  user: UserDTO
 }
 
 export default function EditProfileForm(properties: EditProfileFormProperties) {
   const { user } = properties
-  const [state, action] = useFormState(updateUser, FormResponse.initialState())
+  const [state, action] = useFormState(
+    updateUser,
+    FormResponse.initialState(user),
+  )
 
   useEffect(() => {
-    if (state?.success) {
-      toast((t) => (
-        <Toast
-          message="Perfil actualizado."
-          onCloseHandler={() => toast.dismiss(t.id)}
-        />
-      ))
+    if (state.success) {
+      showToast('Perfil actualizado')
     }
   }, [state])
 
@@ -38,17 +35,17 @@ export default function EditProfileForm(properties: EditProfileFormProperties) {
           <InputForm
             label="Nombre"
             name="name"
-            defaultValue={user.name || ''}
+            defaultValue={state.data?.name || ''}
             isRequired
-            errors={state?.errors}
+            errors={state.errors}
           />
           <InputForm
             label="Correo electrónico"
             name="email"
-            defaultValue={user.email || ''}
+            defaultValue={user?.email || ''}
             isRequired
             isReadOnly
-            errors={state?.errors}
+            errors={state.errors}
           />
           <Divider className="col-span-1 md:col-span-2" />
         </div>

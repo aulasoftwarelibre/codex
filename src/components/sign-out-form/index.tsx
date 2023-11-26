@@ -4,11 +4,11 @@ import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline'
 import { Button } from '@nextui-org/react'
 import React from 'react'
 
-import { form } from '@/components/sign-out-form/actions'
+import { signOutAction } from '@/components/sign-out-form/actions'
 
 export default function SignOutForm() {
   return (
-    <form className="flex flex-col gap-2" action={form}>
+    <form className="flex flex-col gap-2" action={signOutAction}>
       <Button
         size="lg"
         radius="none"

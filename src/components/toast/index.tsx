@@ -3,10 +3,17 @@
 
 import { CheckCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { MouseEventHandler } from 'react'
+import toast from 'react-hot-toast'
 
 interface ToastProperties {
   message: string
   onCloseHandler: MouseEventHandler<HTMLButtonElement>
+}
+
+export function showToast(message: string) {
+  toast((t) => (
+    <Toast message={message} onCloseHandler={() => toast.dismiss(t.id)} />
+  ))
 }
 
 export default function Toast(properties: ToastProperties) {

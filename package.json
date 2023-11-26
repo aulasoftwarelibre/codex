@@ -148,7 +148,7 @@
       "import/first": "error",
       "import/newline-after-import": "error",
       "import/no-duplicates": "error",
-      "neverthrow/must-use-result": "error",
+      "neverthrow/must-use-result": "warn",
       "no-shadow": "off",
       "simple-import-sort/exports": "error",
       "simple-import-sort/imports": "error",

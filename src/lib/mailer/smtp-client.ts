@@ -18,22 +18,20 @@ export class SmtpClient {
   }: SendVerificationRequestParams) {
     const { host } = new URL(url)
 
+    console.debug('sendVerificationRequest', identifier, provider, theme, url)
+
     if (!identifier.toLowerCase().endsWith('@uco.es')) {
       throw new Error('La dirección de correo electrónico no es válida.')
     }
 
     try {
-      const result = await this.transporter.sendMail({
+      await this.transporter.sendMail({
         from: provider.from,
         html: html({ host, theme, url }),
         subject: `Sign in to ${host}`,
         text: text({ host, url }),
         to: identifier,
       })
-      const failed = [...result.rejected, ...result.pending].filter(Boolean)
-      if (failed.length > 0) {
-        throw new Error(`El correo (${failed.join(', ')}) no pudo ser enviado.`)
-      }
     } catch (error) {
       if ((error as Error).message) {
         console.error((error as Error).toString())

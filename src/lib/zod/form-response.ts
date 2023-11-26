@@ -1,12 +1,14 @@
-import { ZodIssue } from 'zod'
+import { ZodError, ZodIssue } from 'zod'
 
-interface FormResponse {
-  errors?: ZodIssue[]
+interface FormResponse<T = undefined> {
+  data: T
+  errors: ZodIssue[]
   success: boolean
 }
 
 const FormResponse = {
-  custom: (path: string[], message: string): FormResponse => ({
+  custom: <T>(path: string[], message: string, data: T): FormResponse<T> => ({
+    data,
     errors: [
       {
         code: 'custom',
@@ -16,12 +18,20 @@ const FormResponse = {
     ],
     success: false,
   }),
-  initialState: (): FormResponse => ({
+  initialState: <T = undefined>(data: T): FormResponse<T> => ({
+    data,
     errors: [],
     success: false,
   }),
-  success: (): FormResponse => ({
+  success: <T = undefined>(data: T): FormResponse<T> => ({
+    data,
+    errors: [],
     success: true,
+  }),
+  withError: <T = undefined>(error: ZodError<T>, data: T): FormResponse<T> => ({
+    data,
+    errors: error.issues,
+    success: false,
   }),
 }
 

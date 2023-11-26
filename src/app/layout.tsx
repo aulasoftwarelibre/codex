@@ -5,7 +5,7 @@ import { Nunito } from 'next/font/google'
 
 import Header from '@/components/header'
 import { Providers } from '@/components/providers'
-import { findUser } from '@/core/user/infrastructure/actions'
+import { findUser } from '@/core/user/infrastructure/actions/find-user'
 import { auth } from '@/lib/auth/auth'
 
 const inter = Nunito({ subsets: ['latin'] })

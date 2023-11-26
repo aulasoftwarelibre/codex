@@ -2,7 +2,7 @@
 
 import { signOut } from '@/lib/auth/auth'
 
-export async function form() {
+export async function signOutAction() {
   try {
     return signOut({ redirectTo: '/' })
   } catch (error) {

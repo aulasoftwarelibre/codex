@@ -1,9 +1,9 @@
 import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 
-import { BookDTO } from '@/core/book/application/types'
+import BookResponse from '@/core/book/dto/responses/book.response'
 
 export interface BookProperties {
-  book: BookDTO
+  book: BookResponse
 }
 
 export default async function Book(properties: BookProperties) {

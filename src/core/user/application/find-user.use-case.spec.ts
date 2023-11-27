@@ -1,46 +1,36 @@
 import FindUserUseCase from '@/core/user/application/find-user.use-case'
-import { FindUserCommand, UserDTO } from '@/core/user/application/types'
 import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
-import User from '@/core/user/domain/model/user.entity'
+import FindUserRequest from '@/core/user/dto/requests/find-user.request'
 import UsersInMemory from '@/core/user/infrastructure/services/users-in-memory.repository'
-import gravatar from '@/lib/utils/gravatar'
 import unexpected from '@/lib/utils/unexpected'
+import UsersExamples from '@/tests/examples/users.examples'
 
 describe('FindUserUseCase', () => {
   test('should find a user by email', async () => {
     // Arrange
     const userRepository = new UsersInMemory()
-    const user = User.create(
-      UserDTO.with({
-        email: 'test@example.com',
-        image: gravatar('test@example.com'),
-        name: 'Test User',
-        roles: ['ROLE_USER'],
-      }),
-    )._unsafeUnwrap()
+    const user = UsersExamples.basic()
+    userRepository.users.set(user.email.value, user)
 
-    userRepository.users.set('test@example.com', user)
-
-    const findUserUseCase = new FindUserUseCase(userRepository)
-    const findUserCommand = FindUserCommand.with({
-      email: 'test@example.com',
+    const useCase = new FindUserUseCase(userRepository)
+    const request = FindUserRequest.with({
+      email: user.email.value,
     })
+
     // Act
-    const result = await findUserUseCase.with(findUserCommand)
+    const result = await useCase.with(request)
 
     // Assert
     result.match(
       (_user) => {
         expect(_user).toEqual({
-          email: 'test@example.com',
-          image: gravatar('test@example.com'),
-          name: 'Test User',
-          roles: ['ROLE_USER'],
+          email: user.email.value,
+          image: user.image.value,
+          name: user.name.value,
+          roles: user.roles.map((role) => role.value),
         })
       },
-      (error) => {
-        unexpected.error(error)
-      },
+      (error) => unexpected.error(error),
     )
   })
 
@@ -48,19 +38,17 @@ describe('FindUserUseCase', () => {
     // Arrange
     const userRepository = new UsersInMemory()
 
-    const findUserUseCase = new FindUserUseCase(userRepository)
-    const findUserCommand = FindUserCommand.with({
+    const useCase = new FindUserUseCase(userRepository)
+    const request = FindUserRequest.with({
       email: 'nonexistent@example.com',
     })
 
     // Act
-    const result = await findUserUseCase.with(findUserCommand)
+    const result = await useCase.with(request)
 
     // Assert
     result.match(
-      (_user) => {
-        unexpected.success(_user)
-      },
+      (_user) => unexpected.success(_user),
       (error) => {
         expect(error).toBeInstanceOf(UserNotFoundError)
       },

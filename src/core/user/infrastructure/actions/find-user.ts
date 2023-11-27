@@ -1,10 +1,13 @@
 'use server'
 
-import { FindUserCommand, UserDTO } from '@/core/user/application/types'
+import FindUserRequest from '@/core/user/dto/requests/find-user.request'
+import UserResponse from '@/core/user/dto/responses/user.response'
 import container from '@/lib/container'
 
-export async function findUser(email: string): Promise<UserDTO | undefined> {
-  const result = await container.findUser.with(FindUserCommand.with({ email }))
+export async function findUser(
+  email: string,
+): Promise<UserResponse | undefined> {
+  const result = await container.findUser.with(FindUserRequest.with({ email }))
 
   return result.match(
     (user) => user,

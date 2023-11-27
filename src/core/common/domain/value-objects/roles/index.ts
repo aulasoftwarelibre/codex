@@ -10,7 +10,7 @@ export default class Roles {
     this._roles = roles
   }
 
-  static create(roles: string[]): Result<Roles, RoleError> {
+  static create(roles: string[] | readonly string[]): Result<Roles, RoleError> {
     return Result.combine(roles.map((role) => Role.create(role))).match<
       Result<Roles, RoleError>
     >(

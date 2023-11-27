@@ -1,16 +1,13 @@
 import { Book as PrismaBook, PrismaClient } from '@prisma/client'
 import { okAsync, ResultAsync } from 'neverthrow'
 
-import { BookDTO } from '@/core/book/application/types'
 import BookNotFoundError from '@/core/book/domain/errors/book-not-found.error'
 import Book from '@/core/book/domain/model/book.entity'
+import BookFactory from '@/core/book/domain/model/book.factory'
 import Books from '@/core/book/domain/services/books.repository'
+import BookResponse from '@/core/book/dto/responses/book.response'
 import ApplicationError from '@/core/common/domain/errors/application-error'
 import BookId from '@/core/common/domain/value-objects/book-id'
-import FullName from '@/core/common/domain/value-objects/fullname'
-import FullNames from '@/core/common/domain/value-objects/fullnames'
-import Image from '@/core/common/domain/value-objects/image'
-import Title from '@/core/common/domain/value-objects/title'
 
 export default class BooksPrisma implements Books {
   constructor(private readonly prisma: PrismaClient) {}
@@ -33,7 +30,9 @@ export default class BooksPrisma implements Books {
   }
 
   save(book: Book): ResultAsync<Book, ApplicationError> {
-    const { authors, id, image, title } = BookDTO.fromModel(book) as PrismaBook
+    const { authors, id, image, title } = BookResponse.fromModel(
+      book,
+    ) as PrismaBook
 
     return ResultAsync.fromPromise(
       this.prisma.book.upsert({
@@ -57,11 +56,6 @@ export default class BooksPrisma implements Books {
   }
 
   private mapFromPrismaBook(book: PrismaBook): Book {
-    return new Book(
-      new BookId(book.id),
-      new Title(book.title),
-      new FullNames(book.authors.map((author) => new FullName(author))),
-      new Image(book.image),
-    )
+    return BookFactory.with(book satisfies BookResponse)
   }
 }

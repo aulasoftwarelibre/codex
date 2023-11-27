@@ -3,13 +3,11 @@ import { okAsync, ResultAsync } from 'neverthrow'
 
 import ApplicationError from '@/core/common/domain/errors/application-error'
 import Email from '@/core/common/domain/value-objects/email'
-import FullName from '@/core/common/domain/value-objects/fullname'
-import Image from '@/core/common/domain/value-objects/image'
-import Role from '@/core/common/domain/value-objects/role'
-import Roles from '@/core/common/domain/value-objects/roles'
 import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
 import User from '@/core/user/domain/model/user.entity'
+import UserFactory from '@/core/user/domain/model/user.factory'
 import Users from '@/core/user/domain/services/users.repository'
+import UserResponse from '@/core/user/dto/responses/user.response'
 
 export default class UsersPrisma implements Users {
   constructor(private readonly prisma: PrismaClient) {}
@@ -61,11 +59,11 @@ export default class UsersPrisma implements Users {
     name,
     roles,
   }: Pick<PrismaUser, 'email' | 'name' | 'roles' | 'image'>) {
-    return new User(
-      new Email(email || ''),
-      new Roles(roles.map((role) => new Role(role))),
-      new FullName(name || ''),
-      new Image(image || ''),
-    )
+    return UserFactory.with({
+      email: email || '',
+      image: image || '',
+      name: name || '',
+      roles,
+    } satisfies UserResponse)
   }
 }

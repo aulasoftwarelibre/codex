@@ -7,12 +7,12 @@ import { useFormState } from 'react-dom'
 import InputForm from '@/components/input-form'
 import SubmitButton from '@/components/submit-button'
 import { showToast } from '@/components/toast'
-import { UserDTO } from '@/core/user/application/types'
+import UserResponse from '@/core/user/dto/responses/user.response'
 import { updateUser } from '@/core/user/infrastructure/actions/update-user'
 import FormResponse from '@/lib/zod/form-response'
 
 interface EditProfileFormProperties {
-  user: UserDTO
+  user: UserResponse
 }
 
 export default function EditProfileForm(properties: EditProfileFormProperties) {

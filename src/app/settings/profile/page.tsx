@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 
 import EditProfileForm from '@/components/edit-profile-form'
-import { UserDTO } from '@/core/user/application/types'
+import UserResponse from '@/core/user/dto/responses/user.response'
 import { findUser } from '@/core/user/infrastructure/actions/find-user'
 import { auth } from '@/lib/auth/auth'
 
@@ -12,7 +12,7 @@ export default async function Page() {
     return redirect('/')
   }
 
-  const user = (await findUser(email)) as UserDTO
+  const user = (await findUser(email)) as UserResponse
 
   return (
     <>

@@ -11,10 +11,10 @@ import Link from 'next/link'
 import HeaderAuthenticatedMenu from '@/components/header/header-authenticated-menu'
 import HeaderUnauthenticatedMenu from '@/components/header/header-unauthenticated-menu'
 import ThemeSwitcher from '@/components/theme-switcher'
-import { UserDTO } from '@/core/user/application/types'
+import UserResponse from '@/core/user/dto/responses/user.response'
 
 interface HeaderProperties {
-  user?: UserDTO
+  user?: UserResponse
 }
 
 export default function Header(properties: HeaderProperties) {

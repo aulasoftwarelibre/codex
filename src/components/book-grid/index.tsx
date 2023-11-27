@@ -1,8 +1,8 @@
 import Book from '@/components/book'
-import { BookDTO } from '@/core/book/application/types'
+import BookResponse from '@/core/book/dto/responses/book.response'
 
 export interface BookGridProperties {
-  books: BookDTO[]
+  books: BookResponse[]
 }
 
 export default function BookGrid(properties: BookGridProperties) {

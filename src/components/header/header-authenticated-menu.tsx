@@ -14,11 +14,11 @@ import {
 } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 
-import { UserDTO } from '@/core/user/application/types'
+import UserResponse from '@/core/user/dto/responses/user.response'
 import gravatar from '@/lib/utils/gravatar'
 
 interface HeaderAuthenticatedMenuProperties {
-  user: UserDTO
+  user: UserResponse
 }
 
 export default function HeaderAuthenticatedMenu(

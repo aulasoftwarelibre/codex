@@ -3,7 +3,7 @@
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
-import { UpdateUserCommand } from '@/core/user/application/types'
+import UpdateUserRequest from '@/core/user/dto/requests/update-user.request'
 import { auth } from '@/lib/auth/auth'
 import container from '@/lib/container'
 import gravatar from '@/lib/utils/gravatar'
@@ -43,7 +43,7 @@ export async function updateUser(
   const { name } = result.data
 
   await container.updateUser.with(
-    UpdateUserCommand.with({ email, image: gravatar(email), name }),
+    UpdateUserRequest.with({ email, image: gravatar(email), name }),
   )
   revalidateTag(`role-for-${email}`)
 

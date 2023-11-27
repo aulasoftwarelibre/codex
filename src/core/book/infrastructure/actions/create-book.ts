@@ -3,7 +3,7 @@
 import { ulid } from 'ulid'
 import { z } from 'zod'
 
-import { CreateBookCommand } from '@/core/book/application/types'
+import CreateBookRequest from '@/core/book/dto/requests/create-book.request'
 import container from '@/lib/container'
 import FormResponse from '@/lib/zod/form-response'
 
@@ -37,7 +37,7 @@ export async function createBook(
   const { authors, image, title } = result.data
 
   await container.createBook.with(
-    CreateBookCommand.with({ authors: authors.split(', '), id, image, title }),
+    CreateBookRequest.with({ authors: authors.split(', '), id, image, title }),
   )
 
   return FormResponse.success(result.data)

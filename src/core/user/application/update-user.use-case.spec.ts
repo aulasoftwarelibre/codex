@@ -1,72 +1,57 @@
-import { UpdateUserCommand, UserDTO } from '@/core/user/application/types'
 import UpdateUserUseCase from '@/core/user/application/update-user.use-case'
 import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
-import User from '@/core/user/domain/model/user.entity'
+import UpdateUserRequest from '@/core/user/dto/requests/update-user.request'
+import UserResponse from '@/core/user/dto/responses/user.response'
 import UsersInMemory from '@/core/user/infrastructure/services/users-in-memory.repository'
 import gravatar from '@/lib/utils/gravatar'
 import unexpected from '@/lib/utils/unexpected'
+import UsersExamples from '@/tests/examples/users.examples'
 
 describe('UpdateUserUseCase', () => {
   test('should update user name by email', async () => {
     // Arrange
     const userRepository = new UsersInMemory()
-    const user = User.create(
-      UserDTO.with({
-        email: 'test@example.com',
-        image: gravatar('test@example.com'),
-        name: 'Test User',
-        roles: ['ROLE_USER'],
-      }),
-    )._unsafeUnwrap()
-    userRepository.users.set('test@example.com', user)
+    const user = UsersExamples.basic()
+    userRepository.users.set(user.email.value, user)
 
-    const updatedName = 'Updated User'
-
-    const updateUserCommand = UpdateUserCommand.with({
-      email: 'test@example.com',
-      image: gravatar('test@example.com'),
-      name: updatedName,
+    const useCase = new UpdateUserUseCase(userRepository)
+    const request = UpdateUserRequest.with({
+      ...UserResponse.fromModel(user),
+      name: 'Updated User',
     })
-    const updateUserUseCase = new UpdateUserUseCase(userRepository)
 
     // Act
-    const result = await updateUserUseCase.with(updateUserCommand)
+    const result = await useCase.with(request)
 
     // Assert
     result.match(
-      (expectedUser) => {
-        expect(expectedUser.name.value).toEqual(updatedName)
-        const updatedUser = userRepository.users.get('test@example.com')
-        expect(updatedUser?.name.value).toEqual(updatedName)
+      () => {
+        const updatedUser = userRepository.users.get(user.email.value)
+        expect(updatedUser?.name.value).toEqual('Updated User')
       },
-      (error) => {
-        unexpected.error(error)
-      },
+      (error) => unexpected.error(error),
     )
   })
 
   test('should handle updating a non-existent user', async () => {
     // Arrange
     const userRepository = new UsersInMemory()
-    const updateUserUseCase = new UpdateUserUseCase(userRepository)
+    const user = UsersExamples.basic()
+    userRepository.users.set(user.email.value, user)
 
-    const email = 'nonexistent@example.com'
-    const image = gravatar(email)
-    const updatedName = 'Updated User'
-    const updateUserCommand = UpdateUserCommand.with({
-      email,
-      image,
-      name: updatedName,
+    const useCase = new UpdateUserUseCase(userRepository)
+    const request = UpdateUserRequest.with({
+      email: 'nonexistent@example.com',
+      image: gravatar('nonexistent@example.com'),
+      name: 'Updated User',
     })
 
     // Act
-    const result = await updateUserUseCase.with(updateUserCommand)
+    const result = await useCase.with(request)
 
     // Assert
     result.match(
-      (_user) => {
-        unexpected.success(_user)
-      },
+      (_user) => unexpected.success(_user),
       (error) => {
         expect(error).toBeInstanceOf(UserNotFoundError)
       },

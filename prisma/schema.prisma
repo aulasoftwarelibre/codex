@@ -44,6 +44,7 @@ model User {
   roles         String[]  @default(["ROLE_USER"])
   accounts      Account[]
   sessions      Session[]
+  Loan          Loan[]
 }
 
 model VerificationToken {
@@ -54,9 +55,23 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Loan {
+  id         String    @id @default(cuid())
+  startsAt   DateTime  @default(now())
+  finishedAt DateTime?
+  user       User      @relation(fields: [userId], references: [id])
+  userId     String
+  book       Book      @relation("Loans", fields: [bookId], references: [id])
+  bookId     String
+  activeLoan Book?     @relation("ActiveLoan") @ignore
+}
+
 model Book {
-  id      String   @id @default(cuid())
-  authors String[]
-  image   String
-  title   String
+  id           String   @id @default(cuid())
+  authors      String[]
+  image        String
+  title        String
+  Loan         Loan[]   @relation("Loans")
+  activeLoan   Loan?    @relation("ActiveLoan", fields: [activeLoanId], references: [id])
+  activeLoanId String?  @unique
 }

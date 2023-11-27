@@ -5,4 +5,7 @@ export default class BookNotFoundError extends ApplicationError {
   static withId(id: BookId): BookNotFoundError {
     return new BookNotFoundError(`book with ${id.value} not found`)
   }
+  static withString(id: string): BookNotFoundError {
+    return new BookNotFoundError(`book with ${id} not found`)
+  }
 }

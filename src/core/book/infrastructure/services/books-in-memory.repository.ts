@@ -25,4 +25,10 @@ export default class BooksInMemory implements Books {
 
     return okAsync(book)
   }
+
+  static withBooks(books: Array<Book>): BooksInMemory {
+    const booksInMemory = new BooksInMemory()
+    books.map((book) => booksInMemory.save(book))
+    return booksInMemory
+  }
 }

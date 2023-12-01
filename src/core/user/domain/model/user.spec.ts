@@ -1,3 +1,5 @@
+import { describe, expect, test as it } from 'vitest'
+
 import Role from '@/core/common/domain/value-objects/role'
 import UserFactory from '@/core/user/domain/model/user.factory'
 import UserResponse from '@/core/user/dto/responses/user.response'

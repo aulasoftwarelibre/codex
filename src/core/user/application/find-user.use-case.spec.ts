@@ -1,12 +1,15 @@
+import { describe, expect, test as it } from 'vitest'
+
 import FindUserUseCase from '@/core/user/application/find-user.use-case'
 import UserNotFoundError from '@/core/user/domain/errors/user-not-found.error'
 import FindUserRequest from '@/core/user/dto/requests/find-user.request'
 import UsersInMemory from '@/core/user/infrastructure/services/users-in-memory.repository'
 import unexpected from '@/lib/utils/unexpected'
-import UsersExamples from '@/tests/examples/users.examples'
+
+import UsersExamples from '../../../../tests/examples/users.examples'
 
 describe('FindUserUseCase', () => {
-  test('should find a user by email', async () => {
+  it('should find a user by email', async () => {
     // Arrange
     const userRepository = new UsersInMemory()
     const user = UsersExamples.basic()
@@ -34,7 +37,7 @@ describe('FindUserUseCase', () => {
     )
   })
 
-  test('should handle not finding a user by email', async () => {
+  it('should handle not finding a user by email', async () => {
     // Arrange
     const userRepository = new UsersInMemory()
 

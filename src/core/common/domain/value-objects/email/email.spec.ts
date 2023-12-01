@@ -1,10 +1,12 @@
+import { describe, expect, it } from 'vitest'
+
 import Email from '@/core/common/domain/value-objects/email'
 import EmailError from '@/core/common/domain/value-objects/email/email.error'
 import unexpected from '@/lib/utils/unexpected'
 
 describe('Email', () => {
   describe('create', () => {
-    test('should create an Email instance with a valid email', () => {
+    it('should create an Email instance with a valid email', () => {
       // Arrange
       const validEmail = 'john.doe@example.com'
 
@@ -23,7 +25,7 @@ describe('Email', () => {
       )
     })
 
-    test('should return an EmailError for an invalid email format', () => {
+    it('should return an EmailError for an invalid email format', () => {
       // Arrange
       const invalidEmail = 'invalid-email' // Invalid format
 
@@ -41,7 +43,7 @@ describe('Email', () => {
       )
     })
 
-    test('should return an EmailError for an empty email', () => {
+    it('should return an EmailError for an empty email', () => {
       // Arrange
       const emptyEmail = ''
 

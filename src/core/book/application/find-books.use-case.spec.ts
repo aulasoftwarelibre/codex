@@ -1,8 +1,11 @@
+import { describe, expect, test as it } from 'vitest'
+
 import FindBooksUseCase from '@/core/book/application/find-books.use-case'
 import BookResponse from '@/core/book/dto/responses/book.response'
 import BooksInMemory from '@/core/book/infrastructure/services/books-in-memory.repository'
 import unexpected from '@/lib/utils/unexpected'
-import BooksExamples from '@/tests/examples/books.examples'
+
+import BooksExamples from '../../../../tests/examples/books.examples'
 
 describe('FindBooksUseCase', () => {
   it('should get all books', async () => {

@@ -1,11 +1,12 @@
 import { ulid } from 'ulid'
+import { describe, expect, it } from 'vitest'
 
 import Id from '@/core/common/domain/value-objects/id'
 import unexpected from '@/lib/utils/unexpected'
 
 describe('Id', () => {
   describe('create', () => {
-    test('should create an instance of Id with valid value', () => {
+    it('should create an instance of Id with valid value', () => {
       // Arrange
       const validValue = ulid()
 
@@ -21,7 +22,7 @@ describe('Id', () => {
       )
     })
 
-    test('should return an error for invalid value', () => {
+    it('should return an error for invalid value', () => {
       // Arrange
       const invalidValue = 'invalid-value'
 
@@ -37,7 +38,7 @@ describe('Id', () => {
       )
     })
 
-    test('should return an error for empty value', () => {
+    it('should return an error for empty value', () => {
       // Arrange
       const emptyValue = ''
 
@@ -55,7 +56,7 @@ describe('Id', () => {
   })
 
   describe('generate', () => {
-    test('should generate a new Id instance', () => {
+    it('should generate a new Id instance', () => {
       // Act
       const generatedId = Id.generate()
 

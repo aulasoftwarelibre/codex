@@ -1,10 +1,12 @@
+import { describe, expect, it } from 'vitest'
+
 import Image from '@/core/common/domain/value-objects/image'
 import ImageError from '@/core/common/domain/value-objects/image/image.error'
 import unexpected from '@/lib/utils/unexpected'
 
 describe('Image', () => {
   describe('create', () => {
-    test('should create an Image instance with a valid URL', () => {
+    it('should create an Image instance with a valid URL', () => {
       // Arrange
       const validUrl = 'https://example.com/image.jpg'
 
@@ -23,7 +25,7 @@ describe('Image', () => {
       )
     })
 
-    test('should return an ImageError for an invalid URL', () => {
+    it('should return an ImageError for an invalid URL', () => {
       // Arrange
       const invalidUrl = 'invalid-url' // Invalid format
 
@@ -41,7 +43,7 @@ describe('Image', () => {
       )
     })
 
-    test('should return an ImageError for an empty URL', () => {
+    it('should return an ImageError for an empty URL', () => {
       // Arrange
       const emptyUrl = ''
 

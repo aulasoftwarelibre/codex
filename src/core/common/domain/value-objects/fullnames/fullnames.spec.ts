@@ -1,3 +1,5 @@
+import { describe, expect, test as it } from 'vitest'
+
 import FullName from '@/core/common/domain/value-objects/fullname'
 import FullNameError from '@/core/common/domain/value-objects/fullname/fullname.error'
 import FullNames from '@/core/common/domain/value-objects/fullnames/index'

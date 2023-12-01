@@ -1,10 +1,12 @@
+import { describe, expect, it } from 'vitest'
+
 import FullName from '@/core/common/domain/value-objects/fullname'
 import FullNameError from '@/core/common/domain/value-objects/fullname/fullname.error'
 import unexpected from '@/lib/utils/unexpected'
 
 describe('FullName', () => {
   describe('create', () => {
-    test('should create a FullName instance with a valid name', () => {
+    it('should create a FullName instance with a valid name', () => {
       // Arrange
       const validName = 'John Doe'
 
@@ -23,7 +25,7 @@ describe('FullName', () => {
       )
     })
 
-    test('should return a FullNameError for an invalid name', () => {
+    it('should return a FullNameError for an invalid name', () => {
       // Arrange
       const invalidName = 'Jo' // Name length is less than 3
 
@@ -41,7 +43,7 @@ describe('FullName', () => {
       )
     })
 
-    test('should return a FullNameError for an empty name', () => {
+    it('should return a FullNameError for an empty name', () => {
       // Arrange
       const emptyName = ''
 

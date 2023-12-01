@@ -1,10 +1,12 @@
+import { describe, expect, test as it } from 'vitest'
+
 import Title from '@/core/common/domain/value-objects/title/index'
 import TitleError from '@/core/common/domain/value-objects/title/title.error'
 import unexpected from '@/lib/utils/unexpected'
 
 describe('Title', () => {
   describe('create', () => {
-    test('should create a Title instance with a valid title', () => {
+    it('should create a Title instance with a valid title', () => {
       // Arrange
       const validTitle = 'A book title'
 
@@ -23,7 +25,7 @@ describe('Title', () => {
       )
     })
 
-    test('should return a TitleError for an invalid title', () => {
+    it('should return a TitleError for an invalid title', () => {
       // Arrange
       const invalidTitle = 'Jo' // Name length is less than 3
 
@@ -41,7 +43,7 @@ describe('Title', () => {
       )
     })
 
-    test('should return a TitleError for an empty name', () => {
+    it('should return a TitleError for an empty name', () => {
       // Arrange
       const emptyName = ''
 

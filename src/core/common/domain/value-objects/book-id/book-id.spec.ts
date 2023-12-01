@@ -1,3 +1,5 @@
+import { describe, expect, test as it } from 'vitest'
+
 import BookId from '@/core/common/domain/value-objects/book-id'
 import Id from '@/core/common/domain/value-objects/id'
 

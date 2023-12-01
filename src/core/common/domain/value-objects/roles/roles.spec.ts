@@ -1,3 +1,5 @@
+import { describe, expect, test as it } from 'vitest'
+
 import Role from '@/core/common/domain/value-objects/role'
 import RoleError from '@/core/common/domain/value-objects/role/role.error'
 import Roles from '@/core/common/domain/value-objects/roles'

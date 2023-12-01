@@ -1,10 +1,12 @@
+import { describe, expect, it } from 'vitest'
+
 import Role from '@/core/common/domain/value-objects/role'
 import RoleError from '@/core/common/domain/value-objects/role/role.error'
 import unexpected from '@/lib/utils/unexpected'
 
 describe('Role', () => {
   describe('create', () => {
-    test('should create a Role instance with a valid role', () => {
+    it('should create a Role instance with a valid role', () => {
       // Arrange
       const validRole = 'ROLE_USER'
 
@@ -23,7 +25,7 @@ describe('Role', () => {
       )
     })
 
-    test('should return a RoleError for an invalid role', () => {
+    it('should return a RoleError for an invalid role', () => {
       // Arrange
       const invalidRole = 'USER_ROLE' // Invalid format
 
@@ -41,7 +43,7 @@ describe('Role', () => {
       )
     })
 
-    test('should return a RoleError for an empty role', () => {
+    it('should return a RoleError for an empty role', () => {
       // Arrange
       const emptyRole = ''
 

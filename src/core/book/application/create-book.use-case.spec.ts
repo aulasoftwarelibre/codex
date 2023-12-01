@@ -1,10 +1,13 @@
+import { describe, expect, test as it } from 'vitest'
+
 import CreateBookUseCase from '@/core/book/application/create-book.use-case'
 import BookIdAlreadyExistsError from '@/core/book/domain/errors/book-id-already-exists.error'
 import CreateBookRequest from '@/core/book/dto/requests/create-book.request'
 import BookResponse from '@/core/book/dto/responses/book.response'
 import BooksInMemory from '@/core/book/infrastructure/services/books-in-memory.repository'
 import unexpected from '@/lib/utils/unexpected'
-import BooksExamples from '@/tests/examples/books.examples'
+
+import BooksExamples from '../../../../tests/examples/books.examples'
 
 describe('CreateBookUseCase', () => {
   it('should create a new book', async () => {

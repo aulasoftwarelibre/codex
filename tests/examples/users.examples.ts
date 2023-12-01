@@ -1,5 +1,5 @@
-import UserFactory from '../../src/core/user/domain/model/user.factory'
-import gravatar from '../../src/lib/utils/gravatar'
+import UserFactory from '@/core/user/domain/model/user.factory'
+import gravatar from '@/lib/utils/gravatar'
 
 const UsersExamples = {
   basic: () =>

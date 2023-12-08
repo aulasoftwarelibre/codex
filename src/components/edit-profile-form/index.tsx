@@ -37,7 +37,7 @@ export default function EditProfileForm(properties: EditProfileFormProperties) {
             name="name"
             defaultValue={state.data?.name || ''}
             isRequired
-            errors={state.errors}
+            state={state}
           />
           <InputForm
             label="Correo electrónico"
@@ -45,7 +45,7 @@ export default function EditProfileForm(properties: EditProfileFormProperties) {
             defaultValue={user?.email || ''}
             isRequired
             isReadOnly
-            errors={state.errors}
+            state={state}
           />
           <Divider className="col-span-1 md:col-span-2" />
         </div>

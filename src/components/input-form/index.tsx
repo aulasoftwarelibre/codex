@@ -1,15 +1,18 @@
 'use client'
 
 import { Input, InputProps } from '@nextui-org/react'
-import { ZodIssue } from 'zod'
+
+import FormResponse from '@/lib/zod/form-response'
 
 type FormInputProperties = InputProps & {
-  errors?: ZodIssue[]
   label: string
+  state: FormResponse<unknown>
 }
 
 export default function InputForm(properties: FormInputProperties) {
-  const { errors = [], label, name, ...rest } = properties
+  const { label, name, state, ...rest } = properties
+
+  const errors = state.success ? [] : state.errors
 
   const errorMessage = errors
     .filter((error) => error.path[0] === name)

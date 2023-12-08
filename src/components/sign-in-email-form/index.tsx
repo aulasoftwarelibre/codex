@@ -34,7 +34,7 @@ export default function SignInEmailForm() {
           type="email"
           placeholder="Introduce tu email"
           variant="bordered"
-          errors={state.errors}
+          state={state}
           defaultValue={state.data.email}
         />
         <Button

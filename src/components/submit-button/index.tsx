@@ -3,8 +3,11 @@
 import { Button } from '@nextui-org/react'
 import { useFormStatus } from 'react-dom'
 
-export default function SubmitButton() {
+export type SubmitButtonProperties = React.ComponentProps<typeof Button>
+
+export default function SubmitButton(properties: SubmitButtonProperties) {
   const { pending } = useFormStatus()
+  const { children = 'Enviar' } = properties
 
   return (
     <>
@@ -13,8 +16,9 @@ export default function SubmitButton() {
         radius="none"
         color="primary"
         aria-disabled={pending}
+        {...properties}
       >
-        Enviar
+        {children}
       </Button>
     </>
   )

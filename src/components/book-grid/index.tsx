@@ -1,16 +1,19 @@
-import Book from '@/components/book'
+import BookCard from '@/components/book-card/book-card'
 import BookResponse from '@/core/book/dto/responses/book.response'
+import UserResponse from '@/core/user/dto/responses/user.response'
 
 export interface BookGridProperties {
   books: BookResponse[]
+  me?: UserResponse
 }
 
 export default function BookGrid(properties: BookGridProperties) {
+  const { books, me } = properties
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 place-items-center">
-        {properties.books.map((book) => (
-          <Book key={book.id} book={book} />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
+        {books.map((book) => (
+          <BookCard book={book} me={me} key={book.id} />
         ))}
       </div>
     </>

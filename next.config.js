@@ -5,7 +5,18 @@ const nextConfig = {
       allowedOrigins: ['localhost:3000', 'codex.aulasoftwarelibre.uco.es'],
     },
   },
-  output: 'standalone',
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'gravatar.com',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

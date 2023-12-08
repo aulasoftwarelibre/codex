@@ -1,11 +1,14 @@
 import BookGrid from '@/components/book-grid'
 import { findBooks } from '@/core/book/infrastructure/actions/find-books'
+import me from '@/core/user/infrastructure/actions/me'
 
 export default async function Home() {
   const books = await findBooks()
+  const user = await me()
+
   return (
     <main>
-      <BookGrid books={books} />
+      <BookGrid books={books} me={user} />
     </main>
   )
 }

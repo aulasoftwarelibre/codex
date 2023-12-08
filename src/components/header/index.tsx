@@ -28,7 +28,7 @@ export default function Header(properties: HeaderProperties) {
 
   return (
     <>
-      <Navbar>
+      <Navbar position="static">
         <NavbarBrand>
           <Link href="/" className="text-2xl font-extrabold text-inherit">
             Codex

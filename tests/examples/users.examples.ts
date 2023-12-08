@@ -1,14 +1,18 @@
-import UserFactory from '@/core/user/domain/model/user.factory'
+import { ulid } from 'ulid'
+
+import UserDataMapper from '@/core/user/infrastructure/persistence/user.data-mapper'
 import gravatar from '@/lib/utils/gravatar'
 
 const UsersExamples = {
   basic: () =>
-    UserFactory.create({
+    UserDataMapper.toModel({
       email: 'test@example.com',
+      id: ulid(),
       image: gravatar('test@example.com'),
       name: 'Test User',
       roles: ['ROLE_USER'],
-    })._unsafeUnwrap(),
+      version: 0,
+    }),
 }
 
 export default UsersExamples

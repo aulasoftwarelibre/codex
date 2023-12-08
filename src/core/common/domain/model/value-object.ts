@@ -7,4 +7,8 @@ export default abstract class ValueObject<T> {
       this.value === other.value
     )
   }
+
+  toRepresentation(): string {
+    return `${this.constructor.name}(${this.value})`
+  }
 }

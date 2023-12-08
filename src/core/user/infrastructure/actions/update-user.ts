@@ -47,5 +47,5 @@ export async function updateUser(
   )
   revalidateTag(`role-for-${email}`)
 
-  return FormResponse.success(result.data)
+  return FormResponse.success(result.data, 'Perfil actualizado.')
 }

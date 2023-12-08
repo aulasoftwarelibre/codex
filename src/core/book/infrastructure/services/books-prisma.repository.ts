@@ -1,61 +1,59 @@
-import { Book as PrismaBook, PrismaClient } from '@prisma/client'
+import { BookState, PrismaClient } from '@prisma/client'
 import { okAsync, ResultAsync } from 'neverthrow'
 
-import BookNotFoundError from '@/core/book/domain/errors/book-not-found.error'
+import AvailableBook from '@/core/book/domain/model/available-book.entity'
 import Book from '@/core/book/domain/model/book.entity'
-import BookFactory from '@/core/book/domain/model/book.factory'
+import LoanedBook from '@/core/book/domain/model/loaned-book.entity'
 import Books from '@/core/book/domain/services/books.repository'
-import BookResponse from '@/core/book/dto/responses/book.response'
+import BookDataMapper from '@/core/book/infrastructure/persistence/book.data-mapper'
+import BookPublisher from '@/core/book/infrastructure/persistence/book.publisher'
+import BookType from '@/core/book/infrastructure/persistence/book.type'
+import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
 import ApplicationError from '@/core/common/domain/errors/application-error'
 import BookId from '@/core/common/domain/value-objects/book-id'
 
 export default class BooksPrisma implements Books {
-  constructor(private readonly prisma: PrismaClient) {}
+  private publisher: BookPublisher
 
-  findAll(): ResultAsync<Book[], ApplicationError> {
-    return ResultAsync.fromSafePromise(this.prisma.book.findMany()).andThen(
-      (books) => okAsync(books.map((book) => this.mapFromPrismaBook(book))),
+  constructor(private readonly prisma: PrismaClient) {
+    this.publisher = new BookPublisher(prisma)
+  }
+
+  findAvailable(id: BookId): ResultAsync<AvailableBook, NotFoundError> {
+    return this.ofId(id, BookState.AVAILABLE).andThen((book) =>
+      okAsync(BookDataMapper.toAvailableBook(book)),
     )
   }
 
-  findById(id: BookId): ResultAsync<Book, BookNotFoundError> {
+  findLoaned(id: BookId): ResultAsync<LoanedBook, NotFoundError> {
+    return this.ofId(id, BookState.LOANED).andThen((book) =>
+      okAsync(BookDataMapper.toLoanedBook(book)),
+    )
+  }
+
+  private ofId(
+    id: BookId,
+    state: BookState,
+  ): ResultAsync<BookType, NotFoundError> {
     return ResultAsync.fromPromise(
       this.prisma.book.findUniqueOrThrow({
+        include: {
+          loan: {
+            include: {
+              user: true,
+            },
+          },
+        },
         where: {
           id: id.value,
+          state,
         },
       }),
-      () => BookNotFoundError.withId(id),
-    ).andThen((book) => okAsync(this.mapFromPrismaBook(book)))
+      () => NotFoundError.withId(id),
+    )
   }
 
-  save(book: Book): ResultAsync<Book, ApplicationError> {
-    const { authors, id, image, title } = BookResponse.fromModel(
-      book,
-    ) as PrismaBook
-
-    return ResultAsync.fromPromise(
-      this.prisma.book.upsert({
-        create: {
-          authors,
-          id,
-          image,
-          title,
-        },
-        update: {
-          authors,
-          image,
-          title,
-        },
-        where: {
-          id,
-        },
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(() => okAsync(book))
-  }
-
-  private mapFromPrismaBook(book: PrismaBook): Book {
-    return BookFactory.with(book satisfies BookResponse)
+  save(book: Book): ResultAsync<void, ApplicationError> {
+    return this.publisher.mergeObjectContext(book).commit()
   }
 }

@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidateTag } from 'next/cache'
 import { ulid } from 'ulid'
 import { z } from 'zod'
 
@@ -40,5 +41,7 @@ export async function createBook(
     CreateBookRequest.with({ authors: authors.split(', '), id, image, title }),
   )
 
-  return FormResponse.success(result.data)
+  revalidateTag('books')
+
+  return FormResponse.success(result.data, 'El libro ha sido creado.')
 }

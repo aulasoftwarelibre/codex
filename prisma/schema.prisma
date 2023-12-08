@@ -36,15 +36,17 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
+  version       Int            @default(0)
   name          String?
-  email         String?   @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
-  roles         String[]  @default(["ROLE_USER"])
+  roles         String[]       @default(["ROLE_USER"])
   accounts      Account[]
   sessions      Session[]
   Loan          Loan[]
+  LoanRegistry  LoanRegistry[]
 }
 
 model VerificationToken {
@@ -55,23 +57,41 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Loan {
-  id         String    @id @default(cuid())
-  startsAt   DateTime  @default(now())
-  finishedAt DateTime?
-  user       User      @relation(fields: [userId], references: [id])
-  userId     String
-  book       Book      @relation("Loans", fields: [bookId], references: [id])
-  bookId     String
-  activeLoan Book?     @relation("ActiveLoan") @ignore
-}
-
 model Book {
-  id           String   @id @default(cuid())
+  id           String         @id @default(cuid())
+  version      Int            @default(0)
   authors      String[]
   image        String
   title        String
-  Loan         Loan[]   @relation("Loans")
-  activeLoan   Loan?    @relation("ActiveLoan", fields: [activeLoanId], references: [id])
-  activeLoanId String?  @unique
+  state        BookState      @default(AVAILABLE)
+  loan         Loan?
+  loanRegistry LoanRegistry[]
+}
+
+model Loan {
+  id       String   @id @default(cuid())
+  version  Int      @default(0)
+  startsAt DateTime @default(now()) @db.Timestamptz()
+  user     User     @relation(fields: [userId], references: [id])
+  userId   String
+  book     Book     @relation(fields: [bookId], references: [id])
+  bookId   String
+
+  @@unique([bookId])
+}
+
+model LoanRegistry {
+  id         String   @id @default(cuid())
+  version    Int      @default(0)
+  startsAt   DateTime @db.Timestamptz()
+  finishedAt DateTime @db.Timestamptz()
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  book       Book     @relation(fields: [bookId], references: [id])
+  bookId     String
+}
+
+enum BookState {
+  AVAILABLE
+  LOANED
 }

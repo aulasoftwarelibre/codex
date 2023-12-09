@@ -7,6 +7,10 @@ import prisma from '@/lib/prisma/prisma'
 const authConfig = {
   accessControl: [
     {
+      path: '^/books/\\w+/edit',
+      roles: 'IS_AUTHENTICATED',
+    },
+    {
       path: '^/settings',
       roles: 'IS_AUTHENTICATED',
     },

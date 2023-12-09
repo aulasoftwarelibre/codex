@@ -1,6 +1,7 @@
 {
   "upgrade": true,
   "reject": [
-    "vitest"
+    "vitest",
+    "@vitest/coverage-v8"
   ]
 }

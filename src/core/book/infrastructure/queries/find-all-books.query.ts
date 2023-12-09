@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { okAsync, ResultAsync } from 'neverthrow'
 
+import SearchBookRequest from '@/core/book/dto/requests/search-book.requests'
 import BookResponse from '@/core/book/dto/responses/book.response'
 import BookType from '@/core/book/infrastructure/persistence/book.type'
 import ApplicationError from '@/core/common/domain/errors/application-error'
@@ -8,7 +9,9 @@ import ApplicationError from '@/core/common/domain/errors/application-error'
 export default class FindAllBooksQuery {
   constructor(private readonly prisma: PrismaClient) {}
 
-  with(): ResultAsync<BookResponse[], ApplicationError> {
+  with(
+    request?: SearchBookRequest,
+  ): ResultAsync<BookResponse[], ApplicationError> {
     return ResultAsync.fromSafePromise(
       this.prisma.book.findMany({
         include: {
@@ -21,6 +24,15 @@ export default class FindAllBooksQuery {
         orderBy: {
           title: 'asc',
         },
+        ...(request
+          ? {
+              where: {
+                title: {
+                  search: request?.terms.join(' & '),
+                },
+              },
+            }
+          : {}),
       }),
     ).andThen((books) => this.mapToBookResponse(books))
   }

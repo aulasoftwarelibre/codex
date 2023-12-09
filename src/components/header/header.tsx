@@ -9,6 +9,7 @@ import {
 import Link from 'next/link'
 
 import HeaderAuthenticatedMenu from '@/components/header/header-authenticated-menu'
+import HeaderSearchInput from '@/components/header/header-search-input'
 import HeaderUnauthenticatedMenu from '@/components/header/header-unauthenticated-menu'
 import Logo from '@/components/header/logo'
 import ThemeSwitcher from '@/components/theme-switcher'
@@ -37,6 +38,9 @@ export default function Header(properties: HeaderProperties) {
           </Link>
         </NavbarBrand>
         <NavbarContent justify="end">
+          <NavbarItem>
+            <HeaderSearchInput />
+          </NavbarItem>
           <NavbarItem>
             <ThemeSwitcher />
           </NavbarItem>

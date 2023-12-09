@@ -10,6 +10,7 @@ import Link from 'next/link'
 
 import HeaderAuthenticatedMenu from '@/components/header/header-authenticated-menu'
 import HeaderUnauthenticatedMenu from '@/components/header/header-unauthenticated-menu'
+import Logo from '@/components/header/logo'
 import ThemeSwitcher from '@/components/theme-switcher'
 import UserResponse from '@/core/user/dto/responses/user.response'
 
@@ -30,6 +31,7 @@ export default function Header(properties: HeaderProperties) {
     <>
       <Navbar position="static">
         <NavbarBrand>
+          <Logo className="w-8 h-8 fill-slate-500 stroke-2 mr-1" />
           <Link href="/" className="text-2xl font-extrabold text-inherit">
             Codex
           </Link>

@@ -30,9 +30,7 @@ export async function returnBook(
     )
   }
 
-  const result = ReturnBookSchema.safeParse({
-    bookId: formData.get('bookId'),
-  })
+  const result = ReturnBookSchema.safeParse(Object.fromEntries(formData))
 
   if (!result.success) {
     return FormResponse.withError(result.error, previousState.data)

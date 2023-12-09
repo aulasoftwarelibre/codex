@@ -28,12 +28,24 @@ export default abstract class Book extends AggregateRoot {
     return this._title
   }
 
+  set title(title: Title) {
+    this._title = title
+  }
+
   get authors(): FullNames {
     return this._authors
   }
 
+  set authors(authors: FullNames) {
+    this._authors = authors
+  }
+
   get image(): Image {
     return this._image
+  }
+
+  set image(image: Image) {
+    this._image = image
   }
 
   get state(): BookState {

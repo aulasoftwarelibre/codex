@@ -21,10 +21,6 @@ export default class LoanedBook extends Book {
     super(_id, _title, _authors, _image, BookState.LOANED)
   }
 
-  get loan(): Loan {
-    return this._loan
-  }
-
   doAvailable(
     returnBookService: ReturnBookService,
   ): ResultAsync<void, ApplicationError> {

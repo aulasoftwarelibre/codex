@@ -15,12 +15,23 @@ interface EditProfileFormProperties {
   user: UserResponse
 }
 
-export default function EditProfileForm(properties: EditProfileFormProperties) {
+function useController(properties: EditProfileFormProperties) {
   const { user } = properties
-  const [state, action] = useFormState(
+  const formData = {
+    name: user.name,
+  }
+
+  const formState = useFormState(
     updateUser,
-    FormResponse.initialState(user),
+    FormResponse.initialState(formData),
   )
+
+  return { ...properties, formState }
+}
+
+export default function EditProfileForm(properties: EditProfileFormProperties) {
+  const { formState, user } = useController(properties)
+  const [state, action] = formState
 
   useEffect(() => {
     if (state.success) {

@@ -10,7 +10,7 @@ import gravatar from '@/lib/utils/gravatar'
 import FormResponse from '@/lib/zod/form-response'
 
 interface EditProfileForm {
-  name?: string
+  name: string
 }
 
 const EditProfileSchema = z.object({
@@ -32,9 +32,7 @@ export async function updateUser(
     )
   }
 
-  const result = EditProfileSchema.safeParse({
-    name: formData.get('name'),
-  })
+  const result = EditProfileSchema.safeParse(Object.fromEntries(formData))
 
   if (!result.success) {
     return FormResponse.withError(result.error, previousState.data)

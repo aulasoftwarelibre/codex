@@ -30,9 +30,7 @@ export async function loanBook(
     )
   }
 
-  const result = LoanFormSchema.safeParse({
-    bookId: formData.get('bookId'),
-  })
+  const result = LoanFormSchema.safeParse(Object.fromEntries(formData))
 
   if (!result.success) {
     return FormResponse.withError(result.error, previousState.data)

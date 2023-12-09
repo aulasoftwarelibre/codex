@@ -1,4 +1,5 @@
 import CreateBookUseCase from '@/core/book/application/create-book.use-case'
+import EditBookUseCase from '@/core/book/application/edit-book.use-case'
 import { LoanBookUseCase } from '@/core/book/application/loan-book-use.case'
 import ReturnBookUseCase from '@/core/book/application/return-book.use-case'
 import FindAllBooksQuery from '@/core/book/infrastructure/queries/find-all-books.query'
@@ -22,6 +23,7 @@ const Container = {
 
     return {
       createBook: new CreateBookUseCase(books),
+      editBook: new EditBookUseCase(books),
       findBook: new FindBookQuery(prisma),
       findBooks: new FindAllBooksQuery(prisma),
       findUser: new FindUserUseCase(users),

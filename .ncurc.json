@@ -2,6 +2,7 @@
   "upgrade": true,
   "reject": [
     "vitest",
-    "@vitest/coverage-v8"
+    "@vitest/coverage-v8",
+    "@vitest/ui"
   ]
 }

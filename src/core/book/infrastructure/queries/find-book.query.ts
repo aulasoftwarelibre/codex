@@ -27,6 +27,6 @@ export default class FindBookQuery {
   }
 
   private mapToBookResponse(book: BookType) {
-    return okAsync(BookResponse.fromBookType(book))
+    return okAsync(BookResponse.fromType(book))
   }
 }

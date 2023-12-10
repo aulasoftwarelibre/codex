@@ -38,6 +38,6 @@ export default class FindAllBooksQuery {
   }
 
   private mapToBookResponse(books: BookType[]) {
-    return okAsync(books.map((book) => BookResponse.fromBookType(book)))
+    return okAsync(books.map((book) => BookResponse.fromType(book)))
   }
 }

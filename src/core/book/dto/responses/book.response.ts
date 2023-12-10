@@ -9,6 +9,7 @@ type BookResponse = DeepReadonly<{
   image: string
   loan?: {
     id: string
+    startsAt: Date
     user: {
       id: string
       image: string
@@ -19,7 +20,7 @@ type BookResponse = DeepReadonly<{
 }>
 
 const BookResponse = {
-  fromBookType: (book: BookType): BookResponse => {
+  fromType: (book: BookType): BookResponse => {
     return {
       authors: book.authors,
       id: book.id,
@@ -29,6 +30,7 @@ const BookResponse = {
         ? {
             loan: {
               id: book.loan.id,
+              startsAt: book.loan.startsAt,
               user: {
                 id: book.loan.user.id,
                 image: book.loan.user.image || gravatar(book.loan.user.email),

@@ -30,6 +30,7 @@
     "@heroicons/react": "^2.0.18",
     "@nextui-org/react": "2.2.9",
     "@prisma/client": "^5.7.0",
+    "date-fns": "^2.30.0",
     "framer-motion": "^10.16.16",
     "neverthrow": "^6.1.0",
     "next": "14.0.4",

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AuthModal from '@/components/auth-modal'
+import AuthModal from '@/components/auth-modal/auth-modal'
 
 export default function RootLayout({
   children,

@@ -1,4 +1,4 @@
-import BookGrid from '@/components/book-grid'
+import BookGrid from '@/components/book-grid/book-grid'
 import { findBooks } from '@/core/book/infrastructure/actions/find-books'
 import me from '@/core/user/infrastructure/actions/me'
 

@@ -1,7 +1,7 @@
 import { Card, CardHeader } from '@nextui-org/react'
 import React, { ReactNode } from 'react'
 
-import ThemeImage from '@/components/theme-image'
+import ThemeImage from '@/components/theme-image/theme-image'
 
 interface AuthModalProperties {
   children: ReactNode

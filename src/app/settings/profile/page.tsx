@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 
-import EditProfileForm from '@/components/edit-profile-form'
+import EditProfileForm from '@/components/edit-profile-form/edit-profile-form'
 import UserResponse from '@/core/user/dto/responses/user.response'
 import { findUser } from '@/core/user/infrastructure/actions/find-user'
 import { auth } from '@/lib/auth/auth'

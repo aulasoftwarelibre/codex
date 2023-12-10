@@ -5,7 +5,7 @@ import { Button } from '@nextui-org/react'
 import React from 'react'
 import { useFormState } from 'react-dom'
 
-import InputForm from '@/components/input-form'
+import InputForm from '@/components/input-form/input-form'
 import { signInAction } from '@/components/sign-in-email-form/actions'
 import FormResponse from '@/lib/zod/form-response'
 

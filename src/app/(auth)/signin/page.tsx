@@ -7,7 +7,7 @@ import AuthModalFooter from '@/components/auth-modal/auth-modal-footer'
 import AuthModalHeader from '@/components/auth-modal/auth-modal-header'
 import { auth } from '@/lib/auth/auth'
 
-import SignInEmailForm from '../../../components/sign-in-email-form'
+import SignInEmailForm from '../../../components/sign-in-email-form/sign-in-email-form'
 
 export const metadata: Metadata = {
   description: 'Biblioteca del Aula de Software Libre',

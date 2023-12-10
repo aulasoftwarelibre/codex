@@ -1,6 +1,6 @@
 import { Link, Navbar, NavbarContent, NavbarItem } from '@nextui-org/react'
 
-import ThemeImage from '@/components/theme-image'
+import ThemeImage from '@/components/theme-image/theme-image'
 
 export default function Footer() {
   return (

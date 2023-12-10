@@ -12,7 +12,7 @@ import HeaderAuthenticatedMenu from '@/components/header/header-authenticated-me
 import HeaderSearchInput from '@/components/header/header-search-input'
 import HeaderUnauthenticatedMenu from '@/components/header/header-unauthenticated-menu'
 import Logo from '@/components/header/logo'
-import ThemeSwitcher from '@/components/theme-switcher'
+import ThemeSwitcher from '@/components/theme-switcher/theme-switcher'
 import UserResponse from '@/core/user/dto/responses/user.response'
 
 interface HeaderProperties {

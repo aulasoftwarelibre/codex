@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 
 import AuthModalHeader from '@/components/auth-modal/auth-modal-header'
-import SignOutForm from '@/components/sign-out-form'
+import SignOutForm from '@/components/sign-out-form/sign-out-form'
 import { auth } from '@/lib/auth/auth'
 
 export const metadata: Metadata = {

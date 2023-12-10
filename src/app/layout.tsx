@@ -6,7 +6,7 @@ import { ReactNode } from 'react'
 
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header/header'
-import { Providers } from '@/components/providers'
+import { Providers } from '@/components/providers/providers'
 import { findUser } from '@/core/user/infrastructure/actions/find-user'
 import { auth } from '@/lib/auth/auth'
 

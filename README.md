@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Codex: Library Management System
+
+## Overview
+
+Codex is a library management system designed for the Free Software Club of the University of Córdoba. Built with a modern stack including Next.js, Prisma, and NextAuth, this project aims to streamline the management of library resources while ensuring a user-friendly experience.
+
+## Features
+
+- **User Authentication**: Secure login through email links.
+- **Database Management**: Utilizing Prisma for efficient data handling.
+- **Email Integration**: Email services for authentication and notifications.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Docker and Docker Compose
+- Node.js
+- A PostgreSQL server (can be set up using Docker)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   git clone https://github.com/aulasoftwarelibre/codex.git
+   cd codex
+   ```
 
-## Learn More
+2. **Environment Configuration**
 
-To learn more about Next.js, take a look at the following resources:
+   Copy the `.env` example file and customize the values:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   cp .env .env.local
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   Update the following keys in your `.env.local` file:
 
-## Deploy on Vercel
+    - `AUTH_SECRET`: A secret key for authentication.
+    - `DATABASE_URL`: URL for your PostgreSQL database.
+    - `MAILER_DSN`: SMTP server details.
+    - `MAIL_FROM`: The email address to send mails from.
+    - `MAILER_SECRET`: A secret key for the mailer.
+    - `MAILER_URL`: URL for the mailer API.
+    - `WEBMAIL_URL`: URL for the webmail service.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Docker Setup**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   Use the provided `docker-compose.yaml` to set up the necessary services:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+   This will start the necessary services:
+    - SMTP server for email handling.
+    - PostgreSQL database.
+    - The Codex application.
+
+4. **Running the Application**
+
+   After setting up the environment, start the Codex application:
+
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+   Visit `http://localhost:3000` to access the application.
+
+## License
+
+This project is licensed under the [EUPL 1.2](LICENSE.md).
+

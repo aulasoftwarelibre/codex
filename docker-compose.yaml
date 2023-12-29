@@ -8,9 +8,10 @@ services:
     image: postgres:12
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_DB=codex
+      - POSTGRES_MULTIPLE_DATABASES=codex,codex_test
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./docker/postgres/multiple-databases.sh:/docker-entrypoint-initdb.d/multiple-databases.sh
     ports:
       - 5432:5432
 

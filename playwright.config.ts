@@ -25,8 +25,8 @@ export default defineConfig({
     trace: 'retry-with-trace',
   },
   webServer: {
-    command: 'yarn dev --experimental-test-proxy',
+    command: `yarn dev -p ${PORT}`,
     reuseExistingServer: !process.env.CI,
-    url: 'http://localhost:3000',
+    url: baseURL,
   },
 })

@@ -1,6 +1,9 @@
-import { expect, test } from 'next/experimental/testmode/playwright'
+import { expect, test } from '@playwright/test'
 
 test.describe('Do login with email', () => {
+  // Reset storage state for this file to avoid being authenticated
+  test.use({ storageState: { cookies: [], origins: [] } })
+
   test.afterEach(async ({ request }) => {
     await request.delete('http://localhost:8025/api/v1/messages')
   })
@@ -21,7 +24,7 @@ test.describe('Do login with email', () => {
   test('receive email login link', async ({ page, request }) => {
     // Arrange
     await page.goto('/signin')
-    const email = `noreply+${+new Date()}@uco.es`
+    const email = `noreply+${Date.now()}@uco.es`
 
     // Act
     await page.getByPlaceholder('Introduce tu email').fill(email)

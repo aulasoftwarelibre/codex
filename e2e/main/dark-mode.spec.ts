@@ -1,5 +1,4 @@
-// import { expect, test } from '@playwright/test'
-import { expect, test } from 'next/experimental/testmode/playwright'
+import { expect, test } from '@playwright/test'
 
 test('switch from dark mode to light mode', async ({ page }) => {
   // Arrange

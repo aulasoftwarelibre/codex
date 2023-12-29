@@ -1,10 +1,6 @@
-import { expect, test } from 'next/experimental/testmode/playwright'
-
-import { USER_AUTH_FILE } from '../auth.setup'
+import { expect, test } from '@playwright/test'
 
 test.describe('update user settings', () => {
-  test.use({ storageState: USER_AUTH_FILE })
-
   test('update name', async ({ page }) => {
     // Arrange
     await page.goto('/settings/profile')

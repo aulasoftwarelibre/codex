@@ -1,10 +1,6 @@
-import { expect, test } from 'next/experimental/testmode/playwright'
-
-import { USER_AUTH_FILE } from '../auth.setup'
+import { expect, test } from '@playwright/test'
 
 test.describe('open settings page', () => {
-  test.use({ storageState: USER_AUTH_FILE })
-
   test('open from main menu', async ({ page }) => {
     // Arrange
     await page.goto('/')
@@ -15,5 +11,18 @@ test.describe('open settings page', () => {
     // Assert
     await expect(page).toHaveURL('/settings/profile')
     await expect(page.locator('body')).toHaveText(/Ajustes de usuario/)
+  })
+
+  test('update name', async ({ page }) => {
+    // Arrange
+    await page.goto('/settings/profile')
+    // Act
+    await page.getByPlaceholder('Nombre').fill('John Doe')
+    await page.getByRole('button', { name: 'Enviar' }).click()
+    await page.reload()
+
+    // Assert
+    await expect(page).toHaveURL('/settings/profile')
+    await expect(page.getByPlaceholder('Nombre')).toHaveValue('John Doe')
   })
 })

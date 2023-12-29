@@ -11,9 +11,8 @@ export default class ReturnBookUseCase {
   ) {}
 
   with(command: ReturnBookRequest) {
-    return this.findLoanedBook(command.bookId).andThen((book) =>
-      this.returnBook(book),
-    )
+    return this.findLoanedBook(command.bookId) //
+      .andThen((book) => this.returnBook(book))
   }
 
   private findLoanedBook(bookId: string) {

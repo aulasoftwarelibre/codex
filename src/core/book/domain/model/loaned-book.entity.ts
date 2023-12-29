@@ -6,7 +6,7 @@ import BookId from '@/core/common/domain/value-objects/book-id'
 import FullNames from '@/core/common/domain/value-objects/fullnames'
 import Image from '@/core/common/domain/value-objects/image'
 import Title from '@/core/common/domain/value-objects/title'
-import stop from '@/core/common/utils/stop'
+import ignore from '@/core/common/utils/ignore'
 import Loan from '@/core/loan/domain/model/loan.entity'
 import ReturnBookService from '@/core/loan/domain/services/return-book.service'
 
@@ -26,6 +26,6 @@ export default class LoanedBook extends Book {
   ): ResultAsync<void, ApplicationError> {
     this._state = BookState.AVAILABLE
 
-    return returnBookService.with(this).andThen(stop)
+    return returnBookService.with(this).andThen(ignore)
   }
 }

@@ -3,7 +3,7 @@ import { ResultAsync } from 'neverthrow'
 
 import ApplicationError from '@/core/common/domain/errors/application-error'
 import Publisher from '@/core/common/domain/publisher/publisher'
-import stop from '@/core/common/utils/stop'
+import ignore from '@/core/common/utils/ignore'
 import User from '@/core/user/domain/model/user.entity'
 import UserDataMapper from '@/core/user/infrastructure/persistence/user.data-mapper'
 
@@ -20,7 +20,7 @@ export default class UserPublisher extends Publisher<User> {
         data,
       }),
       (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(stop)
+    ).andThen(ignore)
   }
 
   update(user: User, version: number): ResultAsync<void, ApplicationError> {
@@ -35,6 +35,6 @@ export default class UserPublisher extends Publisher<User> {
         },
       }),
       (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(stop)
+    ).andThen(ignore)
   }
 }

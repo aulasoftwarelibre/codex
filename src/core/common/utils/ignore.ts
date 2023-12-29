@@ -1,7 +1,7 @@
 import { ok } from 'neverthrow'
 
-const stop = () => {
+const ignore = () => {
   return ok(undefined)
 }
 
-export default stop
+export default ignore

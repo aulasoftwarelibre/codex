@@ -5,7 +5,7 @@ import NotFoundError from '@/core/common/domain/errors/application/not-found-err
 import ApplicationError from '@/core/common/domain/errors/application-error'
 import BookId from '@/core/common/domain/value-objects/book-id'
 import LoanId from '@/core/common/domain/value-objects/loan-id'
-import stop from '@/core/common/utils/stop'
+import ignore from '@/core/common/utils/ignore'
 import Loan from '@/core/loan/domain/model/loan.entity'
 import Loans from '@/core/loan/domain/services/loans.repository'
 import LoanDataMapper from '@/core/loan/infrastructure/persistence/loan.data-mapper'
@@ -53,6 +53,6 @@ export default class LoansPrisma implements Loans {
         },
       }),
       (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(stop)
+    ).andThen(ignore)
   }
 }

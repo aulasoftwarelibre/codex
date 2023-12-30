@@ -33,6 +33,7 @@ export default function BookCard(properties: BookCardProperties) {
   return (
     <>
       <Card
+        role="gridcell"
         className={`max-w-[320px] space-y-4 p-4 group border-t-4 ${cardColor}`}
         radius="none"
         isHoverable

@@ -15,7 +15,7 @@ export default function SearchResult(properties: SearchResultProperties) {
 
   return (
     <div>
-      <Listbox aria-label="Found activities" items={searchResult}>
+      <Listbox aria-label="Found books" items={searchResult}>
         {(book) => (
           <ListboxItem
             description={book.authors.join(', ')}

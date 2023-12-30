@@ -64,6 +64,7 @@ function LoanButton() {
   return (
     <>
       <SubmitButton
+        aria-label="Loan book"
         isIconOnly
         className="opacity-0 group-hover:opacity-100 transition group-hover:duration-300 group-hover:-translate-y-2 text-center w-14 h-14 hover:scale-105 bg-gradient-to-tr from-pink-500 to-yellow-500 shadow-2xl absolute bottom-4 right-5 z-10"
         radius="full"
@@ -79,6 +80,7 @@ function ReturnButton() {
   return (
     <>
       <SubmitButton
+        aria-label="Return book"
         isIconOnly
         className="opacity-0 group-hover:opacity-100 transition group-hover:duration-300 group-hover:-translate-y-2 text-center w-14 h-14 hover:scale-105 bg-gradient-to-tr from-pink-500 to-yellow-500 shadow-2xl absolute bottom-4 left-5 z-10"
         radius="full"

@@ -15,6 +15,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'gravatar.com',
       },
+      ...process.env.NODE_ENV === 'test' ?
+      [{
+        protocol: 'http',
+        hostname: 'localhost',
+      }] : [],
     ],
   },
 }

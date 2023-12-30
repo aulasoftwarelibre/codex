@@ -75,7 +75,7 @@ model Loan {
   startsAt DateTime @default(now()) @db.Timestamptz()
   user     User     @relation(fields: [userId], references: [id])
   userId   String
-  book     Book     @relation(fields: [bookId], references: [id])
+  book     Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId   String
 
   @@unique([bookId])
@@ -88,7 +88,7 @@ model LoanRegistry {
   finishedAt DateTime @db.Timestamptz()
   user       User     @relation(fields: [userId], references: [id])
   userId     String
-  book       Book     @relation(fields: [bookId], references: [id])
+  book       Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId     String
 }
 

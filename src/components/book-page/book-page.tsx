@@ -11,32 +11,28 @@ import {
 } from '@nextui-org/react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import BookBreadcrumbs from '@/components/book-breadcrubs/book-breadcrubs'
+import BookCard from '@/components/book-card/book-card'
 import BookResponse from '@/core/book/dto/responses/book.response'
 import HistoricalLoansResponse from '@/core/loan/dto/responses/historical-loans.response'
+import UserResponse from '@/core/user/dto/responses/user.response'
 
 interface BookPageProperties {
   book: BookResponse
   historicalLoans: HistoricalLoansResponse[]
+  user: UserResponse
 }
 
 export default function BookPage(properties: BookPageProperties) {
-  const { book, historicalLoans } = properties
+  const { book, historicalLoans, user } = properties
   return (
     <>
       <main className="flex flex-col gap-4 px-4 md:px-0">
         <BookBreadcrumbs title={book.title} />
         <div className="flex flex-col md:flex-row gap-4">
-          <Image
-            className="h-[297px] object-scale-down w-auto"
-            alt={book.title}
-            width={297}
-            height={387}
-            src={book.image}
-          />
+          <BookCard book={book} me={user} />
           <div className="flex flex-col gap-4">
             <h1 className="font-bold text-4xl text-default-800">
               {book.title}
@@ -45,14 +41,16 @@ export default function BookPage(properties: BookPageProperties) {
               {book.authors.join(', ')}
             </div>
             <div className="flex-grow">
-              <Button
-                as={Link}
-                href={`/books/${book.id}/edit`}
-                prefetch
-                variant="ghost"
-              >
-                Editar
-              </Button>
+              {user.roles.includes('ROLE_ADMIN') ? (
+                <Button
+                  as={Link}
+                  href={`/books/${book.id}/edit`}
+                  prefetch
+                  variant="ghost"
+                >
+                  Editar
+                </Button>
+              ) : null}
             </div>
             <LoanBy book={book} />
           </div>

@@ -7,8 +7,16 @@ import prisma from '@/lib/prisma/prisma'
 const authConfig = {
   accessControl: [
     {
+      path: '^/admin',
+      roles: 'ROLE_ADMIN',
+    },
+    {
+      path: '^/books/new',
+      roles: 'ROLE_ADMIN',
+    },
+    {
       path: '^/books/\\w+/edit',
-      roles: 'IS_AUTHENTICATED',
+      roles: 'ROLE_ADMIN',
     },
     {
       path: '^/settings',

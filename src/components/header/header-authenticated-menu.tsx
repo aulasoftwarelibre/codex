@@ -1,6 +1,6 @@
 import {
-  ArrowLeftOnRectangleIcon,
-  BookOpenIcon,
+  AdjustmentsHorizontalIcon,
+  ArrowLeftEndOnRectangleIcon,
   PlusIcon,
   UserIcon,
 } from '@heroicons/react/24/outline'
@@ -21,13 +21,24 @@ interface HeaderAuthenticatedMenuProperties {
   user: UserResponse
 }
 
+const OPTIONS = [
+  { key: 'profile', roles: ['ROLE_USER'], url: '/settings/profile' },
+  { key: 'add_book', roles: ['ROLE_ADMIN'], url: '/books/new' },
+  { key: 'admin', roles: ['ROLE_ADMIN'], url: '/admin/users' },
+  { key: 'signout', roles: ['ROLE_USER'], url: '/signout' },
+]
+
 export default function HeaderAuthenticatedMenu(
   properties: HeaderAuthenticatedMenuProperties,
 ) {
   const router = useRouter()
   const {
-    user: { email, image, name },
+    user: { email, image, name, roles },
   } = properties
+
+  const disabledKeys = OPTIONS.filter(
+    (option) => !option.roles.some((role) => roles.includes(role)),
+  ).map((option) => option.key)
 
   return (
     <>
@@ -42,7 +53,11 @@ export default function HeaderAuthenticatedMenu(
             fallback={<UserIcon width={24} height={24} />}
           />
         </DropdownTrigger>
-        <DropdownMenu aria-label="Profile actions" variant="flat">
+        <DropdownMenu
+          aria-label="Profile actions"
+          variant="flat"
+          disabledKeys={disabledKeys}
+        >
           <DropdownItem
             key="profile"
             onClick={() => router.push('/settings/profile')}
@@ -63,15 +78,18 @@ export default function HeaderAuthenticatedMenu(
             Añadir libro
           </DropdownItem>
           <DropdownItem
-            key="books"
-            startContent={<BookOpenIcon width={24} height={24} />}
+            key="admin"
+            startContent={<AdjustmentsHorizontalIcon width={24} height={24} />}
+            onClick={() => router.push('/admin/users')}
           >
-            Mis libros
+            Administrar
           </DropdownItem>
           <DropdownItem
             key="signout"
             onClick={() => router.push('/signout')}
-            startContent={<ArrowLeftOnRectangleIcon width={24} height={24} />}
+            startContent={
+              <ArrowLeftEndOnRectangleIcon width={24} height={24} />
+            }
           >
             Cerrar sesión
           </DropdownItem>

@@ -21,9 +21,9 @@ function useController(properties: BookCardFormProperties) {
   const { book, me } = properties
 
   const isLoaned = !!book.loan
-  const isLogged = !!me
-  const isOwned = isLoaned && isLogged && book.loan.user.id === me.id
-  const isActive = isLogged && (!isLoaned || isOwned)
+  const isMember = !!me && me.roles.includes('ROLE_MEMBER')
+  const isOwned = isLoaned && isMember && book.loan.user.id === me.id
+  const isActive = isMember && (!isLoaned || isOwned)
 
   const currentAction = useFormState(
     isOwned ? returnBook : loanBook,

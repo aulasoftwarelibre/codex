@@ -13,7 +13,7 @@ import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 import Link from 'next/link'
 
-import BookBreadcrumbs from '@/components/book-breadcrubs/book-breadcrubs'
+import BookBreadcrumbs from '@/components/book-breadcrumbs/book-breadcrumbs'
 import BookCard from '@/components/book-card/book-card'
 import BookResponse from '@/core/book/dto/responses/book.response'
 import HistoricalLoansResponse from '@/core/loan/dto/responses/historical-loans.response'

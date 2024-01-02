@@ -9,8 +9,10 @@ import LoanBookService from '@/core/loan/domain/services/loan-book.service'
 import ReturnBookService from '@/core/loan/domain/services/return-book.service'
 import GetHistoricalLoansQuery from '@/core/loan/infrastructure/queries/get-historical-loans.query'
 import LoansPrisma from '@/core/loan/infrastructure/services/loans-prisma.repository'
+import EnableUserUseCase from '@/core/user/application/enable-user.use-case'
 import FindUserUseCase from '@/core/user/application/find-user.use-case'
 import UpdateUserUseCase from '@/core/user/application/update-user.use-case'
+import FindAllUsersQuery from '@/core/user/infrastructure/queries/find-all-users.query'
 import UsersPrisma from '@/core/user/infrastructure/services/users-prisma.repository'
 import prisma from '@/lib/prisma/prisma'
 
@@ -25,9 +27,11 @@ const Container = {
     return {
       createBook: new CreateBookUseCase(books),
       editBook: new EditBookUseCase(books),
+      enableUser: new EnableUserUseCase(users),
       findBook: new FindBookQuery(prisma),
       findBooks: new FindAllBooksQuery(prisma),
       findUser: new FindUserUseCase(users),
+      findUsers: new FindAllUsersQuery(prisma),
       getHistoricalLoans: new GetHistoricalLoansQuery(prisma),
       loanBook: new LoanBookUseCase(books, loanBookService),
       returnBook: new ReturnBookUseCase(books, returnBookService),

@@ -44,4 +44,58 @@ describe('Roles', () => {
       )
     })
   })
+
+  describe('add', () => {
+    it('should add a role to the Roles instance', () => {
+      // Arrange
+      const roles = new Roles([new Role('ROLE_USER'), new Role('ROLE_ADMIN')])
+      const newRole = new Role('NEW_ROLE')
+
+      // Act
+      const result = roles.add(newRole)
+
+      // Assert
+      expect(result).toBeInstanceOf(Roles)
+      expect(result.has(newRole)).toBeTruthy()
+    })
+
+    it('should not add a duplicate role to the Roles instance', () => {
+      // Arrange
+      const roles = new Roles([new Role('ROLE_USER'), new Role('ROLE_ADMIN')])
+      const existingRole = new Role('ROLE_USER')
+
+      // Act
+      const result = roles.add(existingRole)
+
+      // Assert
+      expect(result).toBe(roles) // The instance should remain unchanged
+    })
+  })
+
+  describe('remove', () => {
+    it('should remove a role from the Roles instance', () => {
+      // Arrange
+      const roles = new Roles([new Role('ROLE_USER'), new Role('ROLE_ADMIN')])
+      const roleToRemove = new Role('ROLE_USER')
+
+      // Act
+      const result = roles.remove(roleToRemove)
+
+      // Assert
+      expect(result).toBeInstanceOf(Roles)
+      expect(result.has(roleToRemove)).toBeFalsy()
+    })
+
+    it('should not change the Roles instance if the role to remove is not present', () => {
+      // Arrange
+      const roles = new Roles([new Role('ROLE_USER'), new Role('ROLE_ADMIN')])
+      const roleNotPresent = new Role('NEW_ROLE')
+
+      // Act
+      const result = roles.remove(roleNotPresent)
+
+      // Assert
+      expect(result).toBe(roles) // The instance should remain unchanged
+    })
+  })
 })

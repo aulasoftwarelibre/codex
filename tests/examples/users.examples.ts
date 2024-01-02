@@ -13,6 +13,15 @@ const UsersExamples = {
       roles: ['ROLE_USER'],
       version: 0,
     }),
+  member: () =>
+    UserDataMapper.toModel({
+      email: 'test@example.com',
+      id: ulid(),
+      image: gravatar('test@example.com'),
+      name: 'Test User',
+      roles: ['ROLE_USER', 'ROLE_MEMBER'],
+      version: 0,
+    }),
 }
 
 export default UsersExamples

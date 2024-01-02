@@ -1,0 +1,54 @@
+import { describe, expect, it } from 'vitest'
+
+import Role from '@/core/common/domain/value-objects/role'
+import EnableUserUseCase from '@/core/user/application/enable-user.use-case'
+import EnableUserRequest from '@/core/user/dto/requests/enable-user.request'
+import UsersInMemory from '@/core/user/infrastructure/services/users-in-memory.repository'
+import unexpected from '@/lib/utils/unexpected'
+import UsersExamples from '@/tests/examples/users.examples'
+
+describe('EnableUserUseCase', () => {
+  it('should enable a user', async () => {
+    // Arrange
+    const user = UsersExamples.basic()
+    const users = new UsersInMemory([user])
+
+    const useCase = new EnableUserUseCase(users)
+    const request = EnableUserRequest.with({
+      email: user.email.value,
+      enable: true,
+    })
+    // Act
+    const result = await useCase.with(request)
+    // Assert
+    result.match(
+      () => {
+        const updatedUser = users.users.get(user.id.value)
+        expect(updatedUser?.roles.has(new Role('ROLE_MEMBER'))).toBeTruthy()
+      },
+      (error) => unexpected.error(error),
+    )
+  })
+
+  it('should disable a user', async () => {
+    // Arrange
+    const user = UsersExamples.member()
+    const users = new UsersInMemory([user])
+
+    const useCase = new EnableUserUseCase(users)
+    const request = EnableUserRequest.with({
+      email: user.email.value,
+      enable: false,
+    })
+    // Act
+    const result = await useCase.with(request)
+    // Assert
+    result.match(
+      () => {
+        const updatedUser = users.users.get(user.id.value)
+        expect(updatedUser?.roles.has(new Role('ROLE_MEMBER'))).toBeFalsy()
+      },
+      (error) => unexpected.error(error),
+    )
+  })
+})

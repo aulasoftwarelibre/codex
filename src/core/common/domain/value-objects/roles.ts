@@ -21,6 +21,22 @@ export default class Roles {
     )
   }
 
+  add(other: Role): Roles {
+    if (this.has(other)) {
+      return this
+    }
+
+    return new Roles([...this._roles, other])
+  }
+
+  remove(other: Role): Roles {
+    if (!this.has(other)) {
+      return this
+    }
+
+    return new Roles(this._roles.filter((role) => !role.equals(other)))
+  }
+
   has(other: Role): boolean {
     return this._roles.some((role) => role.equals(other))
   }

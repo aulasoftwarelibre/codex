@@ -36,6 +36,10 @@ export default class User extends AggregateRoot {
     return this._roles
   }
 
+  set roles(roles: Roles) {
+    this._roles = roles
+  }
+
   get image(): Image {
     return this._image
   }

@@ -34,10 +34,13 @@ export default function BookPage(properties: BookPageProperties) {
         <div className="flex flex-col md:flex-row gap-4">
           <BookCard book={book} me={user} />
           <div className="flex flex-col gap-4">
-            <h1 className="font-bold text-4xl text-default-800">
+            <h1
+              className="font-bold text-4xl text-default-800"
+              aria-label="Título"
+            >
               {book.title}
             </h1>
-            <div className="line-clamp-1 text-xl">
+            <div className="line-clamp-1 text-xl" aria-label="Autores">
               {book.authors.join(', ')}
             </div>
             <div className="flex-grow">

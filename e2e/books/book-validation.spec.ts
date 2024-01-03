@@ -1,6 +1,8 @@
+import { ADMIN_AUTH_FILE } from '../tests/constants'
 import { expect, test } from '../tests/fixtures'
 
 test.describe.configure({ mode: 'parallel' })
+test.use({ storageState: ADMIN_AUTH_FILE })
 
 test.describe('Book validation', () => {
   test.describe('Title validation', () => {
@@ -13,6 +15,7 @@ test.describe('Book validation', () => {
         ['Jenny Doe'],
         'http://localhost:3000/images/book.jpeg',
       )
+      await bookPage.submit()
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(
@@ -32,6 +35,7 @@ test.describe('Book validation', () => {
         ['Jenny Doe'],
         'http://localhost:3000/images/book.jpeg',
       )
+      await bookPage.submit()
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(page.getByText('Introduzca un título válido.')).toBeVisible()
@@ -51,6 +55,7 @@ test.describe('Book validation', () => {
         [],
         'http://localhost:3000/images/book.jpeg',
       )
+      await bookPage.submit()
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(
@@ -70,6 +75,7 @@ test.describe('Book validation', () => {
         ['A'],
         'http://localhost:3000/images/book.jpeg',
       )
+      await bookPage.submit()
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(
@@ -87,6 +93,7 @@ test.describe('Book validation', () => {
       await bookPage.goto()
       // Act
       await bookPage.fillForm('A new book', ['Jenny Doe'], '')
+      await bookPage.submit()
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(
@@ -102,6 +109,7 @@ test.describe('Book validation', () => {
       await bookPage.goto()
       // Act
       await bookPage.fillForm('A new book', ['Jenny Doe'], 'book.jpeg')
+      await bookPage.submit()
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(

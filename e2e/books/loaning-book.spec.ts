@@ -1,4 +1,7 @@
+import { USER_AUTH_FILE } from '../tests/constants'
 import { expect, test } from '../tests/fixtures'
+
+test.use({ storageState: USER_AUTH_FILE })
 
 test.describe('Loaning books', () => {
   let index: string

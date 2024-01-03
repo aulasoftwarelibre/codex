@@ -13,8 +13,8 @@ type Fixtures = {
 }
 
 export const test = base.extend<Fixtures>({
-  bookPage: async ({ page, request }, use, testInfo) => {
-    const bookPage = new BookPage(page, testInfo)
+  bookPage: async ({ page, request }, use) => {
+    const bookPage = new BookPage(page)
     await request.post('http://localhost:3000/api/revalidate')
 
     await use(bookPage)

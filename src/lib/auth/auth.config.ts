@@ -19,6 +19,10 @@ const authConfig = {
       roles: 'ROLE_ADMIN',
     },
     {
+      path: '^/books',
+      roles: ['ROLE_MEMBER', 'ROLE_ADMIN'],
+    },
+    {
       path: '^/settings',
       roles: 'IS_AUTHENTICATED',
     },

@@ -61,7 +61,7 @@ function useController(properties: UsersTableProperties) {
   const { users } = properties
 
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'name',
+    column: 'email',
     direction: 'ascending',
   })
 

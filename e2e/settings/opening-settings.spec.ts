@@ -1,4 +1,7 @@
+import { USER_AUTH_FILE } from '../tests/constants'
 import { expect, test } from '../tests/fixtures'
+
+test.use({ storageState: USER_AUTH_FILE })
 
 test.describe('open settings page', () => {
   test('open from main menu', async ({ page }) => {

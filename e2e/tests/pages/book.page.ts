@@ -1,13 +1,10 @@
-import { Page, TestInfo } from '@playwright/test'
+import { Page } from '@playwright/test'
 import { ulid } from 'ulid'
 
 import prisma from '../helpers/prisma'
 
 class BookPage {
-  constructor(
-    private readonly page: Page,
-    private readonly testInfo: TestInfo,
-  ) {}
+  constructor(private readonly page: Page) {}
 
   async goto(id?: string) {
     if (!id) {
@@ -35,7 +32,6 @@ class BookPage {
     await this.editTitle(title)
     await this.editAuthors(authors)
     await this.editImage(image)
-    await this.submit()
   }
 
   async editImage(image: string) {

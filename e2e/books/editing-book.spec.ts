@@ -1,4 +1,7 @@
+import { ADMIN_AUTH_FILE } from '../tests/constants'
 import { expect, test } from '../tests/fixtures'
+
+test.use({ storageState: ADMIN_AUTH_FILE })
 
 test.describe('Editing a book', () => {
   let index: string
@@ -22,9 +25,7 @@ test.describe('Editing a book', () => {
     await bookPage.editTitle('A new title')
     await bookPage.submit()
     // Assert
-    await expect(
-      page.getByRole('heading', { name: 'A new title' }),
-    ).toBeVisible()
+    await expect(page.getByLabel('Título')).toContainText('A new title')
   })
 
   test('Edit the authors of a book', async ({ bookPage, page }) => {
@@ -34,6 +35,6 @@ test.describe('Editing a book', () => {
     await bookPage.editAuthors(['John Doe'])
     await bookPage.submit()
     // Assert
-    await expect(page.getByText('John Doe')).toBeVisible()
+    await expect(page.getByLabel('Autores')).toContainText('John Doe')
   })
 })

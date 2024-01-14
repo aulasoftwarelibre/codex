@@ -8,12 +8,12 @@ test.describe('update user settings', () => {
     // Arrange
     await settingsPage.goto()
     // Act
-    await settingsPage.editName('John Doe')
-    await settingsPage.submit()
+    await settingsPage.edit('name', 'John Doe')
+    await settingsPage.submit('name')
     await page.reload()
 
     // Assert
     await expect(page).toHaveURL('/settings/profile')
-    await expect(page.getByPlaceholder('Nombre')).toHaveValue('John Doe')
+    await expect(page.getByLabel('name')).toHaveValue('John Doe')
   })
 })

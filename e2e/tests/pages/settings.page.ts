@@ -11,12 +11,16 @@ class SettingsPage {
     await this.page.goto('/settings/profile')
   }
 
-  async editName(name: string) {
-    await this.page.getByPlaceholder('Nombre').fill(name)
+  async edit(label: string, name: string) {
+    await this.page.getByLabel(label).fill(name)
   }
 
-  async submit() {
-    await this.page.getByRole('button', { name: 'Enviar' }).click()
+  async submit(label: string) {
+    await this.page
+      .getByRole('region')
+      .filter({ has: this.page.getByLabel(label) })
+      .getByRole('button', { name: 'Guardar' })
+      .click()
   }
 
   async restore() {

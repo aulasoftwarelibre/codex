@@ -4,8 +4,8 @@ import { Input, InputProps } from '@nextui-org/react'
 
 import FormResponse from '@/lib/zod/form-response'
 
-type FormInputProperties = InputProps & {
-  label: string
+export type FormInputProperties = InputProps & {
+  label?: string
   state: FormResponse<unknown>
 }
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { LoanBookUseCase } from '@/core/book/application/loan-book-use.case'
+import LoanBookUseCase from '@/core/book/application/loan-book-use.case'
 import LoanBookRequest from '@/core/book/dto/requests/loan-book.request'
 import BooksInMemory from '@/core/book/infrastructure/services/books-in-memory.repository'
 import ApplicationError from '@/core/common/domain/errors/application-error'

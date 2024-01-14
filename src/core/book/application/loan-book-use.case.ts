@@ -5,7 +5,7 @@ import BookId from '@/core/common/domain/value-objects/book-id'
 import UserId from '@/core/common/domain/value-objects/user-id'
 import LoanBookService from '@/core/loan/domain/services/loan-book.service'
 
-export class LoanBookUseCase {
+export default class LoanBookUseCase {
   constructor(
     private readonly books: Books,
     private readonly loanBookService: LoanBookService,

@@ -25,9 +25,9 @@ describe('FullName', () => {
       )
     })
 
-    it('should return a FullNameError for an invalid name', () => {
+    it('should return a FullNameError for an long name', () => {
       // Arrange
-      const invalidName = 'Jo' // Name length is less than 3
+      const invalidName = 'A'.repeat(65)
 
       // Act
       const result = FullName.create(invalidName)

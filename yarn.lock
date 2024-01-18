@@ -34,10 +34,10 @@
     css-tree "^2.3.1"
     is-potential-custom-element-name "^1.0.1"
 
-"@aulasoftwarelibre/next-auth-firewall@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@aulasoftwarelibre/next-auth-firewall/-/next-auth-firewall-1.0.2.tgz#841b4242aedee93419c3a815ab28136f5e6da7bb"
-  integrity sha512-Za6A7Vn6JIdL64NvFm+suByIEjlD5pvP34DTiA4nk8VS13DHvKFwV4lb2mPieL2AQDE//gs9MjIMqxOlHBsy8Q==
+"@aulasoftwarelibre/next-auth-firewall@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@aulasoftwarelibre/next-auth-firewall/-/next-auth-firewall-1.1.0.tgz#fe9552c14b77118a3e9df280c4b694ceb0b62273"
+  integrity sha512-zvqTCiSdDELD4hUpTbTNqNCwbxwa9ChE+hCr2RwRONa7P09146JyobdQ9WxpUiQorWA4HwF3F+C3EPfvTRSmUQ==
   dependencies:
     "@auth/core" experimental
     next "^14.0.0"

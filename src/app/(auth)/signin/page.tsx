@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
+import AuthModal from '@/components/auth-modal/auth-modal'
 import AuthModalFooter from '@/components/auth-modal/auth-modal-footer'
 import AuthModalHeader from '@/components/auth-modal/auth-modal-header'
 import { auth } from '@/lib/auth/auth'
@@ -23,14 +24,16 @@ export default async function Page() {
 
   return (
     <>
-      <AuthModalHeader title="Iniciar sesión en">
-        <SignInEmailForm />
-      </AuthModalHeader>
-      <AuthModalFooter>
-        Esta plataforma es exclusiva para miembros de la Universidad de Córdoba.
-        Inicia sesión con tu correo corporativo <Kbd>@uco.es</Kbd> para tener
-        acceso.
-      </AuthModalFooter>
+      <AuthModal>
+        <AuthModalHeader title="Iniciar sesión en">
+          <SignInEmailForm />
+        </AuthModalHeader>
+        <AuthModalFooter>
+          Esta plataforma es exclusiva para miembros de la Universidad de
+          Córdoba. Inicia sesión con tu correo corporativo <Kbd>@uco.es</Kbd>{' '}
+          para tener acceso.
+        </AuthModalFooter>
+      </AuthModal>
     </>
   )
 }

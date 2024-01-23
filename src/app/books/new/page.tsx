@@ -1,7 +1,7 @@
 import { Card, CardBody, CardHeader } from '@nextui-org/react'
 import { Metadata } from 'next'
 
-import BookForm from '@/components/book-form/book-form'
+import BookForm from '@/app/books/_components/book-form/book-form'
 
 export const metadata: Metadata = {
   description: 'Biblioteca del Aula de Software Libre',

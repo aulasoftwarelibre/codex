@@ -11,16 +11,16 @@ const authConfig = {
       roles: 'ROLE_ADMIN',
     },
     {
+      path: '^/books/?$',
+      roles: 'PUBLIC_ACCESS',
+    },
+    {
       path: '^/books/new',
       roles: 'ROLE_ADMIN',
     },
     {
       path: '^/books/\\w+/edit',
       roles: 'ROLE_ADMIN',
-    },
-    {
-      path: '^/books',
-      roles: ['ROLE_MEMBER', 'ROLE_ADMIN'],
     },
     {
       path: '^/settings',

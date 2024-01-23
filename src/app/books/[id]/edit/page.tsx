@@ -1,7 +1,7 @@
 import { Card, CardBody, CardHeader } from '@nextui-org/react'
 import { notFound } from 'next/navigation'
 
-import BookForm from '@/components/book-form/book-form'
+import BookForm from '@/app/books/_components/book-form/book-form'
 import { findBook } from '@/core/book/infrastructure/actions/find-book'
 
 interface PageParameters {

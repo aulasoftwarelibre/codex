@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-import AuthModalFooter from '@/components/auth-modal/auth-modal-footer'
-import AuthModalHeader from '@/components/auth-modal/auth-modal-header'
+import AuthCard from '@/app/(auth)/_components/auth-card/auth-card'
+import AuthCardFooter from '@/app/(auth)/_components/auth-card/auth-card-footer'
+import AuthCardHeader from '@/app/(auth)/_components/auth-card/auth-card-header'
 import { auth } from '@/lib/auth/auth'
 
 export const metadata: Metadata = {
@@ -24,25 +25,27 @@ export default async function Page() {
 
   return (
     <>
-      <AuthModalHeader title="Iniciar sesión en">
-        <p className="text-3xl font-black text-center">Verifica tu correo</p>
-        <Button
-          size="lg"
-          radius="none"
-          as={Link}
-          href={WEBMAIL_URL}
-          target="_blank"
-        >
-          Abrir UCOWebMail
-        </Button>
-      </AuthModalHeader>
-      <AuthModalFooter>
-        Se ha enviado un enlace de inicio de sesión a la dirección de correo
-        electrónico que proporcionaste. Este enlace te permitirá acceder al
-        proceso de inicio de sesión. Por favor, revisa tu bandeja de entrada y
-        posiblemente también la carpeta de spam, en caso de que no encuentres el
-        correo electrónico en la bandeja principal.
-      </AuthModalFooter>
+      <AuthCard>
+        <AuthCardHeader title="Iniciar sesión en">
+          <p className="text-3xl font-black text-center">Verifica tu correo</p>
+          <Button
+            size="lg"
+            radius="none"
+            as={Link}
+            href={WEBMAIL_URL}
+            target="_blank"
+          >
+            Abrir UCOWebMail
+          </Button>
+        </AuthCardHeader>
+        <AuthCardFooter>
+          Se ha enviado un enlace de inicio de sesión a la dirección de correo
+          electrónico que proporcionaste. Este enlace te permitirá acceder al
+          proceso de inicio de sesión. Por favor, revisa tu bandeja de entrada y
+          posiblemente también la carpeta de spam, en caso de que no encuentres
+          el correo electrónico en la bandeja principal.
+        </AuthCardFooter>
+      </AuthCard>
     </>
   )
 }

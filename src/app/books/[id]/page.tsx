@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import BookPage from '@/components/book-page/book-page'
+import BookPage from '@/app/books/_components/book-page/book-page'
 import { findBook } from '@/core/book/infrastructure/actions/find-book'
 import getHistoricalLoans from '@/core/loan/infrastructure/actions/get-historical-loans'
 import UserResponse from '@/core/user/dto/responses/user.response'

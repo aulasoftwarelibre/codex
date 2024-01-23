@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import BookCard from '@/components/book-card/book-card'
+import BookCard from '@/app/books/_components/book-card/book-card'
 
 const meta = {
   component: BookCard,

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import SettingsForm from '@/components/settings-form/settings-form'
+import SettingsForm from '@/app/settings/profile/_components/settings-form/settings-form'
 
 const meta = {
   component: SettingsForm,

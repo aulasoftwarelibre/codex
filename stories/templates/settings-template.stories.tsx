@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import SettingsTemplate from '@/components/settings-template/settings-template'
+import SettingsTemplate from '@/app/settings/_components/settings-template/settings-template'
 
 const meta = {
   component: SettingsTemplate,

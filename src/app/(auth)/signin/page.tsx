@@ -3,11 +3,11 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-import AuthModalFooter from '@/components/auth-modal/auth-modal-footer'
-import AuthModalHeader from '@/components/auth-modal/auth-modal-header'
+import AuthCard from '@/app/(auth)/_components/auth-card/auth-card'
+import AuthCardFooter from '@/app/(auth)/_components/auth-card/auth-card-footer'
+import AuthCardHeader from '@/app/(auth)/_components/auth-card/auth-card-header'
+import SignInEmailForm from '@/app/(auth)/signin/_components/sign-in-email-form/sign-in-email-form'
 import { auth } from '@/lib/auth/auth'
-
-import SignInEmailForm from '../../../components/sign-in-email-form/sign-in-email-form'
 
 export const metadata: Metadata = {
   description: 'Biblioteca del Aula de Software Libre',
@@ -23,14 +23,16 @@ export default async function Page() {
 
   return (
     <>
-      <AuthModalHeader title="Iniciar sesión en">
-        <SignInEmailForm />
-      </AuthModalHeader>
-      <AuthModalFooter>
-        Esta plataforma es exclusiva para miembros de la Universidad de Córdoba.
-        Inicia sesión con tu correo corporativo <Kbd>@uco.es</Kbd> para tener
-        acceso.
-      </AuthModalFooter>
+      <AuthCard>
+        <AuthCardHeader title="Iniciar sesión en">
+          <SignInEmailForm />
+        </AuthCardHeader>
+        <AuthCardFooter>
+          Esta plataforma es exclusiva para miembros de la Universidad de
+          Córdoba. Inicia sesión con tu correo corporativo <Kbd>@uco.es</Kbd>{' '}
+          para tener acceso.
+        </AuthCardFooter>
+      </AuthCard>
     </>
   )
 }

@@ -9,58 +9,94 @@ import { Theme } from '@auth/core/types'
  * @note We don't add the email address to avoid needing to escape it, if you do, remember to sanitize it!
  */
 export function html(parameters: { host: string; theme: Theme; url: string }) {
-  const { host, theme, url } = parameters
-
-  const escapedHost = host.replaceAll('.', '&#8203;.')
-
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const brandColor = theme.brandColor || '#346df1'
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const buttonText = theme.buttonText || '#fff'
-
-  const color = {
-    background: '#f9f9f9',
-    buttonBackground: brandColor,
-    buttonBorder: brandColor,
-    buttonText,
-    mainBackground: '#fff',
-    text: '#444',
-  }
+  const { url } = parameters
 
   return `
-<body style="background: ${color.background};">
-  <table width="100%" border="0" cellspacing="20" cellpadding="0"
-    style="background: ${color.mainBackground}; max-width: 600px; margin: auto; border-radius: 10px;">
-    <tr>
-      <td align="center"
-        style="padding: 10px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
-        Sign in to <strong>${escapedHost}</strong>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" style="padding: 20px 0;">
-        <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td align="center" style="border-radius: 5px;" bgcolor="${color.buttonBackground}"><a href="${url}"
-                target="_blank"
-                style="font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: ${color.buttonText}; text-decoration: none; border-radius: 5px; padding: 10px 20px; border: 1px solid ${color.buttonBorder}; display: inline-block; font-weight: bold;">Sign
-                in</a></td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td align="center"
-        style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
-        If you did not request this email you can safely ignore it.
-      </td>
-    </tr>
-  </table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px 60px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        h1 {
+            color: #000;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #333;
+        }
+
+        .note {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verifique su inicio de sesión en Codex</h1>
+        <p>Hola,</p>
+        <p>Hemos recibido un intento de inicio de sesión para este correo en nuestra plataforma</p>
+        <p>Para completar el proceso de inicio de sesión, haga clic en el botón a continuación:</p>
+        <div class="button-container">
+            <a href="${url}" class="button">VERIFICAR</a>
+        </div>
+        <p>O copie y pegue esta URL en una nueva pestaña de su navegador:</p>
+        <p><a href="${url}">${url}</a></p>
+        <p class="note">Si no intentó iniciar sesión, pero recibió este correo electrónico, puede ignorarlo.</p>
+    </div>
 </body>
+</html>
 `
 }
 
 /** Email Text body (fallback for email clients that don't render HTML, e.g. feature phones) */
 export function text({ host, url }: { host: string; url: string }) {
-  return `Sign in to ${host}\n${url}\n\n`
+  return `Iniciar sesión en Codex [${host}]\n${url}\n\n`
 }

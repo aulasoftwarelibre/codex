@@ -4,9 +4,10 @@ import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import { ReactNode } from 'react'
 
-import Footer from '@/components/footer/footer'
-import Header from '@/components/header/header'
-import { Providers } from '@/components/providers/providers'
+import Footer from '@/app/_components/footer/footer'
+import Header from '@/app/_components/header/header'
+import { Providers } from '@/app/_components/providers/providers'
+import UnauthorizedAlert from '@/app/_components/unauthorized-alert/unauthorized-alert'
 import { findUser } from '@/core/user/infrastructure/actions/find-user'
 import { auth } from '@/lib/auth/auth'
 
@@ -37,10 +38,9 @@ export default async function RootLayout({
         <Providers>
           {modal}
           <Header user={user} />
-          <div className=" flex flex-col min-h-[calc(100vh-155px)]">
-            <div className="container mx-auto flex-grow pt-5 pb-5">
-              {children}
-            </div>
+          <div className="flex flex-col min-h-[calc(100vh-155px)] mt-4">
+            <UnauthorizedAlert user={user} />
+            <div className="container mx-auto flex-grow py-5">{children}</div>
           </div>
           <Footer />
         </Providers>

@@ -2,7 +2,7 @@
 
 import Image, { ImageProps } from 'next/image'
 
-import { useController } from '@/components/theme-switcher/hooks'
+import { useController } from '@/app/_components/theme-switcher/hooks'
 
 type ThemeImageProperties = Omit<ImageProps, 'src'> & {
   srcDark: string

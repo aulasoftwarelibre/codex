@@ -22,7 +22,7 @@ import UserResponse from '@/core/user/dto/responses/user.response'
 interface BookPageProperties {
   book: BookResponse
   historicalLoans: HistoricalLoansResponse[]
-  user: UserResponse
+  user?: UserResponse
 }
 
 export default function BookPage(properties: BookPageProperties) {
@@ -44,7 +44,7 @@ export default function BookPage(properties: BookPageProperties) {
               {book.authors.join(', ')}
             </div>
             <div className="flex-grow">
-              {user.roles.includes('ROLE_ADMIN') ? (
+              {user && user.roles.includes('ROLE_ADMIN') ? (
                 <Button
                   as={Link}
                   href={`/books/${book.id}/edit`}

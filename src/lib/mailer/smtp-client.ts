@@ -28,7 +28,7 @@ export class SmtpClient {
       await this.transporter.sendMail({
         from: provider.from,
         html: html({ host, theme, url }),
-        subject: `Sign in to ${host}`,
+        subject: `Verificación de inicio de sesión en Codex`,
         text: text({ host, url }),
         to: identifier,
       })

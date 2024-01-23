@@ -2,9 +2,9 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-import AuthModal from '@/components/auth-modal/auth-modal'
-import AuthModalHeader from '@/components/auth-modal/auth-modal-header'
-import SignOutForm from '@/components/sign-out-form/sign-out-form'
+import AuthCard from '@/app/(auth)/_components/auth-card/auth-card'
+import AuthCardHeader from '@/app/(auth)/_components/auth-card/auth-card-header'
+import SignOutForm from '@/app/(auth)/signout/_components/sign-out-form/sign-out-form'
 import { auth } from '@/lib/auth/auth'
 
 export const metadata: Metadata = {
@@ -21,11 +21,11 @@ export default async function Page() {
 
   return (
     <>
-      <AuthModal>
-        <AuthModalHeader title="Cerrar sesión en">
+      <AuthCard>
+        <AuthCardHeader title="Cerrar sesión en">
           <SignOutForm />
-        </AuthModalHeader>
-      </AuthModal>
+        </AuthCardHeader>
+      </AuthCard>
     </>
   )
 }

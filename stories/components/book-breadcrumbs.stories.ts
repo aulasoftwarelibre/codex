@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import BookBreadcrumbs from '@/components/book-breadcrumbs/book-breadcrumbs'
+import BookBreadcrumbs from '@/app/books/_components/book-breadcrumbs/book-breadcrumbs'
 
 const meta = {
   component: BookBreadcrumbs,

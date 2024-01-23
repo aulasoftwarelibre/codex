@@ -4,9 +4,9 @@ import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import { ReactNode } from 'react'
 
-import Footer from '@/components/footer/footer'
-import Header from '@/components/header/header'
-import { Providers } from '@/components/providers/providers'
+import Footer from '@/app/_components/footer/footer'
+import Header from '@/app/_components/header/header'
+import { Providers } from '@/app/_components/providers/providers'
 import { findUser } from '@/core/user/infrastructure/actions/find-user'
 import { auth } from '@/lib/auth/auth'
 

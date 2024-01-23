@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import BookForm from '@/components/book-form/book-form'
+import BookForm from '@/app/books/_components/book-form/book-form'
 
 const meta = {
   component: BookForm,

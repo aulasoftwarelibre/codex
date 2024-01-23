@@ -1,14 +1,5 @@
-import BookGrid from '@/components/book-grid/book-grid'
-import { findBooks } from '@/core/book/infrastructure/actions/find-books'
-import me from '@/core/user/infrastructure/actions/me'
+import { redirect } from 'next/navigation'
 
 export default async function Home() {
-  const books = await findBooks()
-  const user = await me()
-
-  return (
-    <main>
-      <BookGrid books={books} me={user} />
-    </main>
-  )
+  return redirect('/books')
 }

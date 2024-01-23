@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import BookGrid from '@/components/book-grid/book-grid'
+import BookGrid from '@/app/books/_components/book-grid/book-grid'
 import { searchBooks } from '@/core/book/infrastructure/actions/search-books'
 import me from '@/core/user/infrastructure/actions/me'
 

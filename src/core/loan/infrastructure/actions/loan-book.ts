@@ -53,7 +53,20 @@ export async function loanBook(
           'Libro marcado como prestado.',
         )
       },
-      (_error) =>
-        FormResponse.custom(['general'], _error.message, previousState.data),
+      (_error) => {
+        if (Array.isArray(_error)) {
+          return FormResponse.custom(
+            ['general'],
+            _error[0].message,
+            previousState.data,
+          )
+        }
+
+        return FormResponse.custom(
+          ['general'],
+          _error.message,
+          previousState.data,
+        )
+      },
     )
 }

@@ -1,3 +1,4 @@
+import { Avatar, Link } from '@nextui-org/react'
 import { redirect } from 'next/navigation'
 
 import SettingsForm from '@/app/settings/profile/_components/settings-form/settings-form'
@@ -5,6 +6,7 @@ import SettingsFormInputText from '@/app/settings/profile/_components/settings-f
 import UserResponse from '@/core/user/dto/responses/user.response'
 import { findUser } from '@/core/user/infrastructure/actions/find-user'
 import { auth } from '@/lib/auth/auth'
+import gravatar from '@/lib/utils/gravatar'
 
 export default async function Page() {
   const session = await auth()
@@ -18,6 +20,20 @@ export default async function Page() {
   return (
     <>
       <div className="flex flex-col gap-y-4">
+        <SettingsForm title="Imagen de perfil">
+          <div className="flex justify-between">
+            <div className="flex-1">
+              <p>Esta es tu imagen de perfil.</p>
+              <p>
+                Por el momento solo es posible cambiarla a través de{' '}
+                <Link href="https://gravatar.com">gravatar</Link> y asociando el
+                mismo correo con el que has iniciado sesión.
+              </p>
+            </div>
+            <Avatar size="lg" src={user.image || gravatar(user.email)} />
+          </div>
+        </SettingsForm>
+
         <SettingsForm title="Nombre visible">
           <div>Introduce tu nombre completo o con el que más se te conoce.</div>
           <SettingsFormInputText

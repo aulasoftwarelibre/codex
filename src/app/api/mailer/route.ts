@@ -1,5 +1,3 @@
-import { SendVerificationRequestParams } from '@auth/core/providers/email'
-
 import { SmtpClient } from '@/lib/mailer/smtp-client'
 
 export async function POST(request: Request) {
@@ -21,7 +19,7 @@ export async function POST(request: Request) {
     )
   }
 
-  const parameters: SendVerificationRequestParams = await request.json()
+  const parameters = await request.json()
 
   await new SmtpClient(
     process.env.MAILER_DSN as string,

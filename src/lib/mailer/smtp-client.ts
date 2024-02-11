@@ -1,4 +1,5 @@
-import { SendVerificationRequestParams } from '@auth/core/providers/email'
+import { EmailConfig } from '@auth/core/providers'
+import { Theme } from '@auth/core/types'
 import * as nodemailer from 'nodemailer'
 
 import { html, text } from '@/lib/mailer/formaters'
@@ -15,7 +16,12 @@ export class SmtpClient {
     provider,
     theme,
     url,
-  }: SendVerificationRequestParams) {
+  }: {
+    identifier: string
+    provider: EmailConfig
+    theme: Theme
+    url: string
+  }) {
     const { host } = new URL(url)
 
     console.debug('sendVerificationRequest', identifier, provider, theme, url)

@@ -1,8 +1,5 @@
 import { Provider } from '@auth/core/providers'
-import {
-  EmailUserConfig,
-  SendVerificationRequestParams,
-} from '@auth/core/providers/email'
+import { EmailUserConfig } from '@auth/core/providers/email'
 
 export default function Email(
   options: EmailUserConfig & Record<string, unknown>,
@@ -13,7 +10,7 @@ export default function Email(
     maxAge: 24 * 60 * 60,
     name: 'Email',
     options,
-    async sendVerificationRequest(parameters: SendVerificationRequestParams) {
+    async sendVerificationRequest(parameters) {
       const response = await fetch(process.env.MAILER_URL as string, {
         body: JSON.stringify(parameters),
         headers: {

@@ -25,39 +25,13 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aulasoftwarelibre/next-auth-firewall@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@aulasoftwarelibre/next-auth-firewall/-/next-auth-firewall-1.1.0.tgz#fe9552c14b77118a3e9df280c4b694ceb0b62273"
-  integrity sha512-zvqTCiSdDELD4hUpTbTNqNCwbxwa9ChE+hCr2RwRONa7P09146JyobdQ9WxpUiQorWA4HwF3F+C3EPfvTRSmUQ==
+"@aulasoftwarelibre/next-auth-firewall@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@aulasoftwarelibre/next-auth-firewall/-/next-auth-firewall-1.2.0.tgz#45b1e2fb11cd72a75455aefad1c72128fa253824"
+  integrity sha512-1ic3BgDZp1l3p2iGYW4agk9mxe32eIPCZVIEo6k9gjfY3gpJCde4jdzrIgrUtOHetfciyKDmZfJoIWfjf3Scxw==
   dependencies:
-    "@auth/core" experimental
     next "^14.0.0"
-    next-auth "^5.0.0-beta.3"
-
-"@auth/core@0.0.0-manual.e9863699", "@auth/core@experimental":
-  version "0.0.0-manual.e9863699"
-  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.0.0-manual.e9863699.tgz#5816c1eac2eaeaadc2f6c6cabddd782cf0db88f0"
-  integrity sha512-/hVzGuFw7nAZimliD8kpuKnNjvkRu+jpaVhYB/FaIXLNJFNwhbO2MgXBnr5tvLIHgRJnR5C9UN5RNpQXiFHuSA==
-  dependencies:
-    "@panva/hkdf" "^1.0.4"
-    cookie "0.5.0"
-    jose "^4.11.1"
-    oauth4webapi "^2.0.6"
-    preact "10.11.3"
-    preact-render-to-string "5.2.3"
-
-"@auth/core@0.21.0":
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.21.0.tgz#c1877afc9ffe1058b013216f02dde910b6921076"
-  integrity sha512-jUWYs8gjy2GvtP9dd/4S9KcwZ660Cm/IkybiAq96/2Ooku9SKk5SUG+UTEwkyLuaQ38ZgfwggfpDOgzsXEcufA==
-  dependencies:
-    "@panva/hkdf" "^1.1.1"
-    "@types/cookie" "0.6.0"
-    cookie "0.6.0"
-    jose "^5.1.3"
-    oauth4webapi "^2.4.0"
-    preact "10.11.3"
-    preact-render-to-string "5.2.3"
+    next-auth "5.0.0-beta.9"
 
 "@auth/core@0.26.3":
   version "0.26.3"
@@ -2919,7 +2893,7 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.7.0.tgz#b139c81999c23e3c8d3c0a7234480e945920fc40"
   integrity sha512-AdY5wvN0P2vXBi3b29hxZgSFvdhdxPB9+f0B6s//P9Q8nibRWeA3cHm8UmLpio9ABigkVHJ5NMPk+Mz8VCCyrw==
 
-"@panva/hkdf@^1.0.4", "@panva/hkdf@^1.1.1":
+"@panva/hkdf@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@panva/hkdf/-/hkdf-1.1.1.tgz#ab9cd8755d1976e72fc77a00f7655a64efe6cd5d"
   integrity sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==
@@ -9628,11 +9602,6 @@ jiti@^1.19.1, jiti@^1.20.0:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.0.tgz#7c97f8fe045724e136a397f7340475244156105d"
   integrity sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==
 
-jose@^4.11.1:
-  version "4.15.4"
-  resolved "https://registry.yarnpkg.com/jose/-/jose-4.15.4.tgz#02a9a763803e3872cf55f29ecef0dfdcc218cc03"
-  integrity sha512-W+oqK4H+r5sITxfxpSU+MMdr/YSWGvgZMQDIsNoBDGGy4i7GBPTtvFKibQzW06n3U3TqHjhvBJsirShsEJ6eeQ==
-
 jose@^5.1.3:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/jose/-/jose-5.2.1.tgz#ec3befe173896e592e2d9ef5f267d061ffb203c5"
@@ -10464,14 +10433,7 @@ neverthrow@^6.1.0:
   resolved "https://registry.yarnpkg.com/neverthrow/-/neverthrow-6.1.0.tgz#51a6e9ce2e06600045b3c1b37aecc536d267bf95"
   integrity sha512-xNbNjp/6M5vUV+mststgneJN9eJeJCDSYSBTaf3vxgvcKooP+8L0ATFpM8DGfmH7UWKJeoa24Qi33tBP9Ya3zA==
 
-next-auth@5.0.0-beta.5:
-  version "5.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-5.0.0-beta.5.tgz#a3025b18218948e1f4f4307cc6cb262459b85df0"
-  integrity sha512-tEYIPhm/i0byW4xf9Ldlsnh7ckBQfNvMjOA3B3eXQX9taAQWb8earravSn1fjk4fKfKvaOApFJkks0VeI7Vy/A==
-  dependencies:
-    "@auth/core" "0.21.0"
-
-next-auth@^5.0.0-beta.3:
+next-auth@5.0.0-beta.9:
   version "5.0.0-beta.9"
   resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-5.0.0-beta.9.tgz#deaee88090926e8ea2f85c9d343fe525fa753911"
   integrity sha512-BWFiwJ/wzfxWpHnGpAoFsXHSlVofWgFns6tjtIGeDrXfEf3D+afnBpmzCNyek2RNYDVgMHi8Q5uXzFoNBd2l5g==
@@ -10662,7 +10624,7 @@ nypm@^0.3.3:
     pathe "^1.1.2"
     ufo "^1.3.2"
 
-oauth4webapi@^2.0.6, oauth4webapi@^2.4.0:
+oauth4webapi@^2.4.0:
   version "2.10.3"
   resolved "https://registry.yarnpkg.com/oauth4webapi/-/oauth4webapi-2.10.3.tgz#8e6d5a8a984a297dd80276a6c52634359319d034"
   integrity sha512-9FkXEXfzVKzH63GUOZz1zMr3wBaICSzk6DLXx+CGdrQ10ItNk2ePWzYYc1fdmKq1ayGFb2aX97sRCoZ2s0mkDw==

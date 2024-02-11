@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@aulasoftwarelibre/next-auth-firewall": "^1.1.0",
+    "@auth/core": "0.0.0-manual.e9863699",
     "@auth/prisma-adapter": "^1.3.3",
     "@heroicons/react": "^2.1.1",
     "@nextui-org/react": "2.2.9",

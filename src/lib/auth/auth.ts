@@ -8,5 +8,4 @@ export const {
   handlers: { GET, POST },
   signIn,
   signOut,
-  update,
 } = NextAuthFirewall(authConfig)

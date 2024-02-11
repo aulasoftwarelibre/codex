@@ -22,7 +22,7 @@ class LoginPage {
     // Open login link
     await webMailPage
       .frameLocator('#preview-html')
-      .getByRole('link', { name: 'Sign in' })
+      .getByRole('link', { name: 'VERIFICAR' })
       .click()
 
     return await webMailPage.waitForEvent('popup')

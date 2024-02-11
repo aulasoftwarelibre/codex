@@ -48,6 +48,7 @@ export default function BookCard(properties: BookCardProperties) {
             width={297}
             height={387}
             src={book.image}
+            priority={true}
           />
           <BookAvatar book={book} />
           <BookCardForm book={book} me={me} />

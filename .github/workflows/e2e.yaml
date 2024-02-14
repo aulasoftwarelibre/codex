@@ -1,18 +1,16 @@
-name: e2e
+name: Run e2e tests
 
 on:
-  push:
-    branches:
-      - "e2e"
+  workflow_call:
 
 env:
-  DOCKER_BUILDKIT: 1
   MAILER_SECRET: E2E
   AUTH_SECRET: E2E
 
 jobs:
   e2e:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.repository == 'aulasoftwarelibre/codex' && (startsWith(github.ref, 'refs/heads/releases/') || startsWith(github.ref, 'refs/tags/v') )
     services:
       smtp:
         image: "corpusops/mailhog:v1.0.1"
@@ -34,18 +32,23 @@ jobs:
     strategy:
       matrix:
         node-version: [ 20.x ]
-    name: Run tests on Node ${{ matrix.node-version }}
+    name: Run e2e tests on Node ${{ matrix.node-version }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - run: yarn install --frozen-lockfile
-      - run: yarn prisma:migrate
-      - run: yarn test:e2e
-      - uses: actions/upload-artifact@v3
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run database migrations
+        run: yarn prisma:migrate
+      - name: Run e2e tests
+        run: yarn test:e2e
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report

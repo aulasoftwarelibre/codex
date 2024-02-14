@@ -1,0 +1,53 @@
+name: e2e
+
+on:
+  push:
+    branches:
+      - "e2e"
+
+env:
+  DOCKER_BUILDKIT: 1
+  MAILER_SECRET: E2E
+  AUTH_SECRET: E2E
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    services:
+      smtp:
+        image: "corpusops/mailhog:v1.0.1"
+        ports:
+          - 1025:1025
+          - 8025:8025
+      db:
+        image: "postgres:12"
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: codex_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    name: Run tests on Node ${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn prisma:migrate
+      - run: yarn test:e2e
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

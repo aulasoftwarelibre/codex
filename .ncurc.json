@@ -1,8 +1,5 @@
 {
   "upgrade": true,
   "reject": [
-    "@commitlint/config-conventional",
-    "@typescript-eslint/eslint-plugin",
-    "@typescript-eslint/parser"
   ]
 }

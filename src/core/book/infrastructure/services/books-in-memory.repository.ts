@@ -5,17 +5,14 @@ import AvailableBook from '@/core/book/domain/model/available-book.entity'
 import Book, { BookState } from '@/core/book/domain/model/book.entity'
 import LoanedBook from '@/core/book/domain/model/loaned-book.entity'
 import Books from '@/core/book/domain/services/books.repository'
-import DuplicateIdError from '@/core/common/domain/errors/application/duplicate-id-error'
 import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
 import ApplicationError from '@/core/common/domain/errors/application-error'
-import Publisher from '@/core/common/domain/publisher/publisher'
 import BookId from '@/core/common/domain/value-objects/book-id'
 
-export default class BooksInMemory extends Publisher<Book> implements Books {
+export default class BooksInMemory implements Books {
   public books: Map<string, Book> = new Map()
 
   constructor(books: Book[] = []) {
-    super()
     for (const book of books) {
       this.books.set(book.id.value, book)
     }
@@ -44,34 +41,12 @@ export default class BooksInMemory extends Publisher<Book> implements Books {
   }
 
   save(book: Book): ResultAsync<void, ApplicationError> {
-    return this.mergeObjectContext(book).commit()
+    this.books.set(book.id.value, book)
+
+    return okAsync(undefined)
   }
 
   private clone(book: Book): Book {
     return cloneDeep(book)
-  }
-
-  protected create(instance: Book): ResultAsync<void, ApplicationError> {
-    if (this.books.get(instance.id.value)) {
-      return errAsync(DuplicateIdError.withId(instance.id))
-    }
-
-    this.books.set(instance.id.value, instance)
-
-    return okAsync(undefined)
-  }
-
-  protected update(
-    instance: Book,
-    version: number,
-  ): ResultAsync<void, ApplicationError> {
-    const book = this.books.get(instance.id.value)
-    if (!book || book.version !== version) {
-      return errAsync(NotFoundError.withId(instance.id))
-    }
-
-    this.books.set(instance.id.value, instance)
-
-    return okAsync(undefined)
   }
 }

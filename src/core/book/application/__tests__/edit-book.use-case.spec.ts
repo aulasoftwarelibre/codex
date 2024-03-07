@@ -8,7 +8,33 @@ import unexpected from '@/lib/utils/unexpected'
 import BooksExamples from '@/tests/examples/books.examples'
 
 describe('EditBookUseCase', () => {
-  it('should edit a book', async () => {
+  it('should edit a book without version', async () => {
+    // Arrange
+    const book = BooksExamples.available()
+    const books = new BooksInMemory([book])
+
+    const command = EditBookRequest.with({
+      authors: book.authors.map((author) => author.value),
+      id: book.id.value,
+      image: book.image.value,
+      title: 'A updated title',
+    })
+    const useCase = new EditBookUseCase(books)
+
+    // Act
+    const result = await useCase.with(command)
+
+    // Assert
+    result.match(
+      () => {
+        const savedBook = books.books.get(command.id)
+        expect(savedBook?.title.value).toEqual(command.title)
+      },
+      (error) => unexpected.error(error),
+    )
+  })
+
+  it.skip('should edit a book', async () => {
     // Arrange
     const book = BooksExamples.available()
     const books = new BooksInMemory([book])

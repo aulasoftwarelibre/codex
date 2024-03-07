@@ -4,17 +4,13 @@ import { okAsync, ResultAsync } from 'neverthrow'
 import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
 import ApplicationError from '@/core/common/domain/errors/application-error'
 import Email from '@/core/common/domain/value-objects/email'
+import ignore from '@/core/common/utils/ignore'
 import User from '@/core/user/domain/model/user.entity'
 import Users from '@/core/user/domain/services/users.repository'
 import UserDataMapper from '@/core/user/infrastructure/persistence/user.data-mapper'
-import UserPublisher from '@/core/user/infrastructure/persistence/user.publisher'
 
 export default class UsersPrisma implements Users {
-  private publisher: UserPublisher
-
-  constructor(private readonly prisma: PrismaClient) {
-    this.publisher = new UserPublisher(prisma)
-  }
+  constructor(private readonly prisma: PrismaClient) {}
 
   findByEmail(email: Email): ResultAsync<User, NotFoundError> {
     return ResultAsync.fromPromise(
@@ -28,6 +24,15 @@ export default class UsersPrisma implements Users {
   }
 
   save(user: User): ResultAsync<void, ApplicationError> {
-    return this.publisher.mergeObjectContext(user).commit()
+    const data = UserDataMapper.toPrisma(user)
+
+    return ResultAsync.fromPromise(
+      this.prisma.user.upsert({
+        create: data,
+        update: data,
+        where: { id: data.id },
+      }),
+      (error: unknown) => new ApplicationError((error as Error).toString()),
+    ).andThen(ignore)
   }
 }

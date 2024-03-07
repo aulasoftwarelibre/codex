@@ -9,14 +9,9 @@ import ignore from '@/core/common/utils/ignore'
 import Loan from '@/core/loan/domain/model/loan.entity'
 import Loans from '@/core/loan/domain/services/loans.repository'
 import LoanDataMapper from '@/core/loan/infrastructure/persistence/loan.data-mapper'
-import LoanPublisher from '@/core/loan/infrastructure/persistence/loan.publisher'
 
 export default class LoansPrisma implements Loans {
-  private publisher: LoanPublisher
-
-  constructor(private readonly prisma: PrismaClient) {
-    this.publisher = new LoanPublisher(prisma)
-  }
+  constructor(private readonly prisma: PrismaClient) {}
 
   ofBook(bookId: BookId): ResultAsync<Loan, NotFoundError> {
     return ResultAsync.fromPromise(
@@ -30,7 +25,16 @@ export default class LoansPrisma implements Loans {
   }
 
   save(loan: Loan): ResultAsync<void, ApplicationError> {
-    return this.publisher.mergeObjectContext(loan).commit()
+    const data = LoanDataMapper.toPrisma(loan)
+
+    return ResultAsync.fromPromise(
+      this.prisma.loan.upsert({
+        create: data,
+        update: data,
+        where: { id: data.id },
+      }),
+      (error: unknown) => new ApplicationError((error as Error).toString()),
+    ).andThen(ignore)
   }
 
   remove(id: LoanId): ResultAsync<void, NotFoundError> {

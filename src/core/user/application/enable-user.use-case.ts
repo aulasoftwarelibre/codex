@@ -11,9 +11,9 @@ export default class EnableUserUseCase {
 
   async with(command: EnableUserRequest) {
     return Email.create(command.email)
-      .asyncAndThen((email) => this.users.findByEmail(email))
+      .asyncAndThen((email) => /* find user */ null)
       .andThen((user) => this.enableUser(user, command.enable))
-      .andThen((user) => this.users.save(user))
+      .andThen((user) => /* save user */)
   }
 
   private enableUser(user: User, enable: boolean) {

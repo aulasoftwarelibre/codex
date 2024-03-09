@@ -8,24 +8,34 @@ import prisma from '@/lib/prisma/prisma'
 import gravatar from '@/lib/utils/gravatar'
 
 async function main() {
-  console.info('Creating admin...')
-
-  if (process.argv.length !== 4 || !process.argv[2] || !process.argv[3]) {
+  if (
+    process.argv.length !== 5 ||
+    !['admin', 'member'].includes(process.argv[2] as string) ||
+    !process.argv[3] ||
+    !process.argv[4]
+  ) {
     console.error(`Error: missing parameters.`)
-    console.error(`Usage: npm cli:user:admin "Full name" "email"`)
+    console.error(`Usage: npm cli:user:admin ROLE "Full name" "email"`)
+    console.error(`ROLE must be "admin" or "member".`)
 
     process.exit(1)
   }
 
-  const name = process.argv[2] || ''
-  const email = process.argv[3] || ''
+  console.info(`Creating ${process.argv[2] as string}...`)
+
+  const roles =
+    process.argv[2] === 'member'
+      ? ['ROLE_USER', 'ROLE_MEMBER']
+      : ['ROLE_USER', 'ROLE_ADMIN']
+  const name = process.argv[3] || ''
+  const email = process.argv[4] || ''
 
   const user = UserDataMapper.toModel({
     email,
     id: ulid().toLowerCase(),
     image: gravatar(email),
     name,
-    roles: ['ROLE_USER', 'ROLE_ADMIN'],
+    roles,
     version: 0,
   })
 

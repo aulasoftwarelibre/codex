@@ -23,7 +23,8 @@
     "build-storybook": "storybook build",
     "prisma:migrate": "prisma migrate dev",
     "prisma:generate": "prisma generate",
-    "cli:user:admin": "npx tsx src/core/user/infrastructure/cli/add-user.cli.ts"
+    "cli:user:admin": "npx tsx src/core/user/infrastructure/cli/add-user.cli.ts admin",
+    "cli:user:member": "npx tsx src/core/user/infrastructure/cli/add-user.cli.ts member"
   },
   "dependencies": {
     "@aulasoftwarelibre/next-auth-firewall": "1.2.0",

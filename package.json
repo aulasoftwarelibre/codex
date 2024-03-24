@@ -110,7 +110,7 @@
     ]
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,mts}": "eslint --fix"
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "prettier": {
     "semi": false,

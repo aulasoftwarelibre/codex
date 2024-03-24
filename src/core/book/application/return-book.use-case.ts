@@ -27,3 +27,7 @@ export default class ReturnBookUseCase {
       .andThen(() => this.books.save(book))
   }
 }
+
+export function add(...arguments_: number[]) {
+  return arguments_.reduce((a, b) => a + b, 0)
+}

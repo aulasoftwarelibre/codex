@@ -22,7 +22,7 @@ setup('authenticate as user', async ({ page, request }) => {
   await page.close()
 
   // Purge WebMail
-  await request.delete('http://localhost:8025/api/v1/messages')
+  await request.delete('http://localhost:8025/api/v1/mailbox/noreply')
 })
 
 setup('authenticate as admin', async ({ page, request }) => {
@@ -42,5 +42,5 @@ setup('authenticate as admin', async ({ page, request }) => {
   await page.close()
 
   // Purge WebMail
-  await request.delete('http://localhost:8025/api/v1/messages')
+  await request.delete('http://localhost:8025/api/v1/mailbox/admin')
 })

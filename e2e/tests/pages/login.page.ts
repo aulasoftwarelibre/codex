@@ -17,15 +17,15 @@ class LoginPage {
     // Open WebMail
     await this.page.getByRole('button', { name: 'Abrir UCOWebMail' }).click()
     const webMailPage = await this.page.waitForEvent('popup')
-    await webMailPage.getByText('aulasoftwarelibre@uco.es').first().click()
-
-    // Open login link
     await webMailPage
-      .frameLocator('#preview-html')
-      .getByRole('link', { name: 'VERIFICAR' })
+      .getByRole('cell', { name: '<aulasoftwarelibre@uco.es>' })
+      .first()
       .click()
 
-    return await webMailPage.waitForEvent('popup')
+    // Open login link
+    await webMailPage.getByRole('link', { name: 'VERIFICAR' }).click()
+
+    return webMailPage
   }
 }
 

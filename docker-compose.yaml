@@ -1,9 +1,10 @@
 services:
   smtp:
-    build: https://github.com/mailhog/MailHog.git#master
+    image: inbucket/inbucket
     ports:
-      - 1025:1025
-      - 8025:8025
+      - 1025:2500
+      - 8025:9000
+
   db:
     image: postgres:12
     environment:

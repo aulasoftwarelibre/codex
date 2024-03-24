@@ -34,13 +34,13 @@ test.describe('Do login with email', () => {
     await expect(page).toHaveURL('/verify')
     await expect(page.locator('body')).toHaveText(/Verifica tu correo/)
 
-    const response = await request.get('http://localhost:8025/api/v1/messages')
+    const response = await request.get(
+      'http://localhost:8025/api/v1/mailbox/noreply',
+    )
     expect(response.ok()).toBeTruthy()
     expect(await response.json()).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({
-          Raw: expect.objectContaining({ To: [email] }),
-        }),
+        expect.objectContaining({ to: expect.arrayContaining([`<${email}>`]) }),
       ]),
     )
   })

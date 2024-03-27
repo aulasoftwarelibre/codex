@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test'
 import { ulid } from 'ulid'
 
-import prisma from '../helpers/prisma'
+import { prisma } from '@/lib/prisma/prisma'
 
-class BookPage {
+export class BookPage {
   constructor(private readonly page: Page) {}
 
   async goto(id?: string) {
@@ -63,5 +63,3 @@ class BookPage {
     await prisma.book.deleteMany({ where: { id: { in: ids } } })
   }
 }
-
-export default BookPage

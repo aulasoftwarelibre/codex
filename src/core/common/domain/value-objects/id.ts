@@ -1,12 +1,12 @@
 import { ok, Result } from 'neverthrow'
 import { ulid } from 'ulid'
 
-import DomainError from '@/core/common/domain/errors/domain-error'
-import ValueObject from '@/core/common/domain/model/value-object'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { ValueObject } from '@/core/common/domain/model/value-object'
 
 type Constructor<T> = { new (value: string): T }
 
-export default class Id extends ValueObject<string> {
+export class Id extends ValueObject<string> {
   constructor(value: string) {
     super(value)
   }

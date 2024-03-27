@@ -1,11 +1,11 @@
-import AggregateRoot from '@/core/common/domain/model/aggregate-root'
-import Email from '@/core/common/domain/value-objects/email'
-import FullName from '@/core/common/domain/value-objects/fullname'
-import Image from '@/core/common/domain/value-objects/image'
-import Roles from '@/core/common/domain/value-objects/roles'
-import UserId from '@/core/common/domain/value-objects/user-id'
+import { AggregateRoot } from '@/core/common/domain/model/aggregate-root'
+import { Email } from '@/core/common/domain/value-objects/email'
+import { FullName } from '@/core/common/domain/value-objects/fullname'
+import { Image } from '@/core/common/domain/value-objects/image'
+import { Roles } from '@/core/common/domain/value-objects/roles'
+import { UserId } from '@/core/common/domain/value-objects/user-id'
 
-export default class User extends AggregateRoot {
+export class User extends AggregateRoot {
   constructor(
     private _id: UserId,
     private _email: Email,

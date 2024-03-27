@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import container from '@/lib/container'
-import prisma from '@/lib/prisma/prisma'
-import unexpected from '@/lib/utils/unexpected'
-import bookRequestExamples from '@/tests/examples/books-request.examples'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { container } from '@/lib/container'
+import { prisma } from '@/lib/prisma/prisma'
+import { unexpected } from '@/lib/utils/unexpected'
+import { bookRequestExamples } from '@/tests/examples/books-request.examples'
 import { createAvailableBook } from '@/tests/examples/factories'
 
 describe('CreateBookUseCase', () => {

@@ -1,7 +1,7 @@
 import { DeepReadonly } from 'ts-essentials'
 
-import LoanRegistryType from '@/core/loan/infrastructure/persistence/loan-registry.type'
-import gravatar from '@/lib/utils/gravatar'
+import { LoanRegistryType } from '@/core/loan/infrastructure/persistence/loan-registry.type'
+import { gravatar } from '@/lib/utils/gravatar'
 
 type HistoricalLoansResponse = DeepReadonly<{
   finishedAt: Date
@@ -29,4 +29,4 @@ const HistoricalLoansResponse = {
   },
 }
 
-export default HistoricalLoansResponse
+export { HistoricalLoansResponse }

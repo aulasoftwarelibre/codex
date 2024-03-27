@@ -2,9 +2,9 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-import AuthCard from '@/app/(auth)/_components/auth-card/auth-card'
-import AuthCardHeader from '@/app/(auth)/_components/auth-card/auth-card-header'
-import SignOutForm from '@/app/(auth)/signout/_components/sign-out-form/sign-out-form'
+import { AuthCard } from '@/app/(auth)/components/auth-card'
+import { AuthCardHeader } from '@/app/(auth)/components/auth-card-header'
+import { SignOutForm } from '@/app/(auth)/components/sign-out-form'
 import { auth } from '@/lib/auth/auth'
 
 export const metadata: Metadata = {

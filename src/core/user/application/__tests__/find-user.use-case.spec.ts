@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
-import FindUserRequest from '@/core/user/dto/requests/find-user.request'
-import container from '@/lib/container'
-import unexpected from '@/lib/utils/unexpected'
+import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
+import { FindUserRequest } from '@/core/user/dto/requests/find-user.request'
+import { container } from '@/lib/container'
+import { unexpected } from '@/lib/utils/unexpected'
 import { createUser } from '@/tests/examples/factories'
-import UsersExamples from '@/tests/examples/users.examples'
+import { UsersExamples } from '@/tests/examples/users.examples'
 
 describe('FindUserUseCase', () => {
   it('should find a user by email', async () => {

@@ -1,15 +1,15 @@
 import { ok, Result, safeTry } from 'neverthrow'
 
-import DomainError from '@/core/common/domain/errors/domain-error'
-import Email from '@/core/common/domain/value-objects/email'
-import FullName from '@/core/common/domain/value-objects/fullname'
-import Image from '@/core/common/domain/value-objects/image'
-import Roles from '@/core/common/domain/value-objects/roles'
-import UserId from '@/core/common/domain/value-objects/user-id'
-import User from '@/core/user/domain/model/user.entity'
-import UserResponse from '@/core/user/dto/responses/user.response'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { Email } from '@/core/common/domain/value-objects/email'
+import { FullName } from '@/core/common/domain/value-objects/fullname'
+import { Image } from '@/core/common/domain/value-objects/image'
+import { Roles } from '@/core/common/domain/value-objects/roles'
+import { UserId } from '@/core/common/domain/value-objects/user-id'
+import { User } from '@/core/user/domain/model/user.entity'
+import { UserResponse } from '@/core/user/dto/responses/user.response'
 
-const UserFactory = {
+export const UserFactory = {
   create: (userResponse: UserResponse): Result<User, DomainError> =>
     safeTry<User, DomainError>(function* () {
       const id = yield* UserId.create(userResponse.id)
@@ -31,5 +31,3 @@ const UserFactory = {
       return ok(new User(id, email, roles, name, image))
     }),
 }
-
-export default UserFactory

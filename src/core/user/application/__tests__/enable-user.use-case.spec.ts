@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import EnableUserRequest from '@/core/user/dto/requests/enable-user.request'
-import container from '@/lib/container'
-import prisma from '@/lib/prisma/prisma'
-import unexpected from '@/lib/utils/unexpected'
+import { EnableUserRequest } from '@/core/user/dto/requests/enable-user.request'
+import { container } from '@/lib/container'
+import { prisma } from '@/lib/prisma/prisma'
+import { unexpected } from '@/lib/utils/unexpected'
 import { createUser } from '@/tests/examples/factories'
-import UsersExamples from '@/tests/examples/users.examples'
+import { UsersExamples } from '@/tests/examples/users.examples'
 
 describe('EnableUserUseCase', () => {
   it('should enable a user', async () => {

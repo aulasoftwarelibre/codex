@@ -1,10 +1,10 @@
 import { ulid } from 'ulid'
 
 import { BookState } from '@/core/book/domain/model/book.entity'
-import BookDataMapper from '@/core/book/infrastructure/persistence/book.data-mapper'
-import gravatar from '@/lib/utils/gravatar'
+import { BookDataMapper } from '@/core/book/infrastructure/persistence/book.data-mapper'
+import { gravatar } from '@/lib/utils/gravatar'
 
-const BooksExamples = {
+export const BooksExamples = {
   available: () =>
     BookDataMapper.toAvailableBook({
       authors: ['Jane Doe'],
@@ -41,5 +41,3 @@ const BooksExamples = {
       version: 0,
     }),
 }
-
-export default BooksExamples

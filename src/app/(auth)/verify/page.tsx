@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-import AuthCard from '@/app/(auth)/_components/auth-card/auth-card'
-import AuthCardFooter from '@/app/(auth)/_components/auth-card/auth-card-footer'
-import AuthCardHeader from '@/app/(auth)/_components/auth-card/auth-card-header'
+import { AuthCard } from '@/app/(auth)/components/auth-card'
+import { AuthCardFooter } from '@/app/(auth)/components/auth-card-footer'
+import { AuthCardHeader } from '@/app/(auth)/components/auth-card-header'
 import { auth } from '@/lib/auth/auth'
 
 export const metadata: Metadata = {

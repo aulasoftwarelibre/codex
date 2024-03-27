@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client'
 import { ResultAsync } from 'neverthrow'
 
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import Publisher from '@/core/common/domain/publisher/publisher'
-import ignore from '@/core/common/utils/ignore'
-import User from '@/core/user/domain/model/user.entity'
-import UserDataMapper from '@/core/user/infrastructure/persistence/user.data-mapper'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { Publisher } from '@/core/common/domain/publisher/publisher'
+import { ignore } from '@/core/common/utils/ignore'
+import { User } from '@/core/user/domain/model/user.entity'
+import { UserDataMapper } from '@/core/user/infrastructure/persistence/user.data-mapper'
 
-export default class UserPublisher extends Publisher<User> {
+export class UserPublisher extends Publisher<User> {
   constructor(private readonly prisma: PrismaClient) {
     super()
   }

@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 
-class LoginPage {
+export class LoginPage {
   constructor(private readonly page: Page) {}
 
   async goto() {
@@ -28,5 +28,3 @@ class LoginPage {
     return webMailPage
   }
 }
-
-export default LoginPage

@@ -1,5 +1,3 @@
 import { Prisma } from '@prisma/client'
 
-type UserType = Prisma.UserGetPayload<true>
-
-export default UserType
+export type UserType = Prisma.UserGetPayload<true>

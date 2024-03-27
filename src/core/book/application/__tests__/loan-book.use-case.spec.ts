@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import LoanBookRequest from '@/core/book/dto/requests/loan-book.request'
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import container from '@/lib/container'
-import prisma from '@/lib/prisma/prisma'
-import unexpected from '@/lib/utils/unexpected'
+import { LoanBookRequest } from '@/core/book/dto/requests/loan-book.request'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { container } from '@/lib/container'
+import { prisma } from '@/lib/prisma/prisma'
+import { unexpected } from '@/lib/utils/unexpected'
 import {
   createAvailableBook,
   createLoan,

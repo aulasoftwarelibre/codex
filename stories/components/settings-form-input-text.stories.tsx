@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import SettingsForm from '@/app/settings/profile/_components/settings-form/settings-form'
-import SettingsFormInputText from '@/app/settings/profile/_components/settings-form/settings-form-input-text'
-import UserResponse from '@/core/user/dto/responses/user.response'
+import { SettingsForm } from '@/app/settings/components/settings-form'
+import { SettingsFormInputText } from '@/app/settings/components/settings-form-input-text'
+import { UserResponse } from '@/core/user/dto/responses/user.response'
 
 const meta = {
   component: SettingsFormInputText,

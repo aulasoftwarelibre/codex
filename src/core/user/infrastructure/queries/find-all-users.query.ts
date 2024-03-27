@@ -1,11 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { okAsync, ResultAsync } from 'neverthrow'
 
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import UserResponse from '@/core/user/dto/responses/user.response'
-import UserType from '@/core/user/infrastructure/persistence/user.type'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { UserResponse } from '@/core/user/dto/responses/user.response'
+import { UserType } from '@/core/user/infrastructure/persistence/user.type'
 
-export default class FindAllUsersQuery {
+export class FindAllUsersQuery {
   constructor(private readonly prisma: PrismaClient) {}
 
   with(): ResultAsync<UserResponse[], ApplicationError> {

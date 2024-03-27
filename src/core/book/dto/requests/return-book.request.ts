@@ -8,4 +8,4 @@ const ReturnBookRequest = {
   with: (properties: ReturnBookRequest) => properties,
 }
 
-export default ReturnBookRequest
+export { ReturnBookRequest }

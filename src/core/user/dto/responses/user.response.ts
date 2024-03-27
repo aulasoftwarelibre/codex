@@ -1,8 +1,8 @@
 import { DeepReadonly } from 'ts-essentials'
 
-import User from '@/core/user/domain/model/user.entity'
-import UserType from '@/core/user/infrastructure/persistence/user.type'
-import gravatar from '@/lib/utils/gravatar'
+import { User } from '@/core/user/domain/model/user.entity'
+import { UserType } from '@/core/user/infrastructure/persistence/user.type'
+import { gravatar } from '@/lib/utils/gravatar'
 
 type UserResponse = DeepReadonly<{
   email: string
@@ -30,4 +30,4 @@ const UserResponse = {
   with: (properties: UserResponse) => properties,
 }
 
-export default UserResponse
+export { UserResponse }

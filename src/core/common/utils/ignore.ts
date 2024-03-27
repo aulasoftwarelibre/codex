@@ -4,4 +4,4 @@ const ignore = () => {
   return ok(undefined)
 }
 
-export default ignore
+export { ignore }

@@ -13,4 +13,4 @@ const EditBookRequest = {
   with: (properties: EditBookPayload): EditBookRequest => properties,
 }
 
-export default EditBookRequest
+export { EditBookRequest }

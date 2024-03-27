@@ -10,4 +10,4 @@ const SearchBookRequest = {
   with: (properties: SearchBookPayload): SearchBookRequest => properties,
 }
 
-export default SearchBookRequest
+export { SearchBookRequest }

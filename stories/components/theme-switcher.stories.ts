@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import ThemeSwitcher from '@/app/_components/theme-switcher/theme-switcher'
+import { ThemeSwitcher } from '@/app/components/theme-switcher'
 
 const meta = {
   component: ThemeSwitcher,

@@ -1,15 +1,15 @@
-import AggregateRoot from '@/core/common/domain/model/aggregate-root'
-import BookId from '@/core/common/domain/value-objects/book-id'
-import FullNames from '@/core/common/domain/value-objects/fullnames'
-import Image from '@/core/common/domain/value-objects/image'
-import Title from '@/core/common/domain/value-objects/title'
+import { AggregateRoot } from '@/core/common/domain/model/aggregate-root'
+import { BookId } from '@/core/common/domain/value-objects/book-id'
+import { FullNames } from '@/core/common/domain/value-objects/fullnames'
+import { Image } from '@/core/common/domain/value-objects/image'
+import { Title } from '@/core/common/domain/value-objects/title'
 
 export enum BookState {
   AVAILABLE = 'AVAILABLE',
   LOANED = 'LOANED',
 }
 
-export default abstract class Book extends AggregateRoot {
+export abstract class Book extends AggregateRoot {
   constructor(
     protected _id: BookId,
     protected _title: Title,

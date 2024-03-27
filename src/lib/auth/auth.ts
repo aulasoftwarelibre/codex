@@ -1,6 +1,6 @@
 import NextAuthFirewall from '@aulasoftwarelibre/next-auth-firewall'
 
-import authConfig from '@/lib/auth/auth.config'
+import { authConfig } from '@/lib/auth/auth.config'
 
 export const {
   auth,

@@ -3,11 +3,11 @@
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
-import LoanBookRequest from '@/core/book/dto/requests/loan-book.request'
-import ReturnBookRequest from '@/core/book/dto/requests/return-book.request'
-import me from '@/core/user/infrastructure/actions/me'
-import container from '@/lib/container'
-import FormResponse from '@/lib/zod/form-response'
+import { LoanBookRequest } from '@/core/book/dto/requests/loan-book.request'
+import { ReturnBookRequest } from '@/core/book/dto/requests/return-book.request'
+import { me } from '@/core/user/infrastructure/actions/me'
+import { container } from '@/lib/container'
+import { FormResponse } from '@/lib/zod/form-response'
 
 export interface LoanActionForm {
   action: string

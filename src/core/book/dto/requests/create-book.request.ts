@@ -11,4 +11,4 @@ const CreateBookRequest = {
   with: (properties: CreateBookRequest) => properties,
 }
 
-export default CreateBookRequest
+export { CreateBookRequest }

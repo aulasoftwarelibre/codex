@@ -1,11 +1,11 @@
-import AvailableBook from '@/core/book/domain/model/available-book.entity'
-import Books from '@/core/book/domain/services/books.repository'
-import LoanBookRequest from '@/core/book/dto/requests/loan-book.request'
-import BookId from '@/core/common/domain/value-objects/book-id'
-import UserId from '@/core/common/domain/value-objects/user-id'
-import LoanBookService from '@/core/loan/domain/services/loan-book.service'
+import { AvailableBook } from '@/core/book/domain/model/available-book.entity'
+import { Books } from '@/core/book/domain/services/books.repository'
+import { LoanBookRequest } from '@/core/book/dto/requests/loan-book.request'
+import { BookId } from '@/core/common/domain/value-objects/book-id'
+import { UserId } from '@/core/common/domain/value-objects/user-id'
+import { LoanBookService } from '@/core/loan/domain/services/loan-book.service'
 
-export default class LoanBookUseCase {
+export class LoanBookUseCase {
   constructor(
     private readonly books: Books,
     private readonly loanBookService: LoanBookService,

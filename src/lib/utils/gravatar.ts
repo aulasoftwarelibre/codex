@@ -1,6 +1,6 @@
 import { createHash } from 'crypto'
 
-export default function gravatar(email: string | null) {
+export function gravatar(email: string | null) {
   if (!email) {
     return `http://www.gravatar.com/avatar`
   }

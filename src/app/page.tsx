@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
 
-export default async function Home() {
+export default async function Page() {
   return redirect('/books')
 }

@@ -10,4 +10,4 @@ const UpdateUserRequest = {
   with: (properties: UpdateUserRequest) => properties,
 }
 
-export default UpdateUserRequest
+export { UpdateUserRequest }

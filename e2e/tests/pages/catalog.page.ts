@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 
-class CatalogPage {
+export class CatalogPage {
   constructor(private readonly page: Page) {}
 
   async goto() {
@@ -27,5 +27,3 @@ class CatalogPage {
       .waitFor({ state: 'visible' })
   }
 }
-
-export default CatalogPage

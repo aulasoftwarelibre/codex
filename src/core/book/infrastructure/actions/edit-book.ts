@@ -3,9 +3,9 @@
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
-import EditBookRequest from '@/core/book/dto/requests/edit-book.request'
-import container from '@/lib/container'
-import FormResponse from '@/lib/zod/form-response'
+import { EditBookRequest } from '@/core/book/dto/requests/edit-book.request'
+import { container } from '@/lib/container'
+import { FormResponse } from '@/lib/zod/form-response'
 
 export interface EditBookForm {
   authors: string

@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import EditBookRequest from '@/core/book/dto/requests/edit-book.request'
-import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
-import container from '@/lib/container'
-import prisma from '@/lib/prisma/prisma'
-import unexpected from '@/lib/utils/unexpected'
-import BooksExamples from '@/tests/examples/books.examples'
+import { EditBookRequest } from '@/core/book/dto/requests/edit-book.request'
+import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
+import { container } from '@/lib/container'
+import { prisma } from '@/lib/prisma/prisma'
+import { unexpected } from '@/lib/utils/unexpected'
+import { BooksExamples } from '@/tests/examples/books.examples'
 import { createAvailableBook } from '@/tests/examples/factories'
 
 describe('EditBookUseCase', () => {

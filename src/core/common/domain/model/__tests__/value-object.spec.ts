@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import ValueObject from '@/core/common/domain/model/value-object'
+import { ValueObject } from '@/core/common/domain/model/value-object'
 
 describe('Value Object', () => {
   class ClassA extends ValueObject<string> {

@@ -1,13 +1,13 @@
 import { ok, Result } from 'neverthrow'
 
-import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
-import DomainError from '@/core/common/domain/errors/domain-error'
-import Email from '@/core/common/domain/value-objects/email'
-import Users from '@/core/user/domain/services/users.repository'
-import FindUserRequest from '@/core/user/dto/requests/find-user.request'
-import UserResponse from '@/core/user/dto/responses/user.response'
+import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { Email } from '@/core/common/domain/value-objects/email'
+import { Users } from '@/core/user/domain/services/users.repository'
+import { FindUserRequest } from '@/core/user/dto/requests/find-user.request'
+import { UserResponse } from '@/core/user/dto/responses/user.response'
 
-export default class FindUserUseCase {
+export class FindUserUseCase {
   constructor(private readonly users: Users) {}
 
   async with(

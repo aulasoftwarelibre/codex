@@ -1,11 +1,11 @@
 import { ulid } from 'ulid'
 import { describe, expect, it } from 'vitest'
 
-import Role from '@/core/common/domain/value-objects/role'
-import UserFactory from '@/core/user/domain/model/user.factory'
-import UserResponse from '@/core/user/dto/responses/user.response'
-import gravatar from '@/lib/utils/gravatar'
-import unexpected from '@/lib/utils/unexpected'
+import { Role } from '@/core/common/domain/value-objects/role'
+import { UserFactory } from '@/core/user/domain/model/user.factory'
+import { UserResponse } from '@/core/user/dto/responses/user.response'
+import { gravatar } from '@/lib/utils/gravatar'
+import { unexpected } from '@/lib/utils/unexpected'
 
 describe('User', () => {
   describe('create', () => {

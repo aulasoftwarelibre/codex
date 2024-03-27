@@ -4,9 +4,9 @@ import { revalidateTag } from 'next/cache'
 import { ulid } from 'ulid'
 import { z } from 'zod'
 
-import CreateBookRequest from '@/core/book/dto/requests/create-book.request'
-import container from '@/lib/container'
-import FormResponse from '@/lib/zod/form-response'
+import { CreateBookRequest } from '@/core/book/dto/requests/create-book.request'
+import { container } from '@/lib/container'
+import { FormResponse } from '@/lib/zod/form-response'
 
 export interface CreateBookForm {
   authors: string

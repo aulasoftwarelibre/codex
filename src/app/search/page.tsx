@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
-import BookGrid from '@/app/books/_components/book-grid/book-grid'
+import { BookCardGrid } from '@/app/books/components/book-card-grid'
 import { searchBooks } from '@/core/book/infrastructure/actions/search-books'
-import me from '@/core/user/infrastructure/actions/me'
+import { me } from '@/core/user/infrastructure/actions/me'
 
 export const metadata: Metadata = {
   description: 'Biblioteca del Aula de Software Libre',
@@ -38,7 +38,7 @@ export default async function Page(properties: PageProperties) {
         <h1 className="font-extrabold text-2xl">
           {message}:<span className="text-default-700 ml-2">{query}</span>
         </h1>
-        <BookGrid books={books} me={user} />
+        <BookCardGrid books={books} me={user} />
       </main>
     </>
   )

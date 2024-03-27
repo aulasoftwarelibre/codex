@@ -1,17 +1,17 @@
 import { okAsync, Result, ResultAsync } from 'neverthrow'
 
-import Book from '@/core/book/domain/model/book.entity'
-import Books from '@/core/book/domain/services/books.repository'
-import EditBookRequest from '@/core/book/dto/requests/edit-book.request'
-import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import DomainError from '@/core/common/domain/errors/domain-error'
-import BookId from '@/core/common/domain/value-objects/book-id'
-import FullNames from '@/core/common/domain/value-objects/fullnames'
-import Image from '@/core/common/domain/value-objects/image'
-import Title from '@/core/common/domain/value-objects/title'
+import { Book } from '@/core/book/domain/model/book.entity'
+import { Books } from '@/core/book/domain/services/books.repository'
+import { EditBookRequest } from '@/core/book/dto/requests/edit-book.request'
+import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { BookId } from '@/core/common/domain/value-objects/book-id'
+import { FullNames } from '@/core/common/domain/value-objects/fullnames'
+import { Image } from '@/core/common/domain/value-objects/image'
+import { Title } from '@/core/common/domain/value-objects/title'
 
-export default class EditBookUseCase {
+export class EditBookUseCase {
   constructor(private readonly books: Books) {}
 
   async with(command: EditBookRequest) {

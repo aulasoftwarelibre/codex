@@ -47,4 +47,4 @@ const FormResponse = {
   }),
 }
 
-export default FormResponse
+export { FormResponse }

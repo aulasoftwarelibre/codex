@@ -1,10 +1,10 @@
 import { ok, Result, safeTry } from 'neverthrow'
 
-import DomainError from '@/core/common/domain/errors/domain-error'
-import BookId from '@/core/common/domain/value-objects/book-id'
-import LoanId from '@/core/common/domain/value-objects/loan-id'
-import UserId from '@/core/common/domain/value-objects/user-id'
-import Loan from '@/core/loan/domain/model/loan.entity'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { BookId } from '@/core/common/domain/value-objects/book-id'
+import { LoanId } from '@/core/common/domain/value-objects/loan-id'
+import { UserId } from '@/core/common/domain/value-objects/user-id'
+import { Loan } from '@/core/loan/domain/model/loan.entity'
 
 const LoanFactory = {
   create: (loan: {
@@ -29,4 +29,4 @@ const LoanFactory = {
     }),
 }
 
-export default LoanFactory
+export { LoanFactory }

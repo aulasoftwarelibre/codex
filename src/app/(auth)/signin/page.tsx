@@ -3,10 +3,10 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-import AuthCard from '@/app/(auth)/_components/auth-card/auth-card'
-import AuthCardFooter from '@/app/(auth)/_components/auth-card/auth-card-footer'
-import AuthCardHeader from '@/app/(auth)/_components/auth-card/auth-card-header'
-import SignInEmailForm from '@/app/(auth)/signin/_components/sign-in-email-form/sign-in-email-form'
+import { AuthCard } from '@/app/(auth)/components/auth-card'
+import { AuthCardFooter } from '@/app/(auth)/components/auth-card-footer'
+import { AuthCardHeader } from '@/app/(auth)/components/auth-card-header'
+import { SignInEmailForm } from '@/app/(auth)/components/sign-in-email-form'
 import { auth } from '@/lib/auth/auth'
 
 export const metadata: Metadata = {

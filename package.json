@@ -160,6 +160,7 @@
       "eqeqeq": "error",
       "import/first": "error",
       "import/newline-after-import": "error",
+      "import/no-default-export": "error",
       "import/no-duplicates": "error",
       "no-shadow": "off",
       "simple-import-sort/exports": "error",
@@ -171,6 +172,20 @@
       "unicorn/no-useless-undefined": "off",
       "unicorn/prefer-node-protocol": "off",
       "unused-imports/no-unused-imports": "error"
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "./src/app/**/*.{tsx,ts,js,jsx}",
+          "./stories/**/*.{tsx,ts,js,jsx}"
+        ],
+        "excludedFiles": [
+          "./src/app/**/{actions,components}/*.{tsx,ts,js,jsx}"
+        ],
+        "rules": {
+          "import/no-default-export": "off"
+        }
+      }
+    ]
   }
 }

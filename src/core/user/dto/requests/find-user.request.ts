@@ -8,4 +8,4 @@ const FindUserRequest = {
   with: (properties: FindUserRequest): FindUserRequest => properties,
 }
 
-export default FindUserRequest
+export { FindUserRequest }

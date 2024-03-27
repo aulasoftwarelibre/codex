@@ -1,10 +1,10 @@
 import { ulid } from 'ulid'
 
-import Book from '@/core/book/domain/model/book.entity'
-import LoanDataMapper from '@/core/loan/infrastructure/persistence/loan.data-mapper'
-import User from '@/core/user/domain/model/user.entity'
+import { Book } from '@/core/book/domain/model/book.entity'
+import { LoanDataMapper } from '@/core/loan/infrastructure/persistence/loan.data-mapper'
+import { User } from '@/core/user/domain/model/user.entity'
 
-const LoansExamples = {
+export const LoansExamples = {
   ofBookAndUser: (book: Book, user: User) =>
     LoanDataMapper.toModel({
       bookId: book.id.value,
@@ -14,5 +14,3 @@ const LoansExamples = {
       version: 0,
     }),
 }
-
-export default LoansExamples

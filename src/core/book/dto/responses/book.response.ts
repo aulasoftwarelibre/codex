@@ -1,7 +1,7 @@
 import { DeepReadonly } from 'ts-essentials'
 
-import BookType from '@/core/book/infrastructure/persistence/book.type'
-import gravatar from '@/lib/utils/gravatar'
+import { BookType } from '@/core/book/infrastructure/persistence/book.type'
+import { gravatar } from '@/lib/utils/gravatar'
 
 type BookResponse = DeepReadonly<{
   authors: string[]
@@ -43,4 +43,4 @@ const BookResponse = {
   },
 }
 
-export default BookResponse
+export { BookResponse }

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
-import DomainError from '@/core/common/domain/errors/domain-error'
-import FullName from '@/core/common/domain/value-objects/fullname'
-import unexpected from '@/lib/utils/unexpected'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { FullName } from '@/core/common/domain/value-objects/fullname'
+import { unexpected } from '@/lib/utils/unexpected'
 
 describe('FullName', () => {
   describe('create', () => {

@@ -10,4 +10,4 @@ const UpdateSettingRequest = {
   with: (properties: UpdateSettingRequest): UpdateSettingRequest => properties,
 }
 
-export default UpdateSettingRequest
+export { UpdateSettingRequest }

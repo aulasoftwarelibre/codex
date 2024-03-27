@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 
-import ReturnBookRequest from '@/core/book/dto/requests/return-book.request'
-import container from '@/lib/container'
-import prisma from '@/lib/prisma/prisma'
-import unexpected from '@/lib/utils/unexpected'
+import { ReturnBookRequest } from '@/core/book/dto/requests/return-book.request'
+import { container } from '@/lib/container'
+import { prisma } from '@/lib/prisma/prisma'
+import { unexpected } from '@/lib/utils/unexpected'
 import {
   createLoan,
   createLoanedBook,

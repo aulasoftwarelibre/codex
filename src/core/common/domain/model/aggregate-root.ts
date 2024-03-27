@@ -1,10 +1,10 @@
 import { errAsync, ResultAsync } from 'neverthrow'
 
-import ApplicationError from '@/core/common/domain/errors/application-error'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
 
 const VERSION = Symbol()
 
-export default abstract class AggregateRoot {
+export abstract class AggregateRoot {
   protected [VERSION] = -1
 
   protected constructor(version: number = -1) {

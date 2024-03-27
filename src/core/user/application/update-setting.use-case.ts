@@ -1,15 +1,15 @@
 import { err, ok, Result } from 'neverthrow'
 
-import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import DomainError from '@/core/common/domain/errors/domain-error'
-import Email from '@/core/common/domain/value-objects/email'
-import FullName from '@/core/common/domain/value-objects/fullname'
-import User from '@/core/user/domain/model/user.entity'
-import Users from '@/core/user/domain/services/users.repository'
-import UpdateSettingRequest from '@/core/user/dto/requests/update-setting.request'
+import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { Email } from '@/core/common/domain/value-objects/email'
+import { FullName } from '@/core/common/domain/value-objects/fullname'
+import { User } from '@/core/user/domain/model/user.entity'
+import { Users } from '@/core/user/domain/services/users.repository'
+import { UpdateSettingRequest } from '@/core/user/dto/requests/update-setting.request'
 
-export default class UpdateSettingUseCase {
+export class UpdateSettingUseCase {
   constructor(private readonly users: Users) {}
 
   async with(

@@ -1,9 +1,9 @@
 import { err, ok, Result } from 'neverthrow'
 
-import DomainError from '@/core/common/domain/errors/domain-error'
-import Role from '@/core/common/domain/value-objects/role'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { Role } from '@/core/common/domain/value-objects/role'
 
-export default class Roles {
+export class Roles {
   private readonly _roles: Role[]
 
   constructor(roles: Role[]) {

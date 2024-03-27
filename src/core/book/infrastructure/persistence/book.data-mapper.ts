@@ -1,15 +1,15 @@
-import AvailableBook from '@/core/book/domain/model/available-book.entity'
-import Book from '@/core/book/domain/model/book.entity'
-import LoanedBook from '@/core/book/domain/model/loaned-book.entity'
-import BookType from '@/core/book/infrastructure/persistence/book.type'
-import BookId from '@/core/common/domain/value-objects/book-id'
-import FullName from '@/core/common/domain/value-objects/fullname'
-import FullNames from '@/core/common/domain/value-objects/fullnames'
-import Image from '@/core/common/domain/value-objects/image'
-import LoanId from '@/core/common/domain/value-objects/loan-id'
-import Title from '@/core/common/domain/value-objects/title'
-import UserId from '@/core/common/domain/value-objects/user-id'
-import Loan from '@/core/loan/domain/model/loan.entity'
+import { AvailableBook } from '@/core/book/domain/model/available-book.entity'
+import { Book } from '@/core/book/domain/model/book.entity'
+import { LoanedBook } from '@/core/book/domain/model/loaned-book.entity'
+import { BookType } from '@/core/book/infrastructure/persistence/book.type'
+import { BookId } from '@/core/common/domain/value-objects/book-id'
+import { FullName } from '@/core/common/domain/value-objects/fullname'
+import { FullNames } from '@/core/common/domain/value-objects/fullnames'
+import { Image } from '@/core/common/domain/value-objects/image'
+import { LoanId } from '@/core/common/domain/value-objects/loan-id'
+import { Title } from '@/core/common/domain/value-objects/title'
+import { UserId } from '@/core/common/domain/value-objects/user-id'
+import { Loan } from '@/core/loan/domain/model/loan.entity'
 
 const BookDataMapper = {
   toAvailableBook: (book: BookType): AvailableBook =>
@@ -44,4 +44,4 @@ const BookDataMapper = {
   }),
 } as const
 
-export default BookDataMapper
+export { BookDataMapper }

@@ -1,9 +1,9 @@
 import { err, ok, Result } from 'neverthrow'
 
-import DomainError from '@/core/common/domain/errors/domain-error'
-import FullName from '@/core/common/domain/value-objects/fullname'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
+import { FullName } from '@/core/common/domain/value-objects/fullname'
 
-export default class FullNames {
+export class FullNames {
   private readonly _fullNames: FullName[]
 
   constructor(fullNames: FullName[]) {

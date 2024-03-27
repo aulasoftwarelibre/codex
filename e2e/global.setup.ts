@@ -2,8 +2,8 @@ import { test as setup } from '@playwright/test'
 import fs from 'fs'
 
 import { ADMIN_AUTH_FILE, USER_AUTH_FILE } from './tests/constants'
-import LoginPage from './tests/pages/login.page'
-import SettingsPage from './tests/pages/settings.page'
+import { LoginPage } from './tests/pages/login.page'
+import { SettingsPage } from './tests/pages/settings.page'
 
 setup('authenticate as user', async ({ page, request }) => {
   if (fs.existsSync(USER_AUTH_FILE)) {

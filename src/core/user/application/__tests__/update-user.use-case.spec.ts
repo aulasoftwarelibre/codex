@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
-import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
-import UpdateUserRequest from '@/core/user/dto/requests/update-user.request'
-import UserResponse from '@/core/user/dto/responses/user.response'
-import container from '@/lib/container'
-import prisma from '@/lib/prisma/prisma'
-import gravatar from '@/lib/utils/gravatar'
-import unexpected from '@/lib/utils/unexpected'
+import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
+import { UpdateUserRequest } from '@/core/user/dto/requests/update-user.request'
+import { UserResponse } from '@/core/user/dto/responses/user.response'
+import { container } from '@/lib/container'
+import { prisma } from '@/lib/prisma/prisma'
+import { gravatar } from '@/lib/utils/gravatar'
+import { unexpected } from '@/lib/utils/unexpected'
 import { createUser } from '@/tests/examples/factories'
-import UsersExamples from '@/tests/examples/users.examples'
+import { UsersExamples } from '@/tests/examples/users.examples'
 
 describe('UpdateUserUseCase', () => {
   it('should update user name by email', async () => {

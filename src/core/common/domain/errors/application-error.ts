@@ -1,1 +1,1 @@
-export default class ApplicationError extends Error {}
+export class ApplicationError extends Error {}

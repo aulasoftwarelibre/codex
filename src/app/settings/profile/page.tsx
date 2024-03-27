@@ -1,12 +1,12 @@
 import { Avatar, Link } from '@nextui-org/react'
 import { redirect } from 'next/navigation'
 
-import SettingsForm from '@/app/settings/profile/_components/settings-form/settings-form'
-import SettingsFormInputText from '@/app/settings/profile/_components/settings-form/settings-form-input-text'
-import UserResponse from '@/core/user/dto/responses/user.response'
+import { SettingsForm } from '@/app/settings/components/settings-form'
+import { SettingsFormInputText } from '@/app/settings/components/settings-form-input-text'
+import { UserResponse } from '@/core/user/dto/responses/user.response'
 import { findUser } from '@/core/user/infrastructure/actions/find-user'
 import { auth } from '@/lib/auth/auth'
-import gravatar from '@/lib/utils/gravatar'
+import { gravatar } from '@/lib/utils/gravatar'
 
 export default async function Page() {
   const session = await auth()

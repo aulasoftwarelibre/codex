@@ -1,3 +1,3 @@
-import Id from '@/core/common/domain/value-objects/id'
+import { Id } from '@/core/common/domain/value-objects/id'
 
-export default class LoanId extends Id {}
+export class LoanId extends Id {}

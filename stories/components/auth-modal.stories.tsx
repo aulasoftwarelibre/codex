@@ -2,9 +2,9 @@ import { Kbd } from '@nextui-org/react'
 import { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
-import AuthCard from '@/app/(auth)/_components/auth-card/auth-card'
-import AuthCardFooter from '@/app/(auth)/_components/auth-card/auth-card-footer'
-import AuthCardHeader from '@/app/(auth)/_components/auth-card/auth-card-header'
+import { AuthCard } from '@/app/(auth)/components/auth-card'
+import { AuthCardFooter } from '@/app/(auth)/components/auth-card-footer'
+import { AuthCardHeader } from '@/app/(auth)/components/auth-card-header'
 
 const meta = {
   component: AuthCard,

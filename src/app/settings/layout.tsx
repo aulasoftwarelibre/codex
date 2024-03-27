@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 
-import SettingsTemplate from '@/app/settings/_components/settings-template/settings-template'
+import { SettingsTemplate } from '@/app/settings/components/settings-template'
 
 const TABS = [
   {

@@ -1,15 +1,15 @@
 import { PrismaClient } from '@prisma/client'
 import { okAsync, ResultAsync } from 'neverthrow'
 
-import NotFoundError from '@/core/common/domain/errors/application/not-found-error'
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import Email from '@/core/common/domain/value-objects/email'
-import User from '@/core/user/domain/model/user.entity'
-import Users from '@/core/user/domain/services/users.repository'
-import UserDataMapper from '@/core/user/infrastructure/persistence/user.data-mapper'
-import UserPublisher from '@/core/user/infrastructure/persistence/user.publisher'
+import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { Email } from '@/core/common/domain/value-objects/email'
+import { User } from '@/core/user/domain/model/user.entity'
+import { Users } from '@/core/user/domain/services/users.repository'
+import { UserDataMapper } from '@/core/user/infrastructure/persistence/user.data-mapper'
+import { UserPublisher } from '@/core/user/infrastructure/persistence/user.publisher'
 
-export default class UsersPrisma implements Users {
+export class UsersPrisma implements Users {
   private publisher: UserPublisher
 
   constructor(private readonly prisma: PrismaClient) {

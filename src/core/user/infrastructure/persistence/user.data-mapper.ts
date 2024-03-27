@@ -1,11 +1,11 @@
-import Email from '@/core/common/domain/value-objects/email'
-import FullName from '@/core/common/domain/value-objects/fullname'
-import Image from '@/core/common/domain/value-objects/image'
-import Role from '@/core/common/domain/value-objects/role'
-import Roles from '@/core/common/domain/value-objects/roles'
-import UserId from '@/core/common/domain/value-objects/user-id'
-import User from '@/core/user/domain/model/user.entity'
-import UserType from '@/core/user/infrastructure/persistence/user.type'
+import { Email } from '@/core/common/domain/value-objects/email'
+import { FullName } from '@/core/common/domain/value-objects/fullname'
+import { Image } from '@/core/common/domain/value-objects/image'
+import { Role } from '@/core/common/domain/value-objects/role'
+import { Roles } from '@/core/common/domain/value-objects/roles'
+import { UserId } from '@/core/common/domain/value-objects/user-id'
+import { User } from '@/core/user/domain/model/user.entity'
+import { UserType } from '@/core/user/infrastructure/persistence/user.type'
 
 const UserDataMapper = {
   toModel: (user: Omit<UserType, 'emailVerified'>): User =>
@@ -27,4 +27,4 @@ const UserDataMapper = {
   }),
 } as const
 
-export default UserDataMapper
+export { UserDataMapper }

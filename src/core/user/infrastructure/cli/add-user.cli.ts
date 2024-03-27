@@ -3,9 +3,9 @@ import 'dotenv/config'
 
 import { ulid } from 'ulid'
 
-import UserDataMapper from '@/core/user/infrastructure/persistence/user.data-mapper'
-import prisma from '@/lib/prisma/prisma'
-import gravatar from '@/lib/utils/gravatar'
+import { UserDataMapper } from '@/core/user/infrastructure/persistence/user.data-mapper'
+import { prisma } from '@/lib/prisma/prisma'
+import { gravatar } from '@/lib/utils/gravatar'
 
 async function main() {
   if (

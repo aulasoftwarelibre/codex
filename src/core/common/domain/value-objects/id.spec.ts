@@ -1,8 +1,8 @@
 import { ulid } from 'ulid'
 import { describe, expect, it } from 'vitest'
 
-import Id from '@/core/common/domain/value-objects/id'
-import unexpected from '@/lib/utils/unexpected'
+import { Id } from '@/core/common/domain/value-objects/id'
+import { unexpected } from '@/lib/utils/unexpected'
 
 describe('Id', () => {
   describe('create', () => {

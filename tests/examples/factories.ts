@@ -1,12 +1,12 @@
-import Book from '@/core/book/domain/model/book.entity'
-import BookDataMapper from '@/core/book/infrastructure/persistence/book.data-mapper'
-import LoanDataMapper from '@/core/loan/infrastructure/persistence/loan.data-mapper'
-import User from '@/core/user/domain/model/user.entity'
-import UserDataMapper from '@/core/user/infrastructure/persistence/user.data-mapper'
-import prisma from '@/lib/prisma/prisma'
-import BooksExamples from '@/tests/examples/books.examples'
-import LoansExamples from '@/tests/examples/loans.examples'
-import UsersExamples from '@/tests/examples/users.examples'
+import { Book } from '@/core/book/domain/model/book.entity'
+import { BookDataMapper } from '@/core/book/infrastructure/persistence/book.data-mapper'
+import { LoanDataMapper } from '@/core/loan/infrastructure/persistence/loan.data-mapper'
+import { User } from '@/core/user/domain/model/user.entity'
+import { UserDataMapper } from '@/core/user/infrastructure/persistence/user.data-mapper'
+import { prisma } from '@/lib/prisma/prisma'
+import { BooksExamples } from '@/tests/examples/books.examples'
+import { LoansExamples } from '@/tests/examples/loans.examples'
+import { UsersExamples } from '@/tests/examples/users.examples'
 
 export async function createAvailableBook() {
   const book = BooksExamples.available()

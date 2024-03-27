@@ -1,12 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 import { ResultAsync } from 'neverthrow'
 
-import Book from '@/core/book/domain/model/book.entity'
-import BookDataMapper from '@/core/book/infrastructure/persistence/book.data-mapper'
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import Publisher from '@/core/common/domain/publisher/publisher'
+import { Book } from '@/core/book/domain/model/book.entity'
+import { BookDataMapper } from '@/core/book/infrastructure/persistence/book.data-mapper'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { Publisher } from '@/core/common/domain/publisher/publisher'
 
-export default class BookPublisher extends Publisher<Book> {
+export class BookPublisher extends Publisher<Book> {
   constructor(private readonly prisma: PrismaClient) {
     super()
   }

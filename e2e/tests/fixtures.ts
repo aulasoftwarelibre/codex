@@ -1,8 +1,8 @@
 import { test as base } from '@playwright/test'
 
-import BookPage from './pages/book.page'
-import CatalogPage from './pages/catalog.page'
-import SettingsPage from './pages/settings.page'
+import { BookPage } from './pages/book.page'
+import { CatalogPage } from './pages/catalog.page'
+import { SettingsPage } from './pages/settings.page'
 
 export * from '@playwright/test'
 

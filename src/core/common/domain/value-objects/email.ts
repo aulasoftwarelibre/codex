@@ -1,8 +1,8 @@
 import { ok, Result } from 'neverthrow'
 
-import DomainError from '@/core/common/domain/errors/domain-error'
+import { DomainError } from '@/core/common/domain/errors/domain-error'
 
-export default class Email {
+export class Email {
   constructor(public readonly value: string) {}
 
   public static create(email: string): Result<Email, DomainError> {

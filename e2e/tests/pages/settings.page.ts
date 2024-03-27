@@ -1,10 +1,9 @@
 import { Page } from '@playwright/test'
 
-import gravatar from '@/lib/utils/gravatar'
+import { prisma } from '@/lib/prisma/prisma'
+import { gravatar } from '@/lib/utils/gravatar'
 
-import prisma from '../helpers/prisma'
-
-class SettingsPage {
+export class SettingsPage {
   constructor(private readonly page: Page) {}
 
   async goto() {
@@ -47,5 +46,3 @@ class SettingsPage {
     })
   }
 }
-
-export default SettingsPage

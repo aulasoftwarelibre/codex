@@ -1,9 +1,9 @@
 import { ulid } from 'ulid'
 
-import UserDataMapper from '@/core/user/infrastructure/persistence/user.data-mapper'
-import gravatar from '@/lib/utils/gravatar'
+import { UserDataMapper } from '@/core/user/infrastructure/persistence/user.data-mapper'
+import { gravatar } from '@/lib/utils/gravatar'
 
-const UsersExamples = {
+export const UsersExamples = {
   basic: () =>
     UserDataMapper.toModel({
       email: 'test@example.com',
@@ -23,5 +23,3 @@ const UsersExamples = {
       version: 0,
     }),
 }
-
-export default UsersExamples

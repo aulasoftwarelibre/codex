@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import BookBreadcrumbs from '@/app/books/_components/book-breadcrumbs/book-breadcrumbs'
+import { BookViewBreadcrumbs } from '@/app/books/components/book-view-breadcrumbs'
 
 const meta = {
-  component: BookBreadcrumbs,
+  component: BookViewBreadcrumbs,
   title: 'Components/BookBreadcrumbs',
-} satisfies Meta<typeof BookBreadcrumbs>
+} satisfies Meta<typeof BookViewBreadcrumbs>
 
 export default meta
 type Story = StoryObj<typeof meta>

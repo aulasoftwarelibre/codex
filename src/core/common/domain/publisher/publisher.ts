@@ -1,9 +1,9 @@
 import { errAsync, okAsync, ResultAsync } from 'neverthrow'
 
-import InvalidVersionError from '@/core/common/domain/errors/application/invalid-version-error'
-import AggregateRoot from '@/core/common/domain/model/aggregate-root'
+import { InvalidVersionError } from '@/core/common/domain/errors/application/invalid-version-error'
+import { AggregateRoot } from '@/core/common/domain/model/aggregate-root'
 
-export default abstract class Publisher<T extends AggregateRoot> {
+export abstract class Publisher<T extends AggregateRoot> {
   protected abstract create(instance: T): ResultAsync<void, InvalidVersionError>
 
   protected abstract update(

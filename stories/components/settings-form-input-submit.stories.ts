@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import SettingsFormInputSubmit from '@/app/settings/profile/_components/settings-form/settings-form-input-submit'
+import { SettingsFormInputSubmit } from '@/app/settings/components/settings-form-input-submit'
 
 const meta = {
   component: SettingsFormInputSubmit,

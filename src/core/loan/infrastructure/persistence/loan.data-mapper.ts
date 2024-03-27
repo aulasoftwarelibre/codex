@@ -1,9 +1,9 @@
 import { Loan as PrismaLoan } from '@prisma/client'
 
-import BookId from '@/core/common/domain/value-objects/book-id'
-import LoanId from '@/core/common/domain/value-objects/loan-id'
-import UserId from '@/core/common/domain/value-objects/user-id'
-import Loan from '@/core/loan/domain/model/loan.entity'
+import { BookId } from '@/core/common/domain/value-objects/book-id'
+import { LoanId } from '@/core/common/domain/value-objects/loan-id'
+import { UserId } from '@/core/common/domain/value-objects/user-id'
+import { Loan } from '@/core/loan/domain/model/loan.entity'
 
 const LoanDataMapper = {
   toModel: (loan: PrismaLoan): Loan =>
@@ -23,4 +23,4 @@ const LoanDataMapper = {
   }),
 } as const
 
-export default LoanDataMapper
+export { LoanDataMapper }

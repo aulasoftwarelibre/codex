@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import BookForm from '@/app/books/_components/book-form/book-form'
+import { BookViewForm } from '@/app/books/components/book-view-form'
 
 const meta = {
-  component: BookForm,
+  component: BookViewForm,
   title: 'Components/BookForm',
-} satisfies Meta<typeof BookForm>
+} satisfies Meta<typeof BookViewForm>
 
 export default meta
 type Story = StoryObj<typeof meta>

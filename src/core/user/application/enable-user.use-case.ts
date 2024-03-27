@@ -1,12 +1,12 @@
 import { ok } from 'neverthrow'
 
-import Email from '@/core/common/domain/value-objects/email'
-import Role from '@/core/common/domain/value-objects/role'
-import User from '@/core/user/domain/model/user.entity'
-import Users from '@/core/user/domain/services/users.repository'
-import EnableUserRequest from '@/core/user/dto/requests/enable-user.request'
+import { Email } from '@/core/common/domain/value-objects/email'
+import { Role } from '@/core/common/domain/value-objects/role'
+import { User } from '@/core/user/domain/model/user.entity'
+import { Users } from '@/core/user/domain/services/users.repository'
+import { EnableUserRequest } from '@/core/user/dto/requests/enable-user.request'
 
-export default class EnableUserUseCase {
+export class EnableUserUseCase {
   constructor(private readonly users: Users) {}
 
   async with(command: EnableUserRequest) {

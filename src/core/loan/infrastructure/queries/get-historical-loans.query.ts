@@ -1,11 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { okAsync, ResultAsync } from 'neverthrow'
 
-import ApplicationError from '@/core/common/domain/errors/application-error'
-import HistoricalLoansResponse from '@/core/loan/dto/responses/historical-loans.response'
-import LoanRegistryType from '@/core/loan/infrastructure/persistence/loan-registry.type'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
+import { HistoricalLoansResponse } from '@/core/loan/dto/responses/historical-loans.response'
+import { LoanRegistryType } from '@/core/loan/infrastructure/persistence/loan-registry.type'
 
-export default class GetHistoricalLoansQuery {
+export class GetHistoricalLoansQuery {
   constructor(private readonly prisma: PrismaClient) {}
 
   with(

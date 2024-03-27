@@ -1,7 +1,7 @@
 import { Card, CardBody, CardHeader } from '@nextui-org/react'
 import { notFound } from 'next/navigation'
 
-import BookForm from '@/app/books/_components/book-form/book-form'
+import { BookViewForm } from '@/app/books/components/book-view-form'
 import { findBook } from '@/core/book/infrastructure/actions/find-book'
 
 interface PageParameters {
@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: PageParameters }) {
           <h1 className="text-2xl font-extrabold">Editar libro</h1>
         </CardHeader>
         <CardBody className="col-span-1 lg:col-span-2 xl:col-span-3">
-          <BookForm book={book} />
+          <BookViewForm book={book} />
         </CardBody>
       </Card>
     </main>

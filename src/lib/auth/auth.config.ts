@@ -1,10 +1,10 @@
 import { NextAuthFirewallConfig } from '@aulasoftwarelibre/next-auth-firewall'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 
-import EmailProvider from '@/lib/auth/providers/email'
-import prisma from '@/lib/prisma/prisma'
+import { EmailProvider } from '@/lib/auth/providers/email.provider'
+import { prisma } from '@/lib/prisma/prisma'
 
-const authConfig = {
+export const authConfig = {
   accessControl: [
     {
       path: '^/admin',
@@ -46,5 +46,3 @@ const authConfig = {
     strategy: 'jwt',
   },
 } as NextAuthFirewallConfig
-
-export default authConfig

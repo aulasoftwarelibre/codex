@@ -3,10 +3,10 @@
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
-import UpdateSettingRequest from '@/core/user/dto/requests/update-setting.request'
-import me from '@/core/user/infrastructure/actions/me'
-import container from '@/lib/container'
-import FormResponse from '@/lib/zod/form-response'
+import { UpdateSettingRequest } from '@/core/user/dto/requests/update-setting.request'
+import { me } from '@/core/user/infrastructure/actions/me'
+import { container } from '@/lib/container'
+import { FormResponse } from '@/lib/zod/form-response'
 
 export type UpdatableFields = 'name' | 'email'
 

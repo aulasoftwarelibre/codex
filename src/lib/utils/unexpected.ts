@@ -1,4 +1,4 @@
-const unexpected = {
+export const unexpected = {
   error: (cause: unknown) => {
     throw new Error(`Unexpected error, but got ${JSON.stringify(cause)}`)
   },
@@ -6,5 +6,3 @@ const unexpected = {
     throw new Error(`Expected an error, but got ${JSON.stringify(cause)}`)
   },
 }
-
-export default unexpected

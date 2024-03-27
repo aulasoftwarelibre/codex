@@ -9,4 +9,4 @@ const LoanBookRequest = {
   with: (properties: LoanBookRequest) => properties,
 }
 
-export default LoanBookRequest
+export { LoanBookRequest }

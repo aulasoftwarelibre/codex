@@ -7,4 +7,4 @@ const EnableUserRequest = {
   with: (properties: EnableUserRequest) => properties,
 }
 
-export default EnableUserRequest
+export { EnableUserRequest }

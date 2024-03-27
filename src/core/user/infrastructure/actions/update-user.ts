@@ -3,11 +3,11 @@
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
-import UpdateUserRequest from '@/core/user/dto/requests/update-user.request'
+import { UpdateUserRequest } from '@/core/user/dto/requests/update-user.request'
 import { auth } from '@/lib/auth/auth'
-import container from '@/lib/container'
-import gravatar from '@/lib/utils/gravatar'
-import FormResponse from '@/lib/zod/form-response'
+import { container } from '@/lib/container'
+import { gravatar } from '@/lib/utils/gravatar'
+import { FormResponse } from '@/lib/zod/form-response'
 
 interface EditProfileForm {
   name: string

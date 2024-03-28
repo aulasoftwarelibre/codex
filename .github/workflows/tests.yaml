@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  tests:
+  run-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -13,12 +13,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Enable Corepack
+        run: corepack enable
       - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
       - name: Run tests
-        run: yarn test:ci
+        run: pnpm run test:ci

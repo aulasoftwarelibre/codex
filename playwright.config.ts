@@ -8,6 +8,7 @@ dotenv.config({
   path: '.env.test',
 })
 
+// eslint-disable-next-line import/no-default-export
 export default defineConfig({
   fullyParallel: false,
   projects: [
@@ -22,7 +23,7 @@ export default defineConfig({
       },
     },
   ],
-  reporter: 'html',
+  reporter: process.env.CI ? 'blob' : 'html',
   retries: 3,
   testDir: './e2e',
   use: {

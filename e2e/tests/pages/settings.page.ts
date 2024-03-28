@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 
-import { prisma } from '@/lib/prisma/prisma'
-import { gravatar } from '@/lib/utils/gravatar'
+import { gravatar } from '../helpers/gravatar'
+import { prisma } from '../helpers/prisma'
 
 export class SettingsPage {
   constructor(private readonly page: Page) {}

@@ -8,15 +8,15 @@ env:
   AUTH_SECRET: E2E
 
 jobs:
-  e2e:
+  run-tests:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.repository == 'aulasoftwarelibre/codex' && (startsWith(github.ref, 'refs/heads/releases/') || startsWith(github.ref, 'refs/tags/v') )
+    if: always()
     services:
       smtp:
-        image: "corpusops/mailhog:v1.0.1"
+        image: "inbucket/inbucket"
         ports:
-          - 1025:1025
-          - 8025:8025
+          - 1025:2500
+          - 8025:9000
       db:
         image: "postgres:12"
         env:
@@ -30,27 +30,72 @@ jobs:
         ports:
           - 5432:5432
     strategy:
+      fail-fast: false
       matrix:
         node-version: [ 20.x ]
-    name: Run e2e tests on Node ${{ matrix.node-version }}
+        shardIndex: [ 1, 2 ]
+        shardTotal: [ 2 ]
+    name: Run e2e shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+    env:
+      DATABASE_URL: postgres://postgres@localhost/codex_test_${{ matrix.shardIndex}}
+      NODE_ENV: test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Enable Corepack
+        run: corepack enable
       - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
       - name: Run database migrations
-        run: yarn prisma:migrate
+        run: npx prisma migrate reset --force
+      - name: Store Playwright's Version
+        run: |
+          PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test | grep @playwright | sed 's/.*@//')
+          echo "Playwright's Version: $PLAYWRIGHT_VERSION"
+          echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
+      - name: Cache Playwright Browsers for Playwright's Version
+        id: cache-playwright-browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ env.PLAYWRIGHT_VERSION }}
+      - name: Setup Playwright
+        if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
+        run: npx playwright install chromium --with-deps
       - name: Run e2e tests
-        run: yarn test:e2e
+        run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
       - name: Upload test report
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+          name: blob-report-${{ matrix.shardIndex }}
+          path: blob-report/
+          retention-days: 1
+
+  merge-reports:
+    if: failure()
+    needs: [run-tests]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    steps:
+      - name: Download blob reports from GitHub Actions Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: all-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+      - name: Merge into HTML Report
+        run: npx playwright merge-reports --reporter html ./all-blob-reports
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-report--attempt-${{ github.run_attempt }}
+          path: playwright-report
+          retention-days: 7

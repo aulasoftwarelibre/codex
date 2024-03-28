@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 import { ulid } from 'ulid'
 
-import { prisma } from '@/lib/prisma/prisma'
+import { prisma } from '../helpers/prisma'
 
 export class BookPage {
   constructor(private readonly page: Page) {}

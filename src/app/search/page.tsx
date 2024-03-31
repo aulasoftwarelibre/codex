@@ -35,8 +35,8 @@ export default async function Page(properties: PageProperties) {
   return (
     <>
       <main className="flex flex-col gap-4">
-        <h1 className="font-extrabold text-2xl">
-          {message}:<span className="text-default-700 ml-2">{query}</span>
+        <h1 className="text-2xl font-extrabold">
+          {message}:<span className="ml-2 text-default-700">{query}</span>
         </h1>
         <BookCardGrid books={books} me={user} />
       </main>

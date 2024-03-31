@@ -17,7 +17,7 @@ export function BookViewBreadcrumbs(properties: BookBreadcrumbsProperties) {
     <>
       <Breadcrumbs>
         <BreadcrumbItem onClick={() => router.push('/')}>Inicio</BreadcrumbItem>
-        <BreadcrumbItem isLast className="text-ellipsis overflow-hidden">
+        <BreadcrumbItem isLast className="overflow-hidden text-ellipsis">
           {title}
         </BreadcrumbItem>
       </Breadcrumbs>

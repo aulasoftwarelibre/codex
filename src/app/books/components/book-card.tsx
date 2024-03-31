@@ -34,7 +34,7 @@ export function BookCard(properties: BookCardProperties) {
     <>
       <Card
         role="gridcell"
-        className={`max-w-[320px] space-y-4 p-4 group border-t-4 ${cardColor}`}
+        className={`group max-w-[320px] space-y-4 border-t-4 p-4 ${cardColor}`}
         radius="none"
         isHoverable
         as={Link}
@@ -55,10 +55,10 @@ export function BookCard(properties: BookCardProperties) {
         </div>
 
         <CardBody className="p-0">
-          <div className="line-clamp-1 font-bold hyphens-auto" lang="en">
+          <div className="line-clamp-1 hyphens-auto font-bold" lang="en">
             {book.title}
           </div>
-          <div className="line-clamp-1 font-extralight text-sm">
+          <div className="line-clamp-1 text-sm font-extralight">
             {book.authors.join(', ')}
           </div>
         </CardBody>
@@ -78,7 +78,7 @@ function BookAvatar({ book }: { book: BookResponse }) {
       src={book.loan.user.image}
       height={48}
       width={48}
-      className="absolute top-5 right-5 z-10 rounded-full"
+      className="absolute right-5 top-5 z-10 rounded-full"
     />
   )
 }

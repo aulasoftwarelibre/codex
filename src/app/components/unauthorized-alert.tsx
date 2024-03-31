@@ -18,7 +18,7 @@ export function UnauthorizedAlert(properties: UnauthorizedAlertProperties) {
 
   return (
     <>
-      <Card className="container mx-auto px-4 py-2 bg-default-200">
+      <Card className="container mx-auto bg-default-200 px-4 py-2">
         <CardHeader className="font-bold">
           Reserva de libros no disponible para este usuario.
         </CardHeader>

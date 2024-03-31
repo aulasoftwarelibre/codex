@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: PageParameters }) {
 
   return (
     <main>
-      <Card className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 items-start p-4">
+      <Card className="grid grid-cols-1 items-start p-4 lg:grid-cols-3 xl:grid-cols-4">
         <CardHeader>
           <h1 className="text-2xl font-extrabold">Editar libro</h1>
         </CardHeader>

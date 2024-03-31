@@ -13,7 +13,7 @@ export function AuthCardFooter(properties: AuthModalFooterProperties) {
   const { children } = useController(properties)
   return (
     <CardFooter>
-      <p className="text-small text-center">{children}</p>
+      <p className="text-center text-small">{children}</p>
     </CardFooter>
   )
 }

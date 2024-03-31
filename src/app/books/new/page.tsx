@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <main>
-      <Card className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 items-start p-4">
+      <Card className="grid grid-cols-1 items-start p-4 lg:grid-cols-3 xl:grid-cols-4">
         <CardHeader>
           <h1 className="text-2xl font-extrabold">Añadir un nuevo libro</h1>
         </CardHeader>

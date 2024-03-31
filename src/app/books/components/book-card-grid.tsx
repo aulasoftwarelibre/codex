@@ -13,7 +13,7 @@ export function BookCardGrid(properties: BookGridProperties) {
     <>
       <div
         role="grid"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center"
+        className="grid grid-cols-1 place-items-center gap-6 md:grid-cols-2 lg:grid-cols-4"
       >
         {books.map((book) => (
           <BookCard book={book} me={me} key={book.id} />

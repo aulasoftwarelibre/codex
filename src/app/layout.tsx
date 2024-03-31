@@ -33,12 +33,12 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900`}
+        className={`${inter.className} bg-white text-slate-500 antialiased dark:bg-slate-900 dark:text-slate-400`}
       >
         <Providers>
           {modal}
           <Header user={user} />
-          <div className="flex flex-col min-h-[calc(100vh-155px)] mt-4">
+          <div className="mt-4 flex min-h-[calc(100vh-155px)] flex-col">
             <UnauthorizedAlert user={user} />
             <div className="container mx-auto flex-grow py-5">{children}</div>
           </div>

@@ -30,7 +30,7 @@ export function UsersTableCell(properties: UsersTableCellProperties) {
     case 'roles': {
       return (
         <div className="flex flex-col">
-          <p className="text-bold text-sm capitalize pl-1">
+          <p className="text-bold pl-1 text-sm capitalize">
             {user.roles.join(', ')}
           </p>
         </div>

@@ -27,7 +27,7 @@ export default async function Page() {
     <>
       <AuthCard>
         <AuthCardHeader title="Iniciar sesión en">
-          <p className="text-3xl font-black text-center">Verifica tu correo</p>
+          <p className="text-center text-3xl font-black">Verifica tu correo</p>
           <Button
             size="lg"
             radius="none"

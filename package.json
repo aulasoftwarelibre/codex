@@ -97,6 +97,7 @@
     "lodash.clonedeep": "^4.5.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.13",
     "prisma": "^5.11.0",
     "rimraf": "^5.0.5",
     "storybook": "^8.0.5",
@@ -116,6 +117,9 @@
     "*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "prettier": {
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ],
     "semi": false,
     "singleQuote": true,
     "trailingComma": "all"

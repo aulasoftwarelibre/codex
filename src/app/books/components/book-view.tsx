@@ -31,11 +31,11 @@ export function BookView(properties: BookPageProperties) {
     <>
       <main className="flex flex-col gap-4 px-4 md:px-0">
         <BookViewBreadcrumbs title={book.title} />
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           <BookCard book={book} me={user} />
           <div className="flex flex-col gap-4">
             <h1
-              className="font-bold text-4xl text-default-800"
+              className="text-4xl font-bold text-default-800"
               aria-label="Título"
             >
               {book.title}
@@ -58,7 +58,7 @@ export function BookView(properties: BookPageProperties) {
             <LoanBy book={book} />
           </div>
         </div>
-        <h2 className="font-bold text-3xl mt-4">Histórico de préstamos</h2>
+        <h2 className="mt-4 text-3xl font-bold">Histórico de préstamos</h2>
         <Table aria-label="Listado historico" isStriped>
           <TableHeader>
             <TableColumn>Usuario</TableColumn>

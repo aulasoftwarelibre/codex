@@ -19,9 +19,9 @@ export function SettingsTemplate(properties: SettingsTemplateProperties) {
   const { children, pathname, tabs } = properties
   return (
     <>
-      <Card className="flex flex-col gap-2 w-full p-1">
+      <Card className="flex w-full flex-col gap-2 p-1">
         <CardHeader>
-          <div className="h1 font-bold text-2xl">Ajustes de usuario</div>
+          <div className="h1 text-2xl font-bold">Ajustes de usuario</div>
         </CardHeader>
         <CardBody className="overflow-hidden">
           <Tabs

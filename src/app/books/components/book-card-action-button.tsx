@@ -36,7 +36,7 @@ export function BookCardActionLoanButton() {
   return (
     <>
       <BookCardActionButton aria-label="Loan book" position={'right'}>
-        <BookmarkIcon className="h-8 w-8 m-auto fill-white" />
+        <BookmarkIcon className="m-auto h-8 w-8 fill-white" />
       </BookCardActionButton>
     </>
   )
@@ -46,7 +46,7 @@ export function BookCardActionReturnButton() {
   return (
     <>
       <BookCardActionButton aria-label="Return book" position={'left'}>
-        <BookmarkSlashIcon className="h-8 w-8 m-auto fill-white" />
+        <BookmarkSlashIcon className="m-auto h-8 w-8 fill-white" />
       </BookCardActionButton>
     </>
   )

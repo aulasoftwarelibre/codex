@@ -11,7 +11,7 @@ export function SettingsFormInputSubmit(
   const { isDisabled, status } = properties
   return (
     <>
-      <div className="flex flex-col gap-y-4 items-center sm:items-baseline sm:flex-row sm:justify-between">
+      <div className="flex flex-col items-center gap-y-4 sm:flex-row sm:items-baseline sm:justify-between">
         <span>{status}</span>
         <SubmitButton isDisabled={isDisabled}>Guardar</SubmitButton>
       </div>

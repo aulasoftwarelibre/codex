@@ -12,7 +12,7 @@ export function AuthCard(properties: AuthModalProperties) {
   return (
     <>
       <div className="flex h-[calc(100vh-6rem)] items-center justify-center">
-        <Card className="max-w-[650px] w-[650px]">
+        <Card className="w-[650px] max-w-[650px]">
           <CardHeader>
             <ThemeImage
               className="mx-auto block"

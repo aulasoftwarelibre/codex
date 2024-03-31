@@ -27,7 +27,7 @@ export function SignInEmailForm() {
             <EnvelopeIcon
               height={24}
               width={24}
-              className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+              className="pointer-events-none flex-shrink-0 text-2xl text-default-400"
             />
           }
           name="email"

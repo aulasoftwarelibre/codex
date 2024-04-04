@@ -33,7 +33,7 @@ export function Header(properties: HeaderProperties) {
       <Navbar position="static">
         <NavbarBrand>
           <Logo className="mr-1 h-8 w-8 fill-slate-500 stroke-2" />
-          <Link href="/books" className="text-2xl font-extrabold text-inherit">
+          <Link className="text-2xl font-extrabold text-inherit" href="/books">
             Codex
           </Link>
         </NavbarBrand>

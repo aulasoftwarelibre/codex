@@ -33,22 +33,22 @@ export function BookCard(properties: BookCardProperties) {
   return (
     <>
       <Card
-        role="gridcell"
-        className={`group max-w-[320px] space-y-4 border-t-4 p-4 ${cardColor}`}
-        radius="none"
-        isHoverable
         as={Link}
-        prefetch
+        className={`group max-w-[320px] space-y-4 border-t-4 p-4 ${cardColor}`}
         href={`/books/${book.id}`}
+        isHoverable
+        prefetch
+        radius="none"
+        role="gridcell"
       >
         <div className="relative">
           <Image
-            className="h-[297px] w-[320px] object-cover"
             alt={book.title}
-            width={297}
+            className="h-[297px] w-[320px] object-cover"
             height={387}
-            src={book.image}
             priority={true}
+            src={book.image}
+            width={297}
           />
           <BookAvatar book={book} />
           <BookCardForm book={book} me={me} />
@@ -75,10 +75,10 @@ function BookAvatar({ book }: { book: BookResponse }) {
   return (
     <Image
       alt="Avatar del poseedor del libro"
-      src={book.loan.user.image}
-      height={48}
-      width={48}
       className="absolute right-5 top-5 z-10 rounded-full"
+      height={48}
+      src={book.loan.user.image}
+      width={48}
     />
   )
 }

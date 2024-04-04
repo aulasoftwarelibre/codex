@@ -46,8 +46,8 @@ export function SearchResult(properties: SearchResultProperties) {
           <ListboxItem
             description={book.authors.join(', ')}
             key={book.id}
-            startContent={<AddNoteBulkIcon />}
             onClick={() => onSelectedBook(book)}
+            startContent={<AddNoteBulkIcon />}
           >
             {book.title.slice(0, 100)}
           </ListboxItem>

@@ -22,8 +22,8 @@ export function BookCardActionButton({
   return (
     <SubmitButton
       aria-label={ariaLabel}
-      isIconOnly
       className={`${baseClasses} ${positionClass}`}
+      isIconOnly
       radius="full"
       variant="flat"
     >

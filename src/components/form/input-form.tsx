@@ -22,13 +22,13 @@ export function InputForm(properties: FormInputProperties) {
   return (
     <>
       <Input
+        errorMessage={errorMessage}
         label={label}
-        placeholder={label}
         labelPlacement="outside"
         name={name}
+        placeholder={label}
         radius="none"
         size="lg"
-        errorMessage={errorMessage}
         {...rest}
       />
     </>

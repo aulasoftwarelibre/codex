@@ -55,14 +55,14 @@ export function SettingsFormInputText(
     <>
       <form action={action} className="flex flex-col gap-y-4">
         <InputForm
-          state={state}
-          name="value"
           defaultValue={state.data.value}
+          name="value"
           onChange={() => setIsMutated(true)}
+          state={state}
           {...inputProperties}
           aria-label={field}
         />
-        <input type="hidden" name="field" value={field} />
+        <input name="field" type="hidden" value={field} />
         <SettingsFormInputSubmit isDisabled={!isMutated} status={status} />
       </form>
     </>

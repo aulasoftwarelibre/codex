@@ -29,10 +29,10 @@ export default async function Page() {
         <AuthCardHeader title="Iniciar sesión en">
           <p className="text-center text-3xl font-black">Verifica tu correo</p>
           <Button
-            size="lg"
-            radius="none"
             as={Link}
             href={WEBMAIL_URL}
+            radius="none"
+            size="lg"
             target="_blank"
           >
             Abrir UCOWebMail

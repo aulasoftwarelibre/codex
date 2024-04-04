@@ -25,21 +25,21 @@ export function SettingsTemplate(properties: SettingsTemplateProperties) {
         </CardHeader>
         <CardBody className="overflow-hidden">
           <Tabs
-            size="lg"
             aria-label="Options"
-            selectedKey={pathname}
             classNames={{
               tab: 'max-w-fit',
               tabList: 'w-full',
             }}
             items={tabs}
+            selectedKey={pathname}
+            size="lg"
           >
             {({ target, title }) => (
               <Tab
-                key={`/settings/${target}`}
-                href={`/settings/${target}`}
-                title={title}
                 as={NextLink}
+                href={`/settings/${target}`}
+                key={`/settings/${target}`}
+                title={title}
               />
             )}
           </Tabs>

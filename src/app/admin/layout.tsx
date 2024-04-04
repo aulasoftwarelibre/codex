@@ -16,19 +16,19 @@ export default function Layout({ children }: { children: ReactNode }) {
         </CardHeader>
         <CardBody className="overflow-hidden">
           <Tabs
-            size="lg"
             aria-label="Options"
-            selectedKey={pathname}
             classNames={{
               tab: 'max-w-fit',
               tabList: 'w-full',
             }}
+            selectedKey={pathname}
+            size="lg"
           >
             <Tab
-              key="/admin/users"
-              href="/admin/users"
-              title="Usuarios"
               as={NextLink}
+              href="/admin/users"
+              key="/admin/users"
+              title="Usuarios"
             />
           </Tabs>
           <div className="mt-4">{children}</div>

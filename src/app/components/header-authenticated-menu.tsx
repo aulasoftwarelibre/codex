@@ -47,40 +47,40 @@ export function HeaderAuthenticatedMenu(
           <Avatar
             as="button"
             className="transition-transform"
-            size="md"
+            fallback={<UserIcon height={24} width={24} />}
             showFallback
+            size="md"
             src={image || gravatar(email as string)}
-            fallback={<UserIcon width={24} height={24} />}
           />
         </DropdownTrigger>
         <DropdownMenu
           aria-label="Profile actions"
-          variant="flat"
           disabledKeys={disabledKeys}
+          variant="flat"
         >
           <DropdownItem
             key="profile"
             onClick={() => router.push('/settings/profile')}
           >
             <User
-              name={name || 'Bienvenido'}
-              description={email}
               avatarProps={{
                 src: gravatar(email as string),
               }}
+              description={email}
+              name={name || 'Bienvenido'}
             />
           </DropdownItem>
           <DropdownItem
             key="add_book"
-            startContent={<PlusIcon width={24} height={24} />}
             onClick={() => router.push('/books/new')}
+            startContent={<PlusIcon height={24} width={24} />}
           >
             Añadir libro
           </DropdownItem>
           <DropdownItem
             key="admin"
-            startContent={<AdjustmentsHorizontalIcon width={24} height={24} />}
             onClick={() => router.push('/admin/users')}
+            startContent={<AdjustmentsHorizontalIcon height={24} width={24} />}
           >
             Administrar
           </DropdownItem>
@@ -88,7 +88,7 @@ export function HeaderAuthenticatedMenu(
             key="signout"
             onClick={() => router.push('/signout')}
             startContent={
-              <ArrowLeftEndOnRectangleIcon width={24} height={24} />
+              <ArrowLeftEndOnRectangleIcon height={24} width={24} />
             }
           >
             Cerrar sesión

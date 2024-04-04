@@ -5,7 +5,7 @@ import { ThemeImage } from '@/components/image/theme-image'
 export function Footer() {
   return (
     <>
-      <Navbar position="static" className="h-24">
+      <Navbar className="h-24" position="static">
         <NavbarContent justify="start">
           <NavbarItem>
             <p className="text-default-600">
@@ -22,10 +22,10 @@ export function Footer() {
           <NavbarItem>
             <ThemeImage
               alt="Logos"
+              height={50}
               srcDark="/images/logos-pie-white.png"
               srcLight="/images/logos-pie.png"
               width={150}
-              height={50}
             />
           </NavbarItem>
         </NavbarContent>

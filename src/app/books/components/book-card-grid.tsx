@@ -12,11 +12,11 @@ export function BookCardGrid(properties: BookGridProperties) {
   return (
     <>
       <div
-        role="grid"
         className="grid grid-cols-1 place-items-center gap-6 md:grid-cols-2 lg:grid-cols-4"
+        role="grid"
       >
         {books.map((book) => (
-          <BookCard book={book} me={me} key={book.id} />
+          <BookCard book={book} key={book.id} me={me} />
         ))}
       </div>
     </>

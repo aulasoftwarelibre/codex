@@ -32,7 +32,6 @@ export function HeaderSearchInput() {
   return (
     <>
       <Input
-        readOnly
         classNames={{
           base: 'max-w-full sm:max-w-[14rem] h-10 hidden md:flex',
           input: 'text-small',
@@ -40,13 +39,14 @@ export function HeaderSearchInput() {
             'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
           mainWrapper: 'h-full',
         }}
-        placeholder="Búsqueda rápida..."
-        size="sm"
-        startContent={<MagnifyingGlassIcon width={24} height={25} />}
         endContent={<Kbd keys={['command']}>K</Kbd>}
-        type="search"
-        radius="full"
         onClick={() => onDoSearch()}
+        placeholder="Búsqueda rápida..."
+        radius="full"
+        readOnly
+        size="sm"
+        startContent={<MagnifyingGlassIcon height={25} width={24} />}
+        type="search"
       />
     </>
   )

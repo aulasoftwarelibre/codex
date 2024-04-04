@@ -12,7 +12,7 @@ export function SettingsForm(properties: SettingsFormProperties) {
   return (
     <>
       <section role="region">
-        <Card radius="sm" className="border-1 border-default-200 p-4">
+        <Card className="border-1 border-default-200 p-4" radius="sm">
           <CardHeader className="text-2xl font-bold">
             <h2>{title}</h2>
           </CardHeader>

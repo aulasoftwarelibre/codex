@@ -49,30 +49,30 @@ export function BookViewForm(properties: BookFormProperties) {
 
   return (
     <>
-      <form className="flex flex-col gap-4" action={action}>
-        <input type="hidden" name="id" value={state.data.id} />
+      <form action={action} className="flex flex-col gap-4">
+        <input name="id" type="hidden" value={state.data.id} />
         <InputForm
+          defaultValue={state.data.title}
+          isRequired
           label="Título"
           name="title"
-          isRequired
           state={state}
-          defaultValue={state.data.title}
         />
         <InputForm
+          defaultValue={state.data.authors}
+          description="Separados por comas"
+          isRequired
           label="Autores"
           name="authors"
-          isRequired
-          description="Separados por comas"
           state={state}
-          defaultValue={state.data.authors}
         />
         <InputForm
+          defaultValue={state.data.image}
+          description="Introduzca la URL de la portada del libro"
+          isRequired
           label="Imagen"
           name="image"
-          isRequired
-          description="Introduzca la URL de la portada del libro"
           state={state}
-          defaultValue={state.data.image}
         />
         <Divider className="col-span-1 md:col-span-2" />
         <div className="flex flex-row-reverse">

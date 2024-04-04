@@ -31,8 +31,8 @@ export function UsersTable(properties: UsersTableProperties) {
     <>
       <Table
         aria-label="Lista de usuarios"
-        sortDescriptor={sortDescriptor}
         onSortChange={sortHandle}
+        sortDescriptor={sortDescriptor}
       >
         <TableHeader columns={COLUMNS}>
           {(column) => (

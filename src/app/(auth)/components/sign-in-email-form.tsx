@@ -19,28 +19,28 @@ export function SignInEmailForm() {
 
   return (
     <>
-      <form className="flex flex-col gap-2" action={action}>
+      <form action={action} className="flex flex-col gap-2">
         <InputForm
-          label="Email"
           autoFocus
+          defaultValue={state.data.email}
           endContent={
             <EnvelopeIcon
+              className="pointer-events-none flex-shrink-0 text-2xl text-default-400"
               height={24}
               width={24}
-              className="pointer-events-none flex-shrink-0 text-2xl text-default-400"
             />
           }
+          label="Email"
           name="email"
-          type="email"
           placeholder="Introduce tu email"
-          variant="bordered"
           state={state}
-          defaultValue={state.data.email}
+          type="email"
+          variant="bordered"
         />
         <Button
-          size="lg"
-          radius="none"
           className={` w-full`}
+          radius="none"
+          size="lg"
           startContent={<EnvelopeIcon height={24} width={24} />}
           type="submit"
         >

@@ -12,13 +12,13 @@ export function ThemeSwitcher() {
 
   return (
     <Switch
-      defaultSelected={theme === 'light'}
-      size="md"
       color="secondary"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      startContent={<SunIcon />}
-      endContent={<MoonIcon />}
       data-testid="theme-switcher"
+      defaultSelected={theme === 'light'}
+      endContent={<MoonIcon />}
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      size="md"
+      startContent={<SunIcon />}
     />
   )
 }

@@ -18,16 +18,16 @@ export function HeaderUnauthenticatedMenu() {
           <Avatar
             as="button"
             className="transition-transform"
-            size="md"
+            fallback={<Bars2Icon height={24} width={24} />}
             showFallback
-            fallback={<Bars2Icon width={24} height={24} />}
+            size="md"
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile actions" variant="flat">
           <DropdownItem
             key="signin"
-            startContent={<UserIcon width={24} height={24} />}
             onClick={() => router.push('/signin')}
+            startContent={<UserIcon height={24} width={24} />}
           >
             Iniciar sesión
           </DropdownItem>

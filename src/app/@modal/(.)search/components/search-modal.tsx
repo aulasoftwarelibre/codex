@@ -59,12 +59,12 @@ export function SearchModal() {
   return (
     <div>
       <Modal
+        hideCloseButton
         isOpen={true}
+        onClose={onClose}
         onOpenChange={onOpenChange}
         placement="top"
-        hideCloseButton
         size="3xl"
-        onClose={onClose}
       >
         <ModalContent>
           {() => (
@@ -72,14 +72,14 @@ export function SearchModal() {
               <ModalBody className="w-full p-0">
                 <Input
                   autoFocus
-                  startContent={<SearchIcon />}
-                  endContent={<Kbd keys={'escape'}></Kbd>}
-                  placeholder="Buscar actividad"
                   defaultValue={query}
+                  endContent={<Kbd keys={'escape'}></Kbd>}
                   onValueChange={handleSearch}
+                  placeholder="Buscar actividad"
+                  startContent={<SearchIcon />}
                 />
                 <Suspense fallback={<>Loading...</>}>
-                  <SearchResult query={query} onSelectedBook={onSelectedBook} />
+                  <SearchResult onSelectedBook={onSelectedBook} query={query} />
                 </Suspense>
               </ModalBody>
             </>

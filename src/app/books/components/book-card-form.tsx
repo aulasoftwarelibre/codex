@@ -54,10 +54,10 @@ export function BookCardForm(properties: BookCardFormProperties) {
   return (
     <>
       <form action={action}>
-        <input type="hidden" name="bookId" value={state.data.bookId} />
+        <input name="bookId" type="hidden" value={state.data.bookId} />
         <input
-          type="hidden"
           name="action"
+          type="hidden"
           value={isOwned ? 'return' : 'loan'}
         />
         {isOwned ? (

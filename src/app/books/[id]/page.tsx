@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: PageParameters }) {
 
   return (
     <>
-      <BookView user={user} book={book} historicalLoans={historicalLoans} />
+      <BookView book={book} historicalLoans={historicalLoans} user={user} />
     </>
   )
 }

@@ -15,12 +15,12 @@ export function AuthCard(properties: AuthModalProperties) {
         <Card className="w-[650px] max-w-[650px]">
           <CardHeader>
             <ThemeImage
-              className="mx-auto block"
-              width={130}
-              height={130}
               alt="Logo del Aula de Software Libre"
+              className="mx-auto block"
+              height={130}
               srcDark="/images/logoasl-white.png"
               srcLight="/images/logoasl.png"
+              width={130}
             />
           </CardHeader>
           {children}

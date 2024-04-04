@@ -35,12 +35,12 @@ export function BookView(properties: BookPageProperties) {
           <BookCard book={book} me={user} />
           <div className="flex flex-col gap-4">
             <h1
-              className="text-4xl font-bold text-default-800"
               aria-label="Título"
+              className="text-4xl font-bold text-default-800"
             >
               {book.title}
             </h1>
-            <div className="line-clamp-1 text-xl" aria-label="Autores">
+            <div aria-label="Autores" className="line-clamp-1 text-xl">
               {book.authors.join(', ')}
             </div>
             <div className="flex-grow">

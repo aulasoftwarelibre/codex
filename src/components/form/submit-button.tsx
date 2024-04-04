@@ -13,10 +13,10 @@ export function SubmitButton(properties: SubmitButtonProperties) {
   return (
     <>
       <Button
-        type="submit"
-        radius="none"
-        color="primary"
         aria-disabled={pending}
+        color="primary"
+        radius="none"
+        type="submit"
         {...properties}
       >
         {children}

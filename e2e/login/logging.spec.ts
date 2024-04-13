@@ -31,7 +31,9 @@ test.describe('Do login with email', () => {
     await page.getByRole('button', { name: 'Continuar con el email' }).click()
 
     // Assert
-    await expect(page).toHaveURL('/verify')
+    await expect(page).toHaveURL(
+      '/api/auth/verify-request?provider=email&type=email',
+    )
     await expect(page.locator('body')).toHaveText(/Verifica tu correo/)
 
     const response = await request.get(

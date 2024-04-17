@@ -1,14 +1,14 @@
 'use client'
 
+import { Button } from '@nextui-org/button'
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react'
+} from '@nextui-org/table'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 import Link from 'next/link'

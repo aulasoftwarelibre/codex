@@ -1,4 +1,5 @@
-import { Avatar, Link } from '@nextui-org/react'
+import { Avatar } from '@nextui-org/avatar'
+import { Link } from '@nextui-org/link'
 import { redirect } from 'next/navigation'
 
 import { SettingsForm } from '@/app/settings/components/settings-form'

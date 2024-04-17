@@ -1,9 +1,10 @@
 'use client'
 
 import { Input } from '@nextui-org/input'
+import { Kbd } from '@nextui-org/kbd'
 import { Modal, ModalBody, ModalContent } from '@nextui-org/modal'
-import { Kbd, useDisclosure } from '@nextui-org/react'
 import { SearchIcon } from '@nextui-org/shared-icons'
+import { useDisclosure } from '@nextui-org/use-disclosure'
 import {
   usePathname,
   useSearchParams,

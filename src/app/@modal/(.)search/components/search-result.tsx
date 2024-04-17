@@ -1,6 +1,6 @@
 'use client'
 
-import { Listbox, ListboxItem } from '@nextui-org/react'
+import { Listbox, ListboxItem } from '@nextui-org/listbox'
 import { AddNoteBulkIcon } from '@nextui-org/shared-icons'
 import { useEffect, useState } from 'react'
 

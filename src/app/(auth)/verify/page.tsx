@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react'
+import { Button } from '@nextui-org/button'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'

@@ -1,7 +1,7 @@
 'use client'
 
 import { EnvelopeIcon } from '@heroicons/react/24/outline'
-import { Button } from '@nextui-org/react'
+import { Button } from '@nextui-org/button'
 import React from 'react'
 import { useFormState } from 'react-dom'
 

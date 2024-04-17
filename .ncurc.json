@@ -1,7 +1,6 @@
 {
   "upgrade": true,
   "reject": [
-    "@nextui-org/react",
     "eslint"
   ]
 }

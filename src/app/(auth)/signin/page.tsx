@@ -1,4 +1,4 @@
-import { Kbd } from '@nextui-org/react'
+import { Kbd } from '@nextui-org/kbd'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import React from 'react'

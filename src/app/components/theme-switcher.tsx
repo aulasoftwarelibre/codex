@@ -1,7 +1,7 @@
 'use client'
 
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
-import { Switch } from '@nextui-org/react'
+import { Switch } from '@nextui-org/switch'
 
 import { useTheme } from '@/lib/hooks/use-theme'
 

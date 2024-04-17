@@ -1,4 +1,4 @@
-import { Card, CardHeader } from '@nextui-org/react'
+import { Card, CardHeader } from '@nextui-org/card'
 import React, { ReactNode } from 'react'
 
 import { ThemeImage } from '@/components/image/theme-image'

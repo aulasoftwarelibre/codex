@@ -1,6 +1,7 @@
 'use client'
 
-import { Card, CardBody, CardHeader, Tab, Tabs } from '@nextui-org/react'
+import { Card, CardBody, CardHeader } from '@nextui-org/card'
+import { Tab, Tabs } from '@nextui-org/tabs'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'

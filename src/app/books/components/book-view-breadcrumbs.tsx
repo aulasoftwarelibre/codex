@@ -1,6 +1,6 @@
 'use client'
 
-import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
+import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/breadcrumbs'
 import { useRouter } from 'next/navigation'
 
 interface BookBreadcrumbsProperties {

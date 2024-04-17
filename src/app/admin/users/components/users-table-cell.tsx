@@ -1,6 +1,6 @@
 'use client'
 
-import { User } from '@nextui-org/react'
+import { User } from '@nextui-org/user'
 import { Key } from 'react'
 
 import { UsersTableCellAction } from '@/app/admin/users/components/users-table-cell-action'

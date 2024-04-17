@@ -1,6 +1,6 @@
 'use client'
 
-import { Input, InputProps } from '@nextui-org/react'
+import { Input, InputProps } from '@nextui-org/input'
 
 import { FormResponse } from '@/lib/zod/form-response'
 
@@ -23,6 +23,7 @@ export function InputForm(properties: FormInputProperties) {
     <>
       <Input
         errorMessage={errorMessage}
+        isInvalid={!!errorMessage}
         label={label}
         labelPlacement="outside"
         name={name}

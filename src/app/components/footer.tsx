@@ -1,4 +1,5 @@
-import { Link, Navbar, NavbarContent, NavbarItem } from '@nextui-org/react'
+import { Link } from '@nextui-org/link'
+import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/navbar'
 
 import { ThemeImage } from '@/components/image/theme-image'
 

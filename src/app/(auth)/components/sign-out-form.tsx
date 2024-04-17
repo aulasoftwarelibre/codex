@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowRightStartOnRectangleIcon } from '@heroicons/react/24/outline'
-import { Button } from '@nextui-org/react'
+import { Button } from '@nextui-org/button'
 import React from 'react'
 
 import { signOutAction } from '@/app/(auth)/actions/sign-out-action'

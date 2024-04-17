@@ -1,6 +1,6 @@
 'use client'
 
-import { Divider } from '@nextui-org/react'
+import { Divider } from '@nextui-org/divider'
 import { redirect } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFormState } from 'react-dom'

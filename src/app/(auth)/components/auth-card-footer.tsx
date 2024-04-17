@@ -1,4 +1,4 @@
-import { CardFooter } from '@nextui-org/react'
+import { CardFooter } from '@nextui-org/card'
 import React, { ReactNode } from 'react'
 
 interface AuthModalFooterProperties {

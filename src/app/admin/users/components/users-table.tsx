@@ -1,14 +1,14 @@
 'use client'
 
 import {
+  SortDescriptor,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react'
-import { SortDescriptor } from '@react-types/shared/src/collections'
+} from '@nextui-org/table'
 import { useCallback, useState } from 'react'
 
 import { UsersTableCell } from '@/app/admin/users/components/users-table-cell'

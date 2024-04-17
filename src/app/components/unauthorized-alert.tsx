@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader } from '@nextui-org/react'
+import { Card, CardBody, CardHeader } from '@nextui-org/card'
 
 import { UserResponse } from '@/core/user/dto/responses/user.response'
 

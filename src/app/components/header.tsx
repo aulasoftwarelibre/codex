@@ -5,7 +5,7 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from '@nextui-org/react'
+} from '@nextui-org/navbar'
 import Link from 'next/link'
 
 import { HeaderAuthenticatedMenu } from '@/app/components/header-authenticated-menu'

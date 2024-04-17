@@ -1,5 +1,6 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import { Input, Kbd } from '@nextui-org/react'
+import { Input } from '@nextui-org/input'
+import { Kbd } from '@nextui-org/kbd'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 

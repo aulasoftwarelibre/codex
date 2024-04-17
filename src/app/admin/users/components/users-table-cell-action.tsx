@@ -1,6 +1,6 @@
 'use client'
 
-import { Switch } from '@nextui-org/react'
+import { Switch } from '@nextui-org/switch'
 
 import { UserResponse } from '@/core/user/dto/responses/user.response'
 import { enableUser } from '@/core/user/infrastructure/actions/enable-user'

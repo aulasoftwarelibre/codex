@@ -1,4 +1,4 @@
-import { Kbd } from '@nextui-org/react'
+import { Kbd } from '@nextui-org/kbd'
 import { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 

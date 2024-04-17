@@ -1,4 +1,4 @@
-import { CardBody } from '@nextui-org/react'
+import { CardBody } from '@nextui-org/card'
 import React, { ReactNode } from 'react'
 
 interface AuthModalHeaderProperties {

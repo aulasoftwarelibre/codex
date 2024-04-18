@@ -44,6 +44,7 @@
     "@nextui-org/listbox": "^2.1.17",
     "@nextui-org/modal": "^2.0.31",
     "@nextui-org/navbar": "^2.0.28",
+    "@nextui-org/progress": "^2.0.27",
     "@nextui-org/switch": "^2.0.26",
     "@nextui-org/system": "^2.1.0",
     "@nextui-org/table": "^2.0.29",

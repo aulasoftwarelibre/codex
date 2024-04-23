@@ -45,6 +45,7 @@
     "@nextui-org/modal": "^2.0.32",
     "@nextui-org/navbar": "^2.0.29",
     "@nextui-org/progress": "^2.0.27",
+    "@nextui-org/shared-icons": "^2.0.7",
     "@nextui-org/switch": "^2.0.27",
     "@nextui-org/system": "^2.1.1",
     "@nextui-org/table": "^2.0.30",

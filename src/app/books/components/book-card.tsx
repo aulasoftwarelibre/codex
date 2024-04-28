@@ -40,6 +40,7 @@ export function BookCard(properties: BookCardProperties) {
         prefetch
         radius="none"
         role="gridcell"
+        scroll={false}
       >
         <div className="relative">
           <Image

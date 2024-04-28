@@ -8,7 +8,7 @@ test.describe('Opening search book', () => {
     await page.getByPlaceholder('Búsqueda rápida...').click()
     await page.waitForSelector('[role=dialog]')
     // Assert
-    await expect(page.getByPlaceholder('Buscar actividad')).toBeVisible()
+    await expect(page.getByPlaceholder('Buscar libro')).toBeVisible()
     await expect(page).toHaveURL('/search')
   })
 
@@ -19,7 +19,7 @@ test.describe('Opening search book', () => {
     await page.keyboard.press('Control+k')
     await page.waitForSelector('[role=dialog]')
     // Assert
-    await expect(page.getByPlaceholder('Buscar actividad')).toBeVisible()
+    await expect(page.getByPlaceholder('Buscar libro')).toBeVisible()
     await expect(page).toHaveURL('/search')
   })
 })

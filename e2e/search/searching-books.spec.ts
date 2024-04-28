@@ -27,8 +27,8 @@ test.describe('Searching books', () => {
     await page.goto('/')
     await page.getByPlaceholder('Búsqueda rápida...').click()
     // Act
-    await page.getByPlaceholder('Buscar actividad').click()
-    await page.getByPlaceholder('Buscar actividad').pressSequentially('example')
+    await page.getByPlaceholder('Buscar libro').click()
+    await page.getByPlaceholder('Buscar libro').pressSequentially('example')
     // Assert
     await expect(page.getByLabel('Found books').first()).toBeVisible()
     await expect(page).toHaveURL('/search?query=example')

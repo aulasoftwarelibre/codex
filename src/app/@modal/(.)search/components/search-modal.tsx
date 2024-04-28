@@ -76,7 +76,7 @@ export function SearchModal() {
                   defaultValue={query}
                   endContent={<Kbd keys={'escape'}></Kbd>}
                   onValueChange={handleSearch}
-                  placeholder="Buscar actividad"
+                  placeholder="Buscar libro"
                   startContent={<SearchIcon />}
                 />
                 <Suspense fallback={<>Loading...</>}>

@@ -48,6 +48,7 @@ model User {
   sessions      Session[]
   Loan          Loan[]
   LoanRegistry  LoanRegistry[]
+  Review        Review[]
 }
 
 model VerificationToken {
@@ -67,6 +68,7 @@ model Book {
   state        BookState      @default(AVAILABLE)
   loan         Loan?
   loanRegistry LoanRegistry[]
+  Review       Review[]
 }
 
 model Loan {
@@ -95,4 +97,19 @@ model LoanRegistry {
 enum BookState {
   AVAILABLE
   LOANED
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  version     Int      @default(0)
+  book        Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  createdAt   DateTime @default(now()) @db.Timestamptz()
+  score       Int
+  title       String   @default("")
+  description String   @default("")
+
+  @@unique([userId, bookId])
 }

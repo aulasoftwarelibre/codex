@@ -1,13 +1,16 @@
 'use client'
 
 import { NextUIProvider } from '@nextui-org/system'
+import { useRouter } from 'next/navigation'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 export function Providers({ children }: { children: ReactNode }) {
+  const router = useRouter()
+
   return (
-    <NextUIProvider>
+    <NextUIProvider navigate={router.push}>
       <NextThemesProvider attribute="class" defaultTheme="dark">
         <Toaster
           toastOptions={{

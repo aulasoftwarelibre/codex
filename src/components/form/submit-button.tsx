@@ -15,6 +15,7 @@ export function SubmitButton(properties: SubmitButtonProperties) {
       <Button
         aria-disabled={pending}
         color="primary"
+        isLoading={pending}
         radius="none"
         type="submit"
         {...properties}

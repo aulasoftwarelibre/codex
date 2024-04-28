@@ -52,6 +52,7 @@
     "@nextui-org/theme": "^2.2.3",
     "@nextui-org/user": "^2.0.28",
     "@prisma/client": "^5.13.0",
+    "amazon-buddy": "^2.2.45",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.1.7",
     "neverthrow": "^6.2.1",

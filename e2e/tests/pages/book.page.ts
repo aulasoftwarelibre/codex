@@ -47,7 +47,7 @@ export class BookPage {
   }
 
   async submit() {
-    await this.page.getByRole('button', { name: 'Enviar' }).click()
+    await this.page.getByRole('button', { name: 'Enviar' }).first().click()
   }
 
   async remove(id: string) {

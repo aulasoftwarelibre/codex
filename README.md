@@ -63,8 +63,8 @@ Codex is a library management system designed for the Free Software Club of the 
    After setting up the environment, start the Codex application:
 
    ```bash
-   npm install
-   npm run dev
+   pnpm install
+   pnpm run dev
    ```
 
    Visit `http://localhost:3000` to access the application.

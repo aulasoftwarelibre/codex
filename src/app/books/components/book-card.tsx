@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { BookCardForm } from '@/app/books/components/book-card-form'
+import { ScrollUp } from '@/components/scroll-up'
 import { BookResponse } from '@/core/book/dto/responses/book.response'
 import { UserResponse } from '@/core/user/dto/responses/user.response'
 
@@ -32,6 +33,7 @@ export function BookCard(properties: BookCardProperties) {
 
   return (
     <>
+      <ScrollUp />
       <Card
         as={Link}
         className={`group max-w-[320px] space-y-4 border-t-4 p-4 ${cardColor}`}
@@ -40,7 +42,6 @@ export function BookCard(properties: BookCardProperties) {
         prefetch
         radius="none"
         role="gridcell"
-        scroll={false}
       >
         <div className="relative">
           <Image

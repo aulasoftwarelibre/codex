@@ -35,7 +35,7 @@ export function BookCard(properties: BookCardProperties) {
       <Card
         as={Link}
         className={`group max-w-[320px] space-y-4 border-t-4 p-4 ${cardColor}`}
-        href={`/books/${book.id}`}
+        href={`/books/${book.id}/reviews`}
         isHoverable
         prefetch
         radius="none"

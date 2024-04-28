@@ -15,7 +15,7 @@ test.describe('Adding a book', () => {
     )
     await bookPage.submit()
     // Assert
-    await expect(page).toHaveURL(/books\/[\dA-Z]{26}$/)
+    await expect(page).toHaveURL(/books\/[\dA-Z]{26}/)
     await expect(page.getByLabel('Título')).toContainText('A new book')
   })
 
@@ -30,7 +30,7 @@ test.describe('Adding a book', () => {
     )
     await bookPage.submit()
     // Assert
-    await expect(page).toHaveURL(/books\/[\dA-Z]{26}$/)
+    await expect(page).toHaveURL(/books\/[\dA-Z]{26}/)
     await expect(page.getByLabel('Autores')).toContainText(
       'Jenny Doe, John Doe',
     )

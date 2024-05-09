@@ -38,7 +38,7 @@ export default async function RootLayout({
         <Providers>
           {modal}
           <Header user={user} />
-          <div className="mt-4 flex min-h-[calc(100vh-155px)] flex-col">
+          <div className="mt-4 flex min-h-[calc(100vh-185px)] flex-col">
             <UnauthorizedAlert user={user} />
             <div className="container mx-auto flex-grow py-5">{children}</div>
           </div>

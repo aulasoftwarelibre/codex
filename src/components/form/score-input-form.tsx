@@ -15,10 +15,11 @@ import { StarIcon } from '@/components/image/star-icon'
 interface ScoreInputFormProperties extends RadioGroupProps {}
 
 const STARS = ['1', '2', '3', '4', '5']
+const DEFAULT_SCORE = '5'
 
 export function ScoreInputForm(properties: ScoreInputFormProperties) {
-  const { defaultValue = '5' } = properties
-  const [selected, setSelected] = useState(defaultValue)
+  const { defaultValue } = properties
+  const [selected, setSelected] = useState(defaultValue || DEFAULT_SCORE)
 
   return (
     <>

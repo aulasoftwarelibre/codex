@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client'
-import { ResultAsync } from 'neverthrow'
 
 import { ApplicationError } from '@/core/common/domain/errors/application-error'
 import { Publisher } from '@/core/common/domain/publisher/publisher'
-import { ignore } from '@/core/common/utils/ignore'
 import { User } from '@/core/user/domain/model/user.entity'
 import { UserDataMapper } from '@/core/user/infrastructure/persistence/user.data-mapper'
 
@@ -12,29 +10,31 @@ export class UserPublisher extends Publisher<User> {
     super()
   }
 
-  create(user: User): ResultAsync<void, ApplicationError> {
+  async create(user: User): Promise<void> {
     const data = UserDataMapper.toPrisma(user)
 
-    return ResultAsync.fromPromise(
-      this.prisma.user.create({
+    try {
+      await this.prisma.user.create({
         data,
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(ignore)
+      })
+    } catch (error) {
+      throw new ApplicationError((error as Error).toString())
+    }
   }
 
-  update(user: User, version: number): ResultAsync<void, ApplicationError> {
+  async update(user: User, version: number): Promise<void> {
     const { id, ...data } = UserDataMapper.toPrisma(user)
 
-    return ResultAsync.fromPromise(
-      this.prisma.user.update({
+    try {
+      await this.prisma.user.update({
         data,
         where: {
           id,
           version,
         },
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(ignore)
+      })
+    } catch (error) {
+      throw new ApplicationError((error as Error).toString())
+    }
   }
 }

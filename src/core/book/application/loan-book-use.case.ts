@@ -11,20 +11,22 @@ export class LoanBookUseCase {
     private readonly loanBookService: LoanBookService,
   ) {}
 
-  with(command: LoanBookRequest) {
-    return this.findAvailableBook(command.bookId) //
-      .andThen((book) => this.loanBook(book, command.userId))
+  async with(command: LoanBookRequest) {
+    const book = await this.findAvailableBook(command.bookId)
+
+    return this.loanBook(book, command.userId)
   }
 
-  private findAvailableBook(bookId: string) {
-    return BookId.create(bookId).asyncAndThen((_bookId) =>
-      this.books.findAvailable(_bookId),
-    )
+  private async findAvailableBook(bookId: string) {
+    const _bookId = BookId.create(bookId)
+
+    return this.books.findAvailable(_bookId)
   }
 
-  private loanBook(book: AvailableBook, userId: string) {
-    return UserId.create(userId)
-      .asyncAndThen((_email) => book.loanTo(_email, this.loanBookService))
-      .andThen(() => this.books.save(book))
+  private async loanBook(book: AvailableBook, userId: string) {
+    const _userId = UserId.create(userId)
+    await book.loanTo(_userId, this.loanBookService)
+
+    return this.books.save(book)
   }
 }

@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest'
 import { ReturnBookRequest } from '@/core/book/dto/requests/return-book.request'
 import { container } from '@/lib/container'
 import { prisma } from '@/lib/prisma/prisma'
-import { unexpected } from '@/lib/utils/unexpected'
 import {
   createLoan,
   createLoanedBook,
@@ -21,14 +20,9 @@ describe('Return book', () => {
     })
 
     // Act
-    const result = container.returnBook.with(request)
+    await container.returnBook.with(request)
 
     // Assert
-    await result.match(
-      async () => {
-        expect(await prisma.loan.count()).toBe(0)
-      },
-      (error) => unexpected.error(error),
-    )
+    expect(await prisma.loan.count()).toBe(0)
   })
 })

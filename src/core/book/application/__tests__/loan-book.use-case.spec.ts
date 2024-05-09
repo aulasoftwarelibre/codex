@@ -1,10 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
 import { LoanBookRequest } from '@/core/book/dto/requests/loan-book.request'
-import { ApplicationError } from '@/core/common/domain/errors/application-error'
 import { container } from '@/lib/container'
 import { prisma } from '@/lib/prisma/prisma'
-import { unexpected } from '@/lib/utils/unexpected'
 import {
   createAvailableBook,
   createLoan,
@@ -23,15 +21,10 @@ describe('Loan book', () => {
     })
 
     // Act
-    const result = container.loanBook.with(request)
+    await container.loanBook.with(request)
 
     // Assert
-    await result.match(
-      async () => {
-        expect(await prisma.loan.count()).toBe(1)
-      },
-      (error) => unexpected.error(error),
-    )
+    expect(await prisma.loan.count()).toBe(1)
   })
 
   it('should not loan an unavailable book to a user', async () => {
@@ -45,14 +38,9 @@ describe('Loan book', () => {
     })
 
     // Act
-    const result = container.loanBook.with(request)
+    const result = async () => container.loanBook.with(request)
 
     // Assert
-    await result.match(
-      (_ok) => unexpected.success(_ok),
-      (_error) => {
-        expect(_error).instanceof(ApplicationError)
-      },
-    )
+    expect(result).rejects.toThrowError()
   })
 })

@@ -7,10 +7,9 @@ import { container } from '@/lib/container'
 export async function findUser(
   email: string,
 ): Promise<UserResponse | undefined> {
-  const result = await container.findUser.with(FindUserRequest.with({ email }))
-
-  return result.match(
-    (user) => user,
-    () => undefined,
-  )
+  try {
+    return await container.findUser.with(FindUserRequest.with({ email }))
+  } catch {
+    return undefined
+  }
 }

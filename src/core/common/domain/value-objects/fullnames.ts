@@ -1,6 +1,3 @@
-import { err, ok, Result } from 'neverthrow'
-
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { FullName } from '@/core/common/domain/value-objects/fullname'
 
 export class FullNames {
@@ -10,15 +7,10 @@ export class FullNames {
     this._fullNames = fullNames
   }
 
-  static create(
-    fullNames: string[] | readonly string[],
-  ): Result<FullNames, DomainError> {
-    return Result.combine(
-      fullNames.map((fullName) => FullName.create(fullName)),
-    ).match<Result<FullNames, DomainError>>(
-      (_fullNames) => ok(new FullNames(_fullNames)),
-      (_error) => err(_error),
-    )
+  static create(fullNames: string[] | readonly string[]): FullNames {
+    const _fullNames = fullNames.map((fullName) => FullName.create(fullName))
+
+    return new FullNames(_fullNames)
   }
 
   map<T>(

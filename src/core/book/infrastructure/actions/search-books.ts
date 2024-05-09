@@ -14,7 +14,13 @@ export async function searchBooks(
   }
 
   const getCachedBooks = cache(
-    async (_request) => container.findBooks.with(_request).unwrapOr([]),
+    async (_request) => {
+      try {
+        return await container.findBooks.with(_request)
+      } catch {
+        return []
+      }
+    },
     ['search-books'],
     {
       tags: ['books'],

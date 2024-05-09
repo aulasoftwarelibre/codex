@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { okAsync, ResultAsync } from 'neverthrow'
 
 import { BookResponse } from '@/core/book/dto/responses/book.response'
 import { BookType } from '@/core/book/infrastructure/persistence/book.type'
@@ -8,9 +7,9 @@ import { ApplicationError } from '@/core/common/domain/errors/application-error'
 export class FindBookQuery {
   constructor(private readonly prisma: PrismaClient) {}
 
-  with(bookId: string): ResultAsync<BookResponse, ApplicationError> {
-    return ResultAsync.fromPromise(
-      this.prisma.book.findUniqueOrThrow({
+  async with(bookId: string): Promise<BookResponse> {
+    try {
+      const book = await this.prisma.book.findUniqueOrThrow({
         include: {
           loan: {
             include: {
@@ -21,12 +20,15 @@ export class FindBookQuery {
         where: {
           id: bookId,
         },
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen((book) => this.mapToBookResponse(book))
+      })
+
+      return this.mapToBookResponse(book)
+    } catch (error) {
+      throw new ApplicationError((error as Error).toString())
+    }
   }
 
   private mapToBookResponse(book: BookType) {
-    return okAsync(BookResponse.fromType(book))
+    return BookResponse.fromType(book)
   }
 }

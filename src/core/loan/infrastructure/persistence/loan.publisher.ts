@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client'
-import { ResultAsync } from 'neverthrow'
 
 import { ApplicationError } from '@/core/common/domain/errors/application-error'
 import { Publisher } from '@/core/common/domain/publisher/publisher'
-import { ignore } from '@/core/common/utils/ignore'
 import { Loan } from '@/core/loan/domain/model/loan.entity'
 import { LoanDataMapper } from '@/core/loan/infrastructure/persistence/loan.data-mapper'
 
@@ -12,29 +10,31 @@ export class LoanPublisher extends Publisher<Loan> {
     super()
   }
 
-  create(loan: Loan): ResultAsync<void, ApplicationError> {
+  async create(loan: Loan): Promise<void> {
     const data = LoanDataMapper.toPrisma(loan)
 
-    return ResultAsync.fromPromise(
-      this.prisma.loan.create({
+    try {
+      await this.prisma.loan.create({
         data,
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(ignore)
+      })
+    } catch (error) {
+      throw new ApplicationError((error as Error).toString())
+    }
   }
 
-  update(loan: Loan, version: number): ResultAsync<void, ApplicationError> {
+  async update(loan: Loan, version: number): Promise<void> {
     const { id, ...data } = LoanDataMapper.toPrisma(loan)
 
-    return ResultAsync.fromPromise(
-      this.prisma.loan.update({
+    try {
+      await this.prisma.loan.update({
         data,
         where: {
           id,
           version,
         },
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(ignore)
+      })
+    } catch (error) {
+      throw new ApplicationError((error as Error).toString())
+    }
   }
 }

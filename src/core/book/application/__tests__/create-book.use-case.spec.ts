@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest'
 import { ApplicationError } from '@/core/common/domain/errors/application-error'
 import { container } from '@/lib/container'
 import { prisma } from '@/lib/prisma/prisma'
-import { unexpected } from '@/lib/utils/unexpected'
 import { bookRequestExamples } from '@/tests/examples/books-request.examples'
 import { createAvailableBook } from '@/tests/examples/factories'
 
@@ -13,21 +12,16 @@ describe('CreateBookUseCase', () => {
     const command = bookRequestExamples.create()
 
     // Act
-    const result = await container.createBook.with(command)
+    await container.createBook.with(command)
 
     // Assert
-    result.match(
-      async () => {
-        const savedBook = await prisma.book.findFirst({
-          where: {
-            id: command.id,
-          },
-        })
-        expect(savedBook?.version).toEqual(0)
-        expect(savedBook?.state).toEqual('AVAILABLE')
+    const savedBook = await prisma.book.findFirst({
+      where: {
+        id: command.id,
       },
-      (error) => unexpected.error(error),
-    )
+    })
+    expect(savedBook?.version).toEqual(0)
+    expect(savedBook?.state).toEqual('AVAILABLE')
   })
 
   it('should rejects to create a book with the same id', async () => {
@@ -39,14 +33,9 @@ describe('CreateBookUseCase', () => {
     }
 
     // Act
-    const result = await container.createBook.with(command)
+    const result = async () => await container.createBook.with(command)
 
     // Assert
-    result.match(
-      (success) => unexpected.success(success),
-      (error) => {
-        expect(error).toBeInstanceOf(ApplicationError)
-      },
-    )
+    expect(result).rejects.toThrowError(ApplicationError)
   })
 })

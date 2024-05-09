@@ -5,7 +5,6 @@ import { Book } from '@/core/book/domain/model/book.entity'
 import { User } from '@/core/user/domain/model/user.entity'
 import { container } from '@/lib/container'
 import { prisma } from '@/lib/prisma/prisma'
-import { unexpected } from '@/lib/utils/unexpected'
 import { createAvailableBook, createUser } from '@/tests/examples/factories'
 import { UsersExamples } from '@/tests/examples/users.examples'
 
@@ -15,15 +14,10 @@ describe('GetReviewsQuery', () => {
     const book = await createAvailableBook()
 
     // Act
-    const result = await container.getReviews.with(book.id.value)
+    const response = await container.getReviews.with(book.id.value)
 
     // Assert
-    result.match(
-      (response) => {
-        expect(response).toStrictEqual([])
-      },
-      (error) => unexpected.error(error),
-    )
+    expect(response).toStrictEqual([])
   })
 
   it('should return published book reviews', async () => {
@@ -33,22 +27,17 @@ describe('GetReviewsQuery', () => {
     await createReview(book, user1, 5)
 
     // Act
-    const result = await container.getReviews.with(book.id.value)
+    const response = await container.getReviews.with(book.id.value)
 
     // Assert
-    result.match(
-      (response) => {
-        expect(response).toHaveLength(1)
-        expect(response).toEqual(
-          expect.arrayContaining([
-            expect.objectContaining({
-              description: 'description',
-              title: 'title',
-            }),
-          ]),
-        )
-      },
-      (error) => unexpected.error(error),
+    expect(response).toHaveLength(1)
+    expect(response).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          description: 'description',
+          title: 'title',
+        }),
+      ]),
     )
   })
 })

@@ -6,7 +6,13 @@ import { container } from '@/lib/container'
 
 export async function findUsers(): Promise<UserResponse[]> {
   const getCachedUsers = cache(
-    async () => container.findUsers.with().unwrapOr([]),
+    async () => {
+      try {
+        return await container.findUsers.with()
+      } catch {
+        return []
+      }
+    },
     ['find-users'],
     {
       tags: ['users'],

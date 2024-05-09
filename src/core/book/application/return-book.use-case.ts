@@ -10,24 +10,20 @@ export class ReturnBookUseCase {
     private readonly returnBookService: ReturnBookService,
   ) {}
 
-  with(command: ReturnBookRequest) {
-    return this.findLoanedBook(command.bookId) //
-      .andThen((book) => this.returnBook(book))
+  async with(command: ReturnBookRequest) {
+    const book = await this.findLoanedBook(command.bookId) //
+
+    return this.returnBook(book)
   }
 
-  private findLoanedBook(bookId: string) {
-    return BookId.create(bookId).asyncAndThen((_bookId) =>
-      this.books.findLoaned(_bookId),
-    )
+  private async findLoanedBook(bookId: string) {
+    const _bookId = BookId.create(bookId)
+
+    return this.books.findLoaned(_bookId)
   }
 
-  private returnBook(book: LoanedBook) {
-    return book
-      .doAvailable(this.returnBookService)
-      .andThen(() => this.books.save(book))
+  private async returnBook(book: LoanedBook) {
+    await book.doAvailable(this.returnBookService)
+    return this.books.save(book)
   }
-}
-
-export function add(...arguments_: number[]) {
-  return arguments_.reduce((a, b) => a + b, 0)
 }

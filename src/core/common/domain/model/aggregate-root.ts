@@ -1,5 +1,3 @@
-import { errAsync, ResultAsync } from 'neverthrow'
-
 import { ApplicationError } from '@/core/common/domain/errors/application-error'
 
 const VERSION = Symbol()
@@ -25,17 +23,15 @@ export abstract class AggregateRoot {
     return this[VERSION]
   }
 
-  commit(): ResultAsync<void, ApplicationError> {
+  async commit(): Promise<void> {
     this[VERSION] += 1
 
     return this.publish(this)
   }
 
-  publish(instance: AggregateRoot): ResultAsync<void, ApplicationError> {
-    return errAsync(
-      new ApplicationError(
-        `Not implemented publish method for ${instance.constructor.name} aggregate`,
-      ),
+  async publish(instance: AggregateRoot): Promise<void> {
+    throw new ApplicationError(
+      `Not implemented publish method for ${instance.constructor.name} aggregate`,
     )
   }
 }

@@ -9,7 +9,13 @@ export async function getHistoricalLoans(
   bookId: string,
 ): Promise<HistoricalLoansResponse[]> {
   const getCachedLoans = cache(
-    async (id: string) => container.getHistoricalLoans.with(id).unwrapOr([]),
+    async (id: string) => {
+      try {
+        return await container.getHistoricalLoans.with(id)
+      } catch {
+        return []
+      }
+    },
     ['historical-loans'],
     {
       tags: [`book-${bookId}`, 'books'],

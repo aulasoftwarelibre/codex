@@ -1,4 +1,3 @@
-import { ok, Result } from 'neverthrow'
 import { ulid } from 'ulid'
 
 import { DomainError } from '@/core/common/domain/errors/domain-error'
@@ -11,15 +10,12 @@ export class Id extends ValueObject<string> {
     super(value)
   }
 
-  static create<T>(
-    this: Constructor<T>,
-    value: string,
-  ): Result<T, DomainError> {
+  static create<T>(this: Constructor<T>, value: string): T {
     if (!value || !/^[\dA-Za-z]{20,30}$/.test(value)) {
-      return DomainError.cause('invalid_id_format')
+      throw DomainError.cause('invalid_id_format')
     }
 
-    return ok(new this(value))
+    return new this(value)
   }
 
   static generate<T>(this: Constructor<T>): T {

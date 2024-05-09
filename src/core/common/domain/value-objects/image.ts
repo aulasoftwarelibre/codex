@@ -1,17 +1,15 @@
-import { ok, Result } from 'neverthrow'
-
 import { DomainError } from '@/core/common/domain/errors/domain-error'
 
 export class Image {
   constructor(public readonly value: string) {}
 
-  static create(name: string): Result<Image, DomainError> {
+  static create(name: string): Image {
     try {
       new URL(name)
     } catch {
-      return DomainError.cause('La URL de la imagen no es válida.')
+      throw DomainError.cause('La URL de la imagen no es válida.')
     }
 
-    return ok(new Image(name))
+    return new Image(name)
   }
 }

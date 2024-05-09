@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { Image } from '@/core/common/domain/value-objects/image'
-import { unexpected } from '@/lib/utils/unexpected'
 
 describe('Image', () => {
   describe('create', () => {
@@ -11,18 +9,11 @@ describe('Image', () => {
       const validUrl = 'https://example.com/image.jpg'
 
       // Act
-      const result = Image.create(validUrl)
+      const image = Image.create(validUrl)
 
       // Assert
-      result.match(
-        (image) => {
-          expect(image).toBeInstanceOf(Image)
-          expect(image.value).toBe(validUrl)
-        },
-        (error) => {
-          unexpected.error(error)
-        },
-      )
+      expect(image).toBeInstanceOf(Image)
+      expect(image.value).toBe(validUrl)
     })
 
     it('should return an DomainError for an invalid URL', () => {
@@ -30,17 +21,10 @@ describe('Image', () => {
       const invalidUrl = 'invalid-url' // Invalid format
 
       // Act
-      const result = Image.create(invalidUrl)
+      const result = () => Image.create(invalidUrl)
 
       // Assert
-      result.match(
-        (image) => {
-          unexpected.success(image)
-        },
-        (error) => {
-          expect(error).toBeInstanceOf(DomainError)
-        },
-      )
+      expect(result).toThrowError()
     })
 
     it('should return an DomainError for an empty URL', () => {
@@ -48,17 +32,10 @@ describe('Image', () => {
       const emptyUrl = ''
 
       // Act
-      const result = Image.create(emptyUrl)
+      const result = () => Image.create(emptyUrl)
 
       // Assert
-      result.match(
-        (image) => {
-          unexpected.success(image)
-        },
-        (error) => {
-          expect(error).toBeInstanceOf(DomainError)
-        },
-      )
+      expect(result).toThrowError()
     })
   })
 })

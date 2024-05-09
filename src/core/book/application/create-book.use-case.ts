@@ -6,8 +6,8 @@ export class CreateBookUseCase {
   constructor(private readonly books: Books) {}
 
   async with(command: CreateBookRequest) {
-    return BookFactory.create(command).asyncAndThen((book) =>
-      this.books.save(book),
-    )
+    const book = BookFactory.create(command)
+
+    return this.books.save(book)
   }
 }

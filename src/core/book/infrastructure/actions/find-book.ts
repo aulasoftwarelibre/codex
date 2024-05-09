@@ -9,7 +9,13 @@ export async function findBook(
   bookId: string,
 ): Promise<BookResponse | undefined> {
   const getCachedBook = cache(
-    async (id: string) => container.findBook.with(id).unwrapOr(undefined),
+    async (id: string) => {
+      try {
+        return container.findBook.with(id)
+      } catch {
+        return undefined
+      }
+    },
     [`book`],
     {
       tags: ['books', `book-${bookId}`],

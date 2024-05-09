@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { Email } from '@/core/common/domain/value-objects/email'
-import { unexpected } from '@/lib/utils/unexpected'
 
 describe('Email', () => {
   describe('create', () => {
@@ -11,18 +9,11 @@ describe('Email', () => {
       const validEmail = 'john.doe@example.com'
 
       // Act
-      const result = Email.create(validEmail)
+      const email = Email.create(validEmail)
 
       // Assert
-      result.match(
-        (email) => {
-          expect(email).toBeInstanceOf(Email)
-          expect(email.value).toBe(validEmail)
-        },
-        (error) => {
-          unexpected.error(error)
-        },
-      )
+      expect(email).toBeInstanceOf(Email)
+      expect(email.value).toBe(validEmail)
     })
 
     it('should return an EmailError for an invalid email format', () => {
@@ -30,17 +21,10 @@ describe('Email', () => {
       const invalidEmail = 'invalid-email' // Invalid format
 
       // Act
-      const result = Email.create(invalidEmail)
+      const result = () => Email.create(invalidEmail)
 
       // Assert
-      result.match(
-        (email) => {
-          unexpected.success(email)
-        },
-        (error) => {
-          expect(error).toBeInstanceOf(DomainError)
-        },
-      )
+      expect(result).toThrowError()
     })
 
     it('should return an EmailError for an empty email', () => {
@@ -48,17 +32,10 @@ describe('Email', () => {
       const emptyEmail = ''
 
       // Act
-      const result = Email.create(emptyEmail)
+      const result = () => Email.create(emptyEmail)
 
       // Assert
-      result.match(
-        (email) => {
-          unexpected.success(email)
-        },
-        (error) => {
-          expect(error).toBeInstanceOf(DomainError)
-        },
-      )
+      expect(result).toThrowError()
     })
   })
 })

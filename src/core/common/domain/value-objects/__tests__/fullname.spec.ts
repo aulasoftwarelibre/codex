@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { FullName } from '@/core/common/domain/value-objects/fullname'
-import { unexpected } from '@/lib/utils/unexpected'
 
 describe('FullName', () => {
   describe('create', () => {
@@ -11,18 +9,11 @@ describe('FullName', () => {
       const validName = 'John Doe'
 
       // Act
-      const result = FullName.create(validName)
+      const fullName = FullName.create(validName)
 
       // Assert
-      result.match(
-        (fullName) => {
-          expect(fullName).toBeInstanceOf(FullName)
-          expect(fullName.value).toBe(validName)
-        },
-        (error) => {
-          unexpected.error(error)
-        },
-      )
+      expect(fullName).toBeInstanceOf(FullName)
+      expect(fullName.value).toBe(validName)
     })
 
     it('should return a FullNameError for an long name', () => {
@@ -30,17 +21,10 @@ describe('FullName', () => {
       const invalidName = 'A'.repeat(65)
 
       // Act
-      const result = FullName.create(invalidName)
+      const result = () => FullName.create(invalidName)
 
       // Assert
-      result.match(
-        (fullName) => {
-          unexpected.success(fullName)
-        },
-        (error) => {
-          expect(error).toBeInstanceOf(DomainError)
-        },
-      )
+      expect(result).toThrowError()
     })
 
     it('should return a FullNameError for an empty name', () => {
@@ -48,17 +32,10 @@ describe('FullName', () => {
       const emptyName = ''
 
       // Act
-      const result = FullName.create(emptyName)
+      const result = () => FullName.create(emptyName)
 
       // Assert
-      result.match(
-        (fullName) => {
-          unexpected.success(fullName)
-        },
-        (error) => {
-          expect(error).toBeInstanceOf(DomainError)
-        },
-      )
+      expect(result).toThrowError()
     })
   })
 })

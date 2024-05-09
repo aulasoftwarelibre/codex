@@ -9,8 +9,10 @@ import { LoanBookService } from '@/core/loan/domain/services/loan-book.service'
 import { ReturnBookService } from '@/core/loan/domain/services/return-book.service'
 import { GetHistoricalLoansQuery } from '@/core/loan/infrastructure/queries/get-historical-loans.query'
 import { LoansPrisma } from '@/core/loan/infrastructure/services/loans-prisma.repository'
+import { CreateReviewUseCase } from '@/core/review/application/create-review.use-case'
 import { GetReviewStatsQuery } from '@/core/review/infrastructure/queries/get-review-stats.query'
 import { GetReviewsQuery } from '@/core/review/infrastructure/queries/get-reviews.query'
+import { ReviewsPrisma } from '@/core/review/infrastructure/services/reviews-prisma.repository'
 import { EnableUserUseCase } from '@/core/user/application/enable-user.use-case'
 import { FindUserUseCase } from '@/core/user/application/find-user.use-case'
 import { UpdateSettingUseCase } from '@/core/user/application/update-setting.use-case'
@@ -25,10 +27,12 @@ const Container = {
     const books = new BooksPrisma(prisma)
     const loans = new LoansPrisma(prisma)
     const loanBookService = new LoanBookService(loans)
+    const reviews = new ReviewsPrisma(prisma)
     const returnBookService = new ReturnBookService(loans)
 
     return {
       createBook: new CreateBookUseCase(books),
+      createReview: new CreateReviewUseCase(reviews),
       editBook: new EditBookUseCase(books),
       enableUser: new EnableUserUseCase(users),
       findBook: new FindBookQuery(prisma),

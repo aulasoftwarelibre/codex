@@ -13,10 +13,9 @@ export async function me(): Promise<UserResponse | undefined> {
     return undefined
   }
 
-  const result = await container.findUser.with(FindUserRequest.with({ email }))
-
-  return result.match(
-    (user) => user,
-    () => undefined,
-  )
+  try {
+    return await container.findUser.with(FindUserRequest.with({ email }))
+  } catch {
+    return undefined
+  }
 }

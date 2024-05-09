@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { ResultAsync } from 'neverthrow'
 
 import { Book } from '@/core/book/domain/model/book.entity'
 import { BookDataMapper } from '@/core/book/infrastructure/persistence/book.data-mapper'
@@ -11,29 +10,33 @@ export class BookPublisher extends Publisher<Book> {
     super()
   }
 
-  create(book: Book): ResultAsync<void, ApplicationError> {
+  async create(book: Book): Promise<void> {
     const data = BookDataMapper.toPrisma(book)
 
-    return ResultAsync.fromPromise(
-      this.prisma.book.create({
+    try {
+      const _book = await this.prisma.book.create({
         data,
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(this.checkVersion(0))
+      })
+      this.checkVersion(0)(_book)
+    } catch (error) {
+      throw new ApplicationError((error as Error).toString())
+    }
   }
 
-  update(book: Book, version: number): ResultAsync<void, ApplicationError> {
+  async update(book: Book, version: number): Promise<void> {
     const { id, ...data } = BookDataMapper.toPrisma(book)
 
-    return ResultAsync.fromPromise(
-      this.prisma.book.update({
+    try {
+      const _book = await this.prisma.book.update({
         data,
         where: {
           id,
           version,
         },
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen(this.checkVersion(version))
+      })
+      this.checkVersion(version)(_book)
+    } catch (error) {
+      throw new ApplicationError((error as Error).toString())
+    }
   }
 }

@@ -1,12 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
 import { UpdateUserRequest } from '@/core/user/dto/requests/update-user.request'
 import { UserResponse } from '@/core/user/dto/responses/user.response'
 import { container } from '@/lib/container'
 import { prisma } from '@/lib/prisma/prisma'
 import { gravatar } from '@/lib/utils/gravatar'
-import { unexpected } from '@/lib/utils/unexpected'
 import { createUser } from '@/tests/examples/factories'
 import { UsersExamples } from '@/tests/examples/users.examples'
 
@@ -20,20 +18,15 @@ describe('UpdateUserUseCase', () => {
     })
 
     // Act
-    const result = await container.updateUser.with(request)
+    await container.updateUser.with(request)
 
     // Assert
-    result.match(
-      async () => {
-        const updatedUser = await prisma.user.findFirst({
-          where: {
-            id: user.id.value,
-          },
-        })
-        expect(updatedUser?.name).toEqual('Updated User')
+    const updatedUser = await prisma.user.findFirst({
+      where: {
+        id: user.id.value,
       },
-      (error) => unexpected.error(error),
-    )
+    })
+    expect(updatedUser?.name).toEqual('Updated User')
   })
 
   it('should handle updating a non-existent user', async () => {
@@ -45,14 +38,9 @@ describe('UpdateUserUseCase', () => {
     })
 
     // Act
-    const result = await container.updateUser.with(request)
+    const result = async () => await container.updateUser.with(request)
 
     // Assert
-    result.match(
-      (_user) => unexpected.success(_user),
-      (error) => {
-        expect(error).toBeInstanceOf(NotFoundError)
-      },
-    )
+    expect(result).rejects.toThrowError()
   })
 })

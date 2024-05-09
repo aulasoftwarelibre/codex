@@ -5,6 +5,7 @@ import { z } from 'zod'
 
 import { LoanBookRequest } from '@/core/book/dto/requests/loan-book.request'
 import { ReturnBookRequest } from '@/core/book/dto/requests/return-book.request'
+import { ApplicationError } from '@/core/common/domain/errors/application-error'
 import { me } from '@/core/user/infrastructure/actions/me'
 import { container } from '@/lib/container'
 import { FormResponse } from '@/lib/zod/form-response'
@@ -63,24 +64,25 @@ async function loanBookAction(
   userId: string,
   previousState: FormResponse<LoanActionForm>,
 ) {
-  return container.loanBook
-    .with(
+  try {
+    await container.loanBook.with(
       LoanBookRequest.with({
         bookId,
         userId,
       }),
     )
-    .match(
-      () => {
-        revalidateTag('books')
-        return FormResponse.success(
-          previousState.data,
-          'Libro marcado como prestado.',
-        )
-      },
-      (_error) =>
-        FormResponse.custom(['general'], _error.message, previousState.data),
+    revalidateTag('books')
+    return FormResponse.success(
+      previousState.data,
+      'Libro marcado como prestado.',
     )
+  } catch (error) {
+    return FormResponse.custom(
+      ['general'],
+      (error as ApplicationError).message,
+      previousState.data,
+    )
+  }
 }
 
 async function returnBookAction(
@@ -88,17 +90,19 @@ async function returnBookAction(
   userId: string,
   previousState: FormResponse<LoanActionForm>,
 ) {
-  return await container.returnBook
-    .with(ReturnBookRequest.with({ bookId }))
-    .match(
-      () => {
-        revalidateTag('books')
-        return FormResponse.success(
-          previousState.data,
-          'Libro marcado como devuelto.',
-        )
-      },
-      (_error) =>
-        FormResponse.custom(['general'], _error.message, previousState.data),
+  try {
+    await container.returnBook.with(ReturnBookRequest.with({ bookId }))
+
+    revalidateTag('books')
+    return FormResponse.success(
+      previousState.data,
+      'Libro marcado como devuelto.',
     )
+  } catch (error) {
+    return FormResponse.custom(
+      ['general'],
+      (error as ApplicationError).message,
+      previousState.data,
+    )
+  }
 }

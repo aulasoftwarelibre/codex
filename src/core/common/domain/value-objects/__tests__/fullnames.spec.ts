@@ -1,9 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { FullName } from '@/core/common/domain/value-objects/fullname'
 import { FullNames } from '@/core/common/domain/value-objects/fullnames'
-import { unexpected } from '@/lib/utils/unexpected'
 
 describe('FullNames', () => {
   describe('create', () => {
@@ -12,17 +10,12 @@ describe('FullNames', () => {
       const validFullNamesStrings = ['John Doe', 'Jane Doe']
 
       // Act
-      const result = FullNames.create(validFullNamesStrings)
+      const fullNames = FullNames.create(validFullNamesStrings)
 
       // Assert
-      result.match(
-        (fullNames) => {
-          expect(fullNames).toBeInstanceOf(FullNames)
-          expect(fullNames.map((fullname) => fullname.value)).toEqual(
-            validFullNamesStrings,
-          )
-        },
-        (error) => unexpected.error(error),
+      expect(fullNames).toBeInstanceOf(FullNames)
+      expect(fullNames.map((fullname) => fullname.value)).toEqual(
+        validFullNamesStrings,
       )
     })
 
@@ -31,13 +24,10 @@ describe('FullNames', () => {
       const invalidFullNamesStrings = ['John Doe', '', 'Jane Doe']
 
       // Act
-      const result = FullNames.create(invalidFullNamesStrings)
+      const result = () => FullNames.create(invalidFullNamesStrings)
 
       // Assert
-      result.match(
-        (fullNames) => unexpected.success(fullNames),
-        (error) => expect(error).toBeInstanceOf(DomainError),
-      )
+      expect(result).toThrowError()
     })
   })
 

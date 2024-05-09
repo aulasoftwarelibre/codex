@@ -1,8 +1,4 @@
-import { err, ok, Result } from 'neverthrow'
-
-import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
 import { ApplicationError } from '@/core/common/domain/errors/application-error'
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { Email } from '@/core/common/domain/value-objects/email'
 import { FullName } from '@/core/common/domain/value-objects/fullname'
 import { User } from '@/core/user/domain/model/user.entity'
@@ -12,13 +8,11 @@ import { UpdateSettingRequest } from '@/core/user/dto/requests/update-setting.re
 export class UpdateSettingUseCase {
   constructor(private readonly users: Users) {}
 
-  async with(
-    command: UpdateSettingRequest,
-  ): Promise<Result<void, NotFoundError | DomainError>> {
-    return Email.create(command.email)
-      .asyncAndThen((email) => this.users.findByEmail(email))
-      .andThen((user) => this.updateUser(user, command))
-      .andThen((user) => this.users.save(user))
+  async with(command: UpdateSettingRequest): Promise<void> {
+    const email = Email.create(command.email)
+    const user = await this.users.findByEmail(email)
+
+    await this.users.save(this.updateUser(user, command))
   }
 
   private updateUser(user: User, command: UpdateSettingRequest) {
@@ -27,20 +21,15 @@ export class UpdateSettingUseCase {
         return this.updateFullName(command, user)
       }
       default: {
-        return err(
-          new ApplicationError(
-            `Field ${command.field} does not exists in User entity`,
-          ),
+        throw new ApplicationError(
+          `Field ${command.field} does not exists in User entity`,
         )
       }
     }
   }
 
   private updateFullName(command: UpdateSettingRequest, user: User) {
-    return FullName.create(command.value).andThen((fullName) => {
-      user.name = fullName
-
-      return ok(user)
-    })
+    user.name = FullName.create(command.value)
+    return user
   }
 }

@@ -1,15 +1,14 @@
-import { ResultAsync } from 'neverthrow'
-
 import { LoanedBook } from '@/core/book/domain/model/loaned-book.entity'
-import { ApplicationError } from '@/core/common/domain/errors/application-error'
 import { Loan } from '@/core/loan/domain/model/loan.entity'
 import { Loans } from '@/core/loan/domain/services/loans.repository'
 
 export class ReturnBookService {
   constructor(private readonly loans: Loans) {}
 
-  with(book: LoanedBook): ResultAsync<void, ApplicationError> {
-    return this.loans.ofBook(book.id).andThen((loan) => this.returnBook(loan))
+  async with(book: LoanedBook): Promise<void> {
+    const loan = await this.loans.ofBook(book.id)
+
+    return this.returnBook(loan)
   }
 
   private returnBook(loan: Loan) {

@@ -2,7 +2,6 @@ import { ulid } from 'ulid'
 import { describe, expect, it } from 'vitest'
 
 import { Id } from '@/core/common/domain/value-objects/id'
-import { unexpected } from '@/lib/utils/unexpected'
 
 describe('Id', () => {
   describe('create', () => {
@@ -14,12 +13,7 @@ describe('Id', () => {
       const result = Id.create(validValue)
 
       // Assert
-      result.match(
-        (value) => {
-          expect(value).toBeDefined()
-        },
-        (error) => unexpected.error(error),
-      )
+      expect(result.value).toBeDefined()
     })
 
     it('should return an error for invalid value', () => {
@@ -27,15 +21,10 @@ describe('Id', () => {
       const invalidValue = 'invalid-value'
 
       // Act
-      const result = Id.create(invalidValue)
+      const result = () => Id.create(invalidValue)
 
       // Assert
-      result.match(
-        (success) => unexpected.success(success),
-        (error) => {
-          expect(error).toBeDefined()
-        },
-      )
+      expect(result).toThrowError()
     })
 
     it('should return an error for empty value', () => {
@@ -43,15 +32,10 @@ describe('Id', () => {
       const emptyValue = ''
 
       // Act
-      const result = Id.create(emptyValue)
+      const result = () => Id.create(emptyValue)
 
       // Assert
-      result.match(
-        (success) => unexpected.success(success),
-        (error) => {
-          expect(error).toBeDefined()
-        },
-      )
+      expect(result).toThrowError()
     })
   })
 

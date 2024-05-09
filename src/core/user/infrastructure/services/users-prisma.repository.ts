@@ -1,8 +1,6 @@
 import { PrismaClient } from '@prisma/client'
-import { okAsync, ResultAsync } from 'neverthrow'
 
 import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
-import { ApplicationError } from '@/core/common/domain/errors/application-error'
 import { Email } from '@/core/common/domain/value-objects/email'
 import { User } from '@/core/user/domain/model/user.entity'
 import { Users } from '@/core/user/domain/services/users.repository'
@@ -16,18 +14,21 @@ export class UsersPrisma implements Users {
     this.publisher = new UserPublisher(prisma)
   }
 
-  findByEmail(email: Email): ResultAsync<User, NotFoundError> {
-    return ResultAsync.fromPromise(
-      this.prisma.user.findUniqueOrThrow({
+  async findByEmail(email: Email): Promise<User> {
+    try {
+      const user = await this.prisma.user.findUniqueOrThrow({
         where: {
           email: email.value,
         },
-      }),
-      () => new NotFoundError('user_email_not_found'),
-    ).andThen((user) => okAsync(UserDataMapper.toModel(user)))
+      })
+
+      return UserDataMapper.toModel(user)
+    } catch {
+      throw new NotFoundError('user_email_not_found')
+    }
   }
 
-  save(user: User): ResultAsync<void, ApplicationError> {
+  async save(user: User): Promise<void> {
     return this.publisher.mergeObjectContext(user).commit()
   }
 }

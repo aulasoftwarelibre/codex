@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { Role } from '@/core/common/domain/value-objects/role'
-import { unexpected } from '@/lib/utils/unexpected'
 
 describe('Role', () => {
   describe('create', () => {
@@ -11,18 +9,11 @@ describe('Role', () => {
       const validRole = 'ROLE_USER'
 
       // Act
-      const result = Role.create(validRole)
+      const role = Role.create(validRole)
 
       // Assert
-      result.match(
-        (role) => {
-          expect(role).toBeInstanceOf(Role)
-          expect(role.value).toBe(validRole)
-        },
-        (error) => {
-          unexpected.error(error)
-        },
-      )
+      expect(role).toBeInstanceOf(Role)
+      expect(role.value).toBe(validRole)
     })
 
     it('should return a DomainError for an invalid role', () => {
@@ -30,17 +21,10 @@ describe('Role', () => {
       const invalidRole = 'USER_ROLE' // Invalid format
 
       // Act
-      const result = Role.create(invalidRole)
+      const result = () => Role.create(invalidRole)
 
       // Assert
-      result.match(
-        (role) => {
-          unexpected.success(role)
-        },
-        (error) => {
-          expect(error).toBeInstanceOf(DomainError)
-        },
-      )
+      expect(result).toThrowError()
     })
 
     it('should return a DomainError for an empty role', () => {
@@ -48,17 +32,10 @@ describe('Role', () => {
       const emptyRole = ''
 
       // Act
-      const result = Role.create(emptyRole)
+      const result = () => Role.create(emptyRole)
 
       // Assert
-      result.match(
-        (role) => {
-          unexpected.success(role)
-        },
-        (error) => {
-          expect(error).toBeInstanceOf(DomainError)
-        },
-      )
+      expect(result).toThrowError()
     })
   })
 })

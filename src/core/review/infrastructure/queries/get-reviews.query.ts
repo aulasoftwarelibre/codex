@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { okAsync, ResultAsync } from 'neverthrow'
 
 import { ApplicationError } from '@/core/common/domain/errors/application-error'
 import { ReviewResponse } from '@/core/review/dto/responses/review-response'
@@ -8,9 +7,9 @@ import { ReviewType } from '@/core/review/infrastructure/persistence/review.type
 export class GetReviewsQuery {
   constructor(private readonly prisma: PrismaClient) {}
 
-  with(bookId: string): ResultAsync<ReviewResponse[], ApplicationError> {
-    return ResultAsync.fromPromise(
-      this.prisma.review.findMany({
+  async with(bookId: string): Promise<ReviewResponse[]> {
+    try {
+      const reviews = await this.prisma.review.findMany({
         include: {
           user: true,
         },
@@ -20,12 +19,15 @@ export class GetReviewsQuery {
         where: {
           bookId: bookId,
         },
-      }),
-      (error: unknown) => new ApplicationError((error as Error).toString()),
-    ).andThen((reviews) => this.mapToReviewResponse(reviews))
+      })
+
+      return this.mapToReviewResponse(reviews)
+    } catch (error) {
+      throw new ApplicationError((error as Error).toString())
+    }
   }
 
   private mapToReviewResponse(reviews: ReviewType[]) {
-    return okAsync(reviews.map((review) => ReviewResponse.fromType(review)))
+    return reviews.map((review) => ReviewResponse.fromType(review))
   }
 }

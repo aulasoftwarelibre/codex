@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest'
 import { EnableUserRequest } from '@/core/user/dto/requests/enable-user.request'
 import { container } from '@/lib/container'
 import { prisma } from '@/lib/prisma/prisma'
-import { unexpected } from '@/lib/utils/unexpected'
 import { createUser } from '@/tests/examples/factories'
 import { UsersExamples } from '@/tests/examples/users.examples'
 
@@ -17,18 +16,13 @@ describe('EnableUserUseCase', () => {
     })
 
     // Act
-    const result = await container.enableUser.with(request)
+    await container.enableUser.with(request)
 
     // Assert
-    result.match(
-      async () => {
-        const updatedUser = await prisma.user.findFirst({
-          where: { id: user.id.value },
-        })
-        expect(updatedUser?.roles.includes('ROLE_MEMBER')).toBeTruthy()
-      },
-      (error) => unexpected.error(error),
-    )
+    const updatedUser = await prisma.user.findFirst({
+      where: { id: user.id.value },
+    })
+    expect(updatedUser?.roles.includes('ROLE_MEMBER')).toBeTruthy()
   })
 
   it('should disable a user', async () => {
@@ -40,17 +34,12 @@ describe('EnableUserUseCase', () => {
     })
 
     // Act
-    const result = await container.enableUser.with(request)
+    await container.enableUser.with(request)
 
     // Assert
-    result.match(
-      async () => {
-        const updatedUser = await prisma.user.findFirst({
-          where: { id: user.id.value },
-        })
-        expect(updatedUser?.roles.includes('ROLE_MEMBER')).toBeFalsy()
-      },
-      (error) => unexpected.error(error),
-    )
+    const updatedUser = await prisma.user.findFirst({
+      where: { id: user.id.value },
+    })
+    expect(updatedUser?.roles.includes('ROLE_MEMBER')).toBeFalsy()
   })
 })

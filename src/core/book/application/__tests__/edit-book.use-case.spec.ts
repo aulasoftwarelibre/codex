@@ -1,10 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
 import { EditBookRequest } from '@/core/book/dto/requests/edit-book.request'
-import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
 import { container } from '@/lib/container'
 import { prisma } from '@/lib/prisma/prisma'
-import { unexpected } from '@/lib/utils/unexpected'
 import { BooksExamples } from '@/tests/examples/books.examples'
 import { createAvailableBook } from '@/tests/examples/factories'
 
@@ -20,21 +18,16 @@ describe('EditBookUseCase', () => {
     })
 
     // Act
-    const result = await container.editBook.with(command)
+    await container.editBook.with(command)
 
     // Assert
-    result.match(
-      async () => {
-        const savedBook = await prisma.book.findFirst({
-          where: {
-            id: command.id,
-          },
-        })
-        expect(savedBook?.version).toEqual(1)
-        expect(savedBook?.title).toEqual(command.title)
+    const savedBook = await prisma.book.findFirst({
+      where: {
+        id: command.id,
       },
-      (error) => unexpected.error(error),
-    )
+    })
+    expect(savedBook?.version).toEqual(1)
+    expect(savedBook?.title).toEqual(command.title)
   })
 
   it('should returns an error if book does not exists', async () => {
@@ -48,14 +41,9 @@ describe('EditBookUseCase', () => {
     })
 
     // Act
-    const result = await container.editBook.with(command)
+    const result = async () => await container.editBook.with(command)
 
     // Assert
-    result.match(
-      (_ok) => unexpected.success(_ok),
-      (error) => {
-        expect(error).toBeInstanceOf(NotFoundError)
-      },
-    )
+    expect(result).rejects.toThrowError()
   })
 })

@@ -1,11 +1,6 @@
-import { okAsync, Result, ResultAsync } from 'neverthrow'
-
 import { Book } from '@/core/book/domain/model/book.entity'
 import { Books } from '@/core/book/domain/services/books.repository'
 import { EditBookRequest } from '@/core/book/dto/requests/edit-book.request'
-import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
-import { ApplicationError } from '@/core/common/domain/errors/application-error'
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { BookId } from '@/core/common/domain/value-objects/book-id'
 import { FullNames } from '@/core/common/domain/value-objects/fullnames'
 import { Image } from '@/core/common/domain/value-objects/image'
@@ -14,34 +9,33 @@ import { Title } from '@/core/common/domain/value-objects/title'
 export class EditBookUseCase {
   constructor(private readonly books: Books) {}
 
-  async with(command: EditBookRequest) {
-    return BookId.create(command.id)
-      .asyncAndThen((bookId) => this.findBook(bookId))
-      .andThen((book) => this.updateBook(book, command))
+  async with(command: EditBookRequest): Promise<void> {
+    const bookId = BookId.create(command.id)
+    const book = await this.findBook(bookId)
+
+    return this.updateBook(book, command)
   }
 
-  private findBook(bookId: BookId): ResultAsync<Book, NotFoundError> {
-    return (
-      this.books.findAvailable(bookId) as ResultAsync<Book, NotFoundError>
-    ).orElse(() => this.books.findLoaned(bookId))
+  private async findBook(bookId: BookId): Promise<Book> {
+    try {
+      return this.books.findAvailable(bookId)
+    } catch {
+      return this.books.findLoaned(bookId)
+    }
   }
 
-  private updateBook(
+  private async updateBook(
     book: Book,
     command: EditBookRequest,
-  ): ResultAsync<void, DomainError | ApplicationError> {
-    return Result.combine([
-      Title.create(command.title),
-      FullNames.create(command.authors),
-      Image.create(command.image),
-    ])
-      .asyncAndThen(([title, authors, image]) => {
-        book.title = title
-        book.image = image
-        book.authors = authors
+  ): Promise<void> {
+    const authors = FullNames.create(command.authors)
+    const image = Image.create(command.image)
+    const title = Title.create(command.title)
 
-        return okAsync(book)
-      })
-      .andThen((_book) => this.books.save(_book))
+    book.authors = authors
+    book.image = image
+    book.title = title
+
+    return this.books.save(book)
   }
 }

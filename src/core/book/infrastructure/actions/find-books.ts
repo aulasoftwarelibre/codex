@@ -7,7 +7,13 @@ import { container } from '@/lib/container'
 
 export async function findBooks(): Promise<BookResponse[]> {
   const getCachedBooks = cache(
-    async () => container.findBooks.with().unwrapOr([]),
+    async () => {
+      try {
+        return await container.findBooks.with()
+      } catch {
+        return []
+      }
+    },
     ['find-books'],
     {
       tags: ['books'],

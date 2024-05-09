@@ -1,7 +1,3 @@
-import { ok, Result } from 'neverthrow'
-
-import { NotFoundError } from '@/core/common/domain/errors/application/not-found-error'
-import { DomainError } from '@/core/common/domain/errors/domain-error'
 import { Email } from '@/core/common/domain/value-objects/email'
 import { FullName } from '@/core/common/domain/value-objects/fullname'
 import { User } from '@/core/user/domain/model/user.entity'
@@ -11,20 +7,16 @@ import { UpdateUserRequest } from '@/core/user/dto/requests/update-user.request'
 export class UpdateUserUseCase {
   constructor(private readonly users: Users) {}
 
-  async with(
-    command: UpdateUserRequest,
-  ): Promise<Result<void, NotFoundError | DomainError>> {
-    return Email.create(command.email)
-      .asyncAndThen((email) => this.users.findByEmail(email))
-      .andThen((user) => this.updateUser(user, command))
-      .andThen((user) => this.users.save(user))
+  async with(command: UpdateUserRequest): Promise<void> {
+    const email = Email.create(command.email)
+    const user = await this.users.findByEmail(email)
+
+    await this.users.save(this.updateUser(user, command))
   }
 
   private updateUser(user: User, command: UpdateUserRequest) {
-    return FullName.create(command.name).andThen((fullName) => {
-      user.name = fullName
+    user.name = FullName.create(command.name)
 
-      return ok(user)
-    })
+    return user
   }
 }

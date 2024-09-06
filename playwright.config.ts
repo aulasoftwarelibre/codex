@@ -31,7 +31,7 @@ export default defineConfig({
     trace: 'retry-with-trace',
   },
   webServer: {
-    command: `yarn dev -p ${PORT}`,
+    command: `pnpm run dev -p ${PORT}`,
     reuseExistingServer: !process.env.CI,
     url: baseURL,
   },

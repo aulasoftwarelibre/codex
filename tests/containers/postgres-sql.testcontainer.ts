@@ -56,7 +56,7 @@ export class PostgreSqlTestContainer {
 
   private async initializeSchema(): Promise<void> {
     try {
-      await execAsync('npx prisma migrate deploy')
+      await execAsync('pnpm dlx prisma migrate deploy')
     } catch (error) {
       throw new Error('Error during creating schema', {
         cause: error,

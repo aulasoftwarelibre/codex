@@ -19,7 +19,9 @@ test.describe('Book validation', () => {
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(
-        page.locator('[placeholder=Título][required]:invalid'),
+        page.locator(
+          '[placeholder=Título][aria-required=true][aria-invalid=true]',
+        ),
       ).toBeVisible()
     })
 
@@ -59,7 +61,9 @@ test.describe('Book validation', () => {
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(
-        page.locator('[placeholder=Autores][required]:invalid'),
+        page.locator(
+          '[placeholder=Autores][aria-required=true][aria-invalid=true]',
+        ),
       ).toBeVisible()
     })
 
@@ -97,7 +101,9 @@ test.describe('Book validation', () => {
       // Assert
       await expect(page).toHaveURL('/books/new')
       await expect(
-        page.locator('[placeholder=Imagen][required]:invalid'),
+        page.locator(
+          '[placeholder=Imagen][aria-required=true][aria-invalid=true]',
+        ),
       ).toBeVisible()
     })
 

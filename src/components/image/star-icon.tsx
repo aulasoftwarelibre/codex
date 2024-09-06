@@ -1,5 +1,5 @@
 import { StarIcon as BaseStarIcon } from '@heroicons/react/20/solid'
-import { cn } from '@nextui-org/system'
+import { cn } from '@nextui-org/theme'
 import React from 'react'
 
 interface StarIconProperties {

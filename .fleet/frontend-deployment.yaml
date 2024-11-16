@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: codex
+      tier: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: codex
+        tier: frontend
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/aulasoftwarelibre/codex:v1.0
+          ports:
+            - containerPort: 3000

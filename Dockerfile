@@ -1,4 +1,5 @@
 FROM node:20-alpine AS base
+    RUN corepack enable
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -11,7 +12,7 @@ FROM base AS deps
     RUN \
       if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
       elif [ -f package-lock.json ]; then npm ci; \
-      elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
+      elif [ -f pnpm-lock.yaml ]; then pnpm i --frozen-lockfile; \
       else echo "Lockfile not found." && exit 1; \
       fi
 
@@ -27,7 +28,7 @@ FROM base AS builder
     # Uncomment the following line in case you want to disable telemetry during the build.
     ENV NEXT_TELEMETRY_DISABLED 1
 
-    RUN yarn build
+    RUN pnpm run build
 
     # If using npm comment out above and use below instead
     # RUN npm run build
@@ -64,4 +65,4 @@ FROM base AS runner
     # set hostname to localhost
     ENV HOSTNAME "0.0.0.0"
 
-    CMD npx prisma migrate deploy && node server.js
+    CMD pnpm dlx prisma migrate deploy && node server.js

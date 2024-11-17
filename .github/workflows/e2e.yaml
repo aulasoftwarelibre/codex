@@ -42,8 +42,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Enable pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Setup node
         uses: actions/setup-node@v4
         with:

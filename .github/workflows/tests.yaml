@@ -22,5 +22,7 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
+      - name: Generate prisma
+        run: pnpm run prisma:generate
       - name: Run tests
         run: pnpm run test:ci

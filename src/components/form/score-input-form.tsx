@@ -12,7 +12,7 @@ import { useState } from 'react'
 
 import { StarIcon } from '@/components/image/star-icon'
 
-interface ScoreInputFormProperties extends RadioGroupProps {}
+type ScoreInputFormProperties = RadioGroupProps
 
 const STARS = ['1', '2', '3', '4', '5']
 const DEFAULT_SCORE = '5'

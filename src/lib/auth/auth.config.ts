@@ -19,7 +19,7 @@ export const authConfig = {
       roles: 'ROLE_ADMIN',
     },
     {
-      path: '^/books/\\w+/edit',
+      path: String.raw`^/books/\w+/edit`,
       roles: 'ROLE_ADMIN',
     },
     {

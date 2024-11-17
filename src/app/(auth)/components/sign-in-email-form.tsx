@@ -38,7 +38,7 @@ export function SignInEmailForm() {
           variant="bordered"
         />
         <Button
-          className={` w-full`}
+          className={`w-full`}
           radius="none"
           size="lg"
           startContent={<EnvelopeIcon height={24} width={24} />}

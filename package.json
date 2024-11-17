@@ -11,7 +11,6 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
-    "postinstall": "pnpm dlx prisma generate",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "test:ci": "NODE_ENV=test vitest --watch=false",

@@ -11,9 +11,7 @@ import { showToast } from '@/components/form/toast'
 import { importBook } from '@/core/book/infrastructure/actions/import-book'
 import { FormResponse } from '@/lib/zod/form-response'
 
-interface BookImportFormProperties {}
-
-export function BookImportForm({}: BookImportFormProperties) {
+export function BookImportForm() {
   const formData = {
     asin: '',
     id: '',
